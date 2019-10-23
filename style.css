@@ -1,0 +1,29 @@
+body
+{
+    background-color: paleturquoise;
+}
+
+.top_bar
+{
+    background-color: aqua;
+}
+
+.log_in_field
+{
+    background-color: blueviolet;
+}
+
+.sign_up_field
+{
+    background-color: chartreuse;
+}
+
+.bottom_bar
+{
+    background-color: cyan;
+}
+
+.sign_up_con
+{
+    background-color: darkgreen;
+}
