@@ -10,7 +10,7 @@
 // we will use the try-catch block
 try
 {
-    $connection = new PDO('mysql:host=localhost;dbname=rush', 'root', '369089jp');
+    $connection = new PDO('mysql:host=localhost;dbname=rush', 'root', '');
     // $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //because i have activated the error handling in the php.ini, there is no difference whether this statement is in or not.
 }
 // TRY will try to run whatever code is in the TRY block, if it fails, the CATCH block will catch that error or exception and instead of crashing the page ito \
@@ -31,10 +31,12 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
 
     // now to access a table inside a database
     $container = $connection->query('SELECT * FROM users'); //a query or a request to the database to return everything(*) from the table USERS.
-    // while($cont = $container->fetch())
-    // {
-    //     echo $cont['user_email']."<br>"; //this statement will return all the user_emails line by line.
-    // }
-    $cont = $container->fetch();
-    echo '<pre>', var_dump($cont), '</pre>';
+    //$container = $connection->query('SELECT user_name FROM users'); //this should return the column "user_name" (i.e. usernames of users) from the table USERS.
+    //while($cont = $container->fetch())
+    //{
+    //  echo $cont['user_email']."<br>"; //this statement will return all the user_emails line by line.
+    //}
+    $cont = $container->fetch(); //fetch() fetches all the data in the next ROW / line every time it is called.
+                                // hence in the above while loop, it will continue to fetch users' emails until the "user_email" column reads NULL.
+    echo '<pre>', var_dump($cont), '</pre>'; //for now i'm only able to return all the details of one user and not all of them. i will see if i can't find to manipulate this in a while loop.
 ?>
