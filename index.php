@@ -11,6 +11,7 @@
 try
 {
     $connection = new PDO('mysql:host=localhost;dbname=rush', 'root', '');
+    $connection->setAttribute()
 }
 // TRY will try to run whatever code is in the TRY block, if it fails, the CATCH block will catch that error or exception and instead of crashing the page ito \
 // the error/exception, it will instead execute the code that is in the CATCH block.
