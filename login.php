@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php
 <html>
     <head>
         <title>
@@ -34,3 +34,4 @@
         </footer>
     </body>
 </html>
+?>
