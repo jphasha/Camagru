@@ -36,7 +36,8 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
     //{
     //  echo $cont['user_email']."<br>"; //this statement will return all the user_emails line by line.
     //}
-    $cont = $container->fetch(); //fetch() fetches all the data in the next ROW / line every time it is called.
+    //$cont = $container->fetch(); //fetch() fetches all the data in the next ROW / line every time it is called.
                                 // hence in the above while loop, it will continue to fetch users' emails until the "user_email" column reads NULL.
+    $cont = $container->fetch(PDO::FETCH_BOTH); //by default, fetch() is the fetch_both mode. so this statement is equivalent to the one above.
     echo '<pre>', var_dump($cont), '</pre>'; //for now i'm only able to return all the details of one user and not all of them. i will see if i can't find to manipulate this in a while loop.
 ?>
