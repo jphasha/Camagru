@@ -10,7 +10,7 @@
 // we will use the try-catch block
 try
 {
-    $connection = new PDO('mysql:host=localhost;dbname=rush', 'root', '');
+    $connection = new PDO('mysql:host=localhost;dbname=rush', 'root', '369089jp');
     // $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //because i have activated the error handling in the php.ini, there is no difference whether this statement is in or not.
 }
 // TRY will try to run whatever code is in the TRY block, if it fails, the CATCH block will catch that error or exception and instead of crashing the page ito \
@@ -28,4 +28,13 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
     // IF THERE IS NO EXCEPTION CAUGHT.
 
     echo "OK! we are good! </br>";
+
+    // now to access a table inside a database
+    $container = $connection->query('SELECT * FROM users'); //a query or a request to the database to return everything(*) from the table USERS.
+    // while($cont = $container->fetch())
+    // {
+    //     echo $cont['user_email']."<br>"; //this statement will return all the user_emails line by line.
+    // }
+    $cont = $container->fetch();
+    echo '<pre>', var_dump($cont), '</pre>';
 ?>
