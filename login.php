@@ -15,8 +15,8 @@
             </form>
         </header>
         <section>
-            <p class="sign_up_con">
-                sign up
+			<p class="sign_up_con">
+                sign upppp
             </p>
             <form class="sign_up_field" name="sign_up" method="POST">
                 <input type="text" placeholder="First Name(s)">First Name<br>

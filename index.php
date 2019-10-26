@@ -47,14 +47,14 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
     // }
 
     // NOW to create what they call a class
-    class users //why the red underline?
+    // class users //the fetch below does not seem to care about the existence of this class.
+    // {
+    //     public $user_id;
+    // }
+    $container->setFetchMode(PDO::FETCH_CLASS, 'users'); //in the variable $container, we set the fetch mode to fetch_class. every time we use fetch() on the variable $container, an object will be returned.
+    while($elements = $container->fetch())              // now we using fetch which will return an object because of the fetch mode set above.
     {
-        public $user_id;
-    }
-    $container->setFetchMode(PDO::FETCH_CLASS, 'users'); //i will be right back.
-    while($elements = $container->fetch())
-    {
-        echo $elements->user_id."<br>";
+        echo $elements->user_email."<br>";              //
     }
     //echo '<pre>', var_dump($cont), '</pre>'; //for now i'm only able to return all the details of ONE user and not all of them. i will see if i can't find a way to manipulate this in a while loop.
 ?>
