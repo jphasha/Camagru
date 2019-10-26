@@ -45,5 +45,16 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
     // {
     //     echo $cont->user_name."<br>"; //like a struct, i am accessing one element 'user_name'.
     // }
-    echo '<pre>', var_dump($cont), '</pre>'; //for now i'm only able to return all the details of ONE user and not all of them. i will see if i can't find a way to manipulate this in a while loop.
+
+    // NOW to create what they call a class
+    class users //why the red underline?
+    {
+        public $user_id;
+    }
+    $container->setFetchMode(PDO::FETCH_CLASS, 'users'); //i will be right back.
+    while($elements = $container->fetch())
+    {
+        echo $elements->user_id."<br>";
+    }
+    //echo '<pre>', var_dump($cont), '</pre>'; //for now i'm only able to return all the details of ONE user and not all of them. i will see if i can't find a way to manipulate this in a while loop.
 ?>
