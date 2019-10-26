@@ -1,4 +1,5 @@
 <?php
+
 // print_r(PDO::getAvailableDrivers()); //to see the list of drivers that are available for you to use. on my machine, it is mysql: version=sqlite.
 
 // now to connect to the database that is hosted in the above driver.
