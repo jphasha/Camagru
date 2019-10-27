@@ -48,14 +48,19 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
     // }
 
     // NOW to create what they call a class
-    // class users //the fetch below does not seem to care about the existence of this class.
-    // {
-    //     public $user_id;
-    // }
+    class Users //the fetch below does not seem to care about the existence of this class.
+    {
+        public $user_id, $user_name, $user_email, $user_pass, $name_and_email;
+
+        public function __construct() //construct? | used to define/construct the variable neme_and_email?(still cloudy)
+        {
+            $this->name_and_email = "name: {$this->user_name} email: {$this->user_email}"; //$this?
+        }
+    }
     $container->setFetchMode(PDO::FETCH_CLASS, 'users'); //in the variable $container, we set the fetch mode to fetch_class. every time we use fetch() on the variable $container, an object will be returned.
     while($elements = $container->fetch())              // now we using fetch which will return an object because of the fetch mode set above.
     {
-        echo $elements->user_email."<br>";              //
+        echo $elements->name_and_email."<br>";              //return a variable of the class Users
     }
     //echo '<pre>', var_dump($cont), '</pre>'; //for now i'm only able to return all the details of ONE user and not all of them. i will see if i can't find a way to manipulate this in a while loop.
 ?>
