@@ -12,7 +12,7 @@
 try
 {
     $connection = new PDO('mysql:host=localhost;dbname=rush', 'root', '');
-    // $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //because i have activated the error handling in the php.ini, there is no difference whether this statement is in or not.
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //because i have activated the error handling in the php.ini, there is no difference whether this statement is in or not.
 }
 // TRY will try to run whatever code is in the TRY block, if it fails, the CATCH block will catch that error or exception and instead of crashing the page ito \
 // the error/exception, it will instead execute the code that is in the CATCH block.
@@ -31,7 +31,7 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
     echo "OK! we are good! </br>";
 
     // now to access a table inside a database
-    $container = $connection->query('SELECT * FROM users'); //a query or a request to the database to return everything(*) from the table USERS.
+    //$container = $connection->query('SELECT * FROM users'); //a query or a request to the database to return everything(*) from the table USERS.
     //$container = $connection->query('SELECT user_name FROM users'); //this should return the column "user_name" (i.e. usernames of users) from the table USERS.
     //while($cont = $container->fetch())
     //{
@@ -48,16 +48,16 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
     // }
 
     // NOW to create what they call a class
-    class Users //the fetch below does not seem to care about the existence of this class.
-    {
-        public $user_id, $user_name, $user_email, $user_pass, $name_and_email;
+    // class Users //the fetch below does not seem to care about the existence of this class.
+    // {
+    //     public $user_id, $user_name, $user_email, $user_pass, $name_and_email;
 
-        public function __construct() //construct? | used to define/construct the variable neme_and_email?(still cloudy)
-        {
-            $this->name_and_email = "name: {$this->user_name} email: {$this->user_email}"; //$this?
-        }
-    }
-    $container->setFetchMode(PDO::FETCH_CLASS, 'users'); //in the variable $container, we set the fetch mode to fetch_class. fetch and put into the class 'users'.
+    //     public function __construct() //construct? | used to define/construct the variable neme_and_email?(still cloudy)
+    //     {
+    //         $this->name_and_email = "name: {$this->user_name} email: {$this->user_email}"; //$this?
+    //     }
+    // }
+    // $container->setFetchMode(PDO::FETCH_CLASS, 'users'); //in the variable $container, we set the fetch mode to fetch_class. fetch and put into the class 'users'.
     // while($elements = $container->fetch())              // now we using fetch which will return an object because of the fetch mode set above.
     // {
     //     echo $elements->name_and_email."<br>";              //return a variable of the class Users
@@ -65,5 +65,14 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
     // $allelements = $container->fetchALL(); //the variable $allelements contains all the data contained in the table users
     //echo '<pre>', var_dump($elements), '</pre>'; //for now i'm only able to return all the details of ONE user and not all of them. i will see if i can't find a way to manipulate this in a while loop. | nevermind, fetchALL() solved this little problem.
     // $count = count($allelements); //this will give the total number of users in a table or whatever is contained in $allelements.
-    echo $count."<br>";
+    // echo $count."<br>";
+
+    // prepared statements
+    // we will use the POST method when executing this.
+
+    $sql_statement = "INSERT INTO users (user_name, user_pass, user_email) VALUES (?, ?, ?)"; //composition of a prepared statement. the three specified values will be inserted into the table
+    $query = $connection->prepare($sql_statement); //query preparation.
+    $query->execute(array("king", "541236", "king@mail.com")); //executing a prepared statement.
+
+
 ?>
