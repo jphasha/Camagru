@@ -58,9 +58,10 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
         }
     }
     $container->setFetchMode(PDO::FETCH_CLASS, 'users'); //in the variable $container, we set the fetch mode to fetch_class. fetch and put into the class 'users'.
-    while($elements = $container->fetch())              // now we using fetch which will return an object because of the fetch mode set above.
-    {
-        echo $elements->name_and_email."<br>";              //return a variable of the class Users
-    }
-    //echo '<pre>', var_dump($cont), '</pre>'; //for now i'm only able to return all the details of ONE user and not all of them. i will see if i can't find a way to manipulate this in a while loop.
+    // while($elements = $container->fetch())              // now we using fetch which will return an object because of the fetch mode set above.
+    // {
+    //     echo $elements->name_and_email."<br>";              //return a variable of the class Users
+    // }
+    // $allelements = $container->fetchALL(); //the variable $allelements contains all the data contained in the table users
+    //echo '<pre>', var_dump($elements), '</pre>'; //for now i'm only able to return all the details of ONE user and not all of them. i will see if i can't find a way to manipulate this in a while loop. | nevermind, fetchALL() solved this little problem.
 ?>
