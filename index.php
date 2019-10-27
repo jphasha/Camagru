@@ -64,4 +64,6 @@ catch(PDOException $some_exception) //in this case, the EXCEPTION/ERROR that is 
     // }
     // $allelements = $container->fetchALL(); //the variable $allelements contains all the data contained in the table users
     //echo '<pre>', var_dump($elements), '</pre>'; //for now i'm only able to return all the details of ONE user and not all of them. i will see if i can't find a way to manipulate this in a while loop. | nevermind, fetchALL() solved this little problem.
+    // $count = count($allelements); //this will give the total number of users in a table or whatever is contained in $allelements.
+    echo $count."<br>";
 ?>
