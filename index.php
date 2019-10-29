@@ -1,6 +1,5 @@
 <?php
-require_once 'config/database.php';
+require_once 'core/initialise.php';
 
-// $users = DB::getInstance()->query('SELECT user_nmae FROM users');
-echo '<pre>', var_dump($connection), '</pre>'; //successfully linked database.php to index.php
+echo Config::get('mysql/host/phasha'); //"::" the double colons are the "->" sccessing method to access a static function (or a variable).
 ?>

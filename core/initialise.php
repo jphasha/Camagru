@@ -16,13 +16,13 @@ $GLOBALS['config'] = array
     // setup cookies.
     'remember' => array
     (
-        'cookie_name' => 'hash',
-        'cookie_expiry' => 3600
+        'cookie_name' => 'my_cookie',
+        'cookie_expiry' => 3600 //setup to an hour.
     ),
     // setup a session.
     'sessions' => array
     (
-        'session' => 'user'
+        'session' => 'user_session'
     )
 );
 
@@ -30,7 +30,7 @@ spl_autoload_register
 (
     function($class)
     {
-        require_once 'classes/' . $class . '.php';
+        require_once 'classes/' . $class . '.php';// ???????
     }
 );
 
