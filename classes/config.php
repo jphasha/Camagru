@@ -20,6 +20,11 @@ class Config
                 if (isset($config[$element]))
                 {
                     echo ":".$element."<br>";
+                    $new_path = $config[$element];
+                    foreach ($new_path as $new_element)
+                    {
+                        echo "::".$new_element."<br>";
+                    }
                 }
                 else
                 {
