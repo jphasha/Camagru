@@ -18,7 +18,7 @@ class Config //what this function does is return the host path or really any pat
             {
                 if (isset($config[$element]))
                 {
-                    $config = $config[$element];
+                    $config = $config[$element]; // under ideal circumstances, localhost will be returned.(for the purposes of this project ofcourse.)
                 }
             }
             return $config;
