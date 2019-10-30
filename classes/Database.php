@@ -27,5 +27,15 @@ class DataBase //a singleton class?
             die ("connection failed because :" . $exception->getMessage());
         }
     }
+
+    // a function to instantiate (to create / establish)
+    public static function getInstance()
+    {
+        if (!isset(self::$_instance))// where we have not instantiated our class:
+        {
+            self::$_instance = new DataBase();// we instantiate our 'DataBase' class.
+        }
+        return self::$_instance; //the 'getInstance()' function will instantiate our class when called upon. but only if there was no instantiation that has already occured.
+    }
 }
 ?>
