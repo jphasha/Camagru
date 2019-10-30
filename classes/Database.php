@@ -41,6 +41,7 @@ class DataBase //a singleton class?
     // a function to query
     public function query($sql, $parameters = array())//$sql = an sql query statatement, $parameters,
     {
+        $this->_query = $this->_pdo->prepare($sql);
         $this->_error = false; // to make sure that the error that is returned is not the error of the previous query as this function may end up performing multiple queries.
         if ($this->_query = $this->_pdo->prepare($sql))//to prepare and check if the preparation has been successful. | prepared statements protect against sql injections.
         {
@@ -56,7 +57,7 @@ class DataBase //a singleton class?
                     $value_counter++;
                 }
             }
-            // echo "binded " . $value_counter . " times<br>";
+            echo "binded " . $value_counter . " times<br>";
             // now that preparation has been carried out, let's execute the prepared statement(s).
             if ($this->_query->execute())
             {
