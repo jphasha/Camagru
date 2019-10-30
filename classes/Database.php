@@ -10,7 +10,7 @@ class DataBase //a singleton class?
             $_count = 0;// and of course, the count of the said results.
 
     // a constructor function that will connect to the database.
-    private function __construct()
+    private function __construct()// private functions can only be used by variables and methods within the class?
     {
         try
         {
@@ -35,7 +35,34 @@ class DataBase //a singleton class?
         {
             self::$_instance = new DataBase();// we instantiate our 'DataBase' class.
         }
-        return self::$_instance; //the 'getInstance()' function will instantiate our class when called upon. but only if there was no instantiation that has already occured.
+        return self::$_instance; //the 'getInstance()' function will instantiate our class when called upon. but only if there was no instantiation that has already occured. (i.e.) no connection has been established already.
+    }
+
+    // a function to query
+    public function query($sql, $parameters = array())//$sql = an sql query statatement, $parameters,
+    {
+        $this->_error = false; // to make sure that the error that is returned is not the error of the previous query as this function may end up performing multiple queries.
+        if ($this->_query = $this->_pdo->prepare($sql))//to prepare and check if the preparation has been successful. | prepared statements protect against sql injections.
+        {
+            // echo "success<br>"; // if the preparation of the if statement was successful.
+
+            // now to bind the entered values to the prepared statement.
+            $value_counter = 1;//for a case where by there is more than one value that needs to be binded to the prepared statement(s).
+            if (count($parameters))
+            {
+                foreach ($parameters as $parameter)//iterate through the parameters and bind them one by one to their prepared statements.
+                {
+                    $this->_query->bindValue($value_counter, $parameter);
+                    $value_counter++;
+                }
+            }
+            // echo "binded " . $value_counter . " times<br>";
+            // now that preparation has been carried out, let's execute the prepared statement(s).
+            if ($this->_query->execute())
+            {
+                echo "prepared and executed<br>";
+            }
+        }
     }
 }
 ?>

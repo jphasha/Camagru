@@ -12,5 +12,5 @@ require_once 'core/initialise.php';
 //         echo $user->user_name;
 //     }
 // }
-DataBase::getInstance();
+DataBase::getInstance()->query("");// the database class has been successfully instantiated. / ???????
 ?>
