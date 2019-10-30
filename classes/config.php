@@ -1,5 +1,5 @@
 <?php
-class Config
+class Config //what this function does is return the host path or really any path it is directed towards. but what it does is check if the path exists.
 {
     public static function get($path = null)
     {
@@ -16,23 +16,14 @@ class Config
             // now printing the above arrays in a while loop.
             foreach ($path as $element)
             {
-                echo $element."<br>";
                 if (isset($config[$element]))
                 {
-                    echo ":".$element."<br>";
-                    $new_path = $config[$element];
-                    foreach ($new_path as $new_element)
-                    {
-                        echo "::".$new_element."<br>";
-                    }
-                }
-                else
-                {
-                    echo ": not an element <br>";
+                    $config = $config[$element];
                 }
             }
-            
+            return $config;
         }
+        return false;
     }
 }
 ?>
