@@ -61,8 +61,15 @@ class DataBase //a singleton class?
             // now that preparation has been carried out, let's execute the prepared statement(s).
             if ($this->_query->execute())
             {
-                echo "prepared and executed<br>";
+                // echo "prepared and executed<br>";
+                // $this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ); // unclear as to what the error is.
+                $this->_count = $this->_query->rowCount();
             }
+            else
+            {
+                $this->_error = true;
+            }
+            echo $this->_count . "<br>";
         }
     }
 }
