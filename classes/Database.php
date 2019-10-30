@@ -24,7 +24,7 @@ class DataBase //a singleton class?
         }
         catch (PDOException $some_exception)
         {
-            die ("connection failed because :" . $exception->getMessage());
+            die ("connection failed because :" . $some_exception->getMessage());
         }
     }
 
