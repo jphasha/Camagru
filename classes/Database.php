@@ -90,7 +90,7 @@ class DataBase //a singleton class?
             {
                 $sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
 
-                if (!$this->query($sql, array($value))->error())
+                if (!$this->query($sql, array($value))->error()) // to check if the binding of the value is successful.
                 {
                     return $this;
                 }
@@ -101,14 +101,20 @@ class DataBase //a singleton class?
 
     // the GET function which is used to retrieve data from the database.
     public function get($table, $where)
-    {}
+    {
+        return $this->action('SELECT *', $table, $where);
+    }
     // the DELETE function to delete stuff from the database.
     public function delete($table, $where)
-    {}
+    {
+        return $this->action('DELETE', $table, $where);
+    }
     // the ERROR function.
     public function error() // that's what it does, it checks for errors.
     {
         return $this->_error;
     }
+
+    // the COUNT function. checks for existence of content
 }
 ?>
