@@ -72,6 +72,43 @@ class DataBase //a singleton class?
             }
             // echo $this->_count . "<br>"; //getting the count of rows for the data in the query.
         }
+        return $this; // return the current object. i.e. return the end-product of the above code block.
+    }
+
+    // the ACTION function, now that we have prepared our statements, it's time to do stuff with them (the statements).
+    public function action($action, $table, $where = array())
+    {
+        if (count($where === 3)) //(i.e.) the 'field' (e.g. user_name), 'operator' (e.g. =) and 'value' (e.g. porter) must all be provided in order for the query to be valid (all three).
+        {
+            $operators = array('=', '>', '<', '>=', '<=');// defining all the valid / allowed operators.
+
+            $field =    $where[0];
+            $operator = $where[1];
+            $value =    $where[2];
+
+            if (in_array($operator, $operators))// checking if the entered operator matches one of the pre-defined '$operators'.
+            {
+                $sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
+
+                if (!$this->query($sql, array($value))->error())
+                {
+                    return $this;
+                }
+            }
+        }
+        return false;
+    }
+
+    // the GET function which is used to retrieve data from the database.
+    public function get($table, $where)
+    {}
+    // the DELETE function to delete stuff from the database.
+    public function delete($table, $where)
+    {}
+    // the ERROR function.
+    public function error() // that's what it does, it checks for errors.
+    {
+        return $this->_error;
     }
 }
 ?>
