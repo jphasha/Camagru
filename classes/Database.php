@@ -34,6 +34,7 @@ class DataBase //a singleton class?
         if (!isset(self::$_instance))// where we have not instantiated our class:
         {
             self::$_instance = new DataBase();// we instantiate our 'DataBase' class.
+            // echo "instance<br>"; // wanted to see how many times it will instantiate.
         }
         return self::$_instance; //the 'getInstance()' function will instantiate our class when called upon. but only if there was no instantiation that has already occured. (i.e.) no connection has been established already.
     }
@@ -57,7 +58,7 @@ class DataBase //a singleton class?
                     $value_counter++;
                 }
             }
-            echo "binded " . $value_counter . " times<br>";
+            // echo "binded " . $value_counter . " times<br>";
             // now that preparation has been carried out, let's execute the prepared statement(s).
             if ($this->_query->execute())
             {
@@ -69,7 +70,7 @@ class DataBase //a singleton class?
             {
                 $this->_error = true;
             }
-            echo $this->_count . "<br>";
+            // echo $this->_count . "<br>"; //getting the count of rows for the data in the query.
         }
     }
 }
