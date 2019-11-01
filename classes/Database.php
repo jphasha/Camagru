@@ -39,7 +39,7 @@ class DataBase //a singleton class?
         return self::$_instance; //the 'getInstance()' function will instantiate our class when called upon. but only if there was no instantiation that has already occured. (i.e.) no connection has been established already.
     }
 
-    // a function to query
+    // a function to QUERY
     public function query($sql, $parameters = array())//$sql = an sql query statatement, $parameters,
     {
         $this->_query = $this->_pdo->prepare($sql);
@@ -78,7 +78,7 @@ class DataBase //a singleton class?
     // the ACTION function, now that we have prepared our statements, it's time to do stuff with them (the statements).
     public function action($action, $table, $where = array())
     {
-        if (count($where === 3)) //(i.e.) the 'field' (e.g. user_name), 'operator' (e.g. =) and 'value' (e.g. porter) must all be provided in order for the query to be valid (all three).
+        if (count($where) === 3) //(i.e.) the 'field' (e.g. user_name), 'operator' (e.g. =) and 'value' (e.g. porter) must all be provided in order for the query to be valid (all three).
         {
             $operators = array('=', '>', '<', '>=', '<=');// defining all the valid / allowed operators.
 
@@ -115,6 +115,10 @@ class DataBase //a singleton class?
         return $this->_error;
     }
 
-    // the COUNT function. checks for existence of content
+    // the COUNT function. checks for existence of content.
+    public function count()
+    {
+        return $this->_count;
+    }
 }
 ?>

@@ -13,5 +13,6 @@ require_once 'core/initialise.php';
 //     }
 // }
 // DataBase::getInstance()->query("INSERT INTO users(user_name, user_email) VALUES ('roman', 'roman@romemail.com')");// the database class has been successfully instantiated. and data insertion into table successful.
-
+$users = DataBase::getInstance()->get('users', array('user_name', '=', 'king'));
+echo $users->count();
 ?>
