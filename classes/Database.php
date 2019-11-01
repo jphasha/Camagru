@@ -139,6 +139,29 @@ class DataBase //a singleton class?
         }
         return false;
     }
+    // UPDATE function to edit some info about a user.
+    public function update($table, $id, $fields)
+    {
+        $set = '';
+        $stp_con = 1;
+
+        foreach ($fields as $name => $value)
+        {
+            $set .= "{$name} = ?";
+            if (count($fields) > $stp_con)
+            {
+                $set .= ", ";
+            }
+            $stp_con++;
+        }
+        $sql_query = "UPDATE {$table} SET {$set} WHERE user_id = {$id}";
+        echo $sql_query;
+        if (!$this->query($sql_query, $fields)->error())
+        {
+            return true;
+        }
+        return false;
+    }
     // the RESULTS function which is used to return all the results of a query and not only the first part of the results.
     public function results()
     {
