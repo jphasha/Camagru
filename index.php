@@ -13,7 +13,7 @@ require_once 'core/initialise.php';
 //     }
 // }
 // DataBase::getInstance()->query("INSERT INTO users(user_name, user_email) VALUES ('roman', 'roman@romemail.com')");// the database class has been successfully instantiated. and data insertion into table successful.
-$users = DataBase::getInstance()->get('users', array('user_id', '>', '0'));
-echo $users->first()->user_name;
+$users = DataBase::getInstance()->insert('users', array('user_email' => 'po', 'user_name' => 'kfjh', 'user_pass' => 'ffff'));
+// echo $users->first()->user_name;
 // echo '<pre>', var_dump($users->first()), '<pre>'; // the results function is acting up so for now if i want to see the results of my query but i will be back.
 ?>

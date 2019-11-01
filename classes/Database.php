@@ -21,6 +21,8 @@ class DataBase //a singleton class?
 
             // now just to set the PDO error mode to Exception. (i.e.)we are trying to catch some exception.
             $this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $this->_pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         }
         catch (PDOException $some_exception)
         {
@@ -109,12 +111,40 @@ class DataBase //a singleton class?
     {
         return $this->action('DELETE', $table, $where);
     }
+    // a function to INSERT data into a table.
+    public function insert($table, $fields = array())
+    {
+        if (count($fields))
+        {
+            $keys = array_keys($fields);
+            $values = '';
+            $stp_con = 1;
+
+            foreach ($fields as $field)
+            {
+                $values .= '?';
+                if (count($fields) > $stp_con)
+                {
+                    $values .= ', ';
+                }
+                $stp_con++;
+            }
+
+            $sql = "INSERT INTO users (`" . implode("`, `", $keys) . "`) VALUES ({$values})";
+            // echo $sql;
+            if (!$this->query($sql, $fields)->error())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     // the RESULTS function which is used to return all the results of a query and not only the first part of the results.
     public function results()
     {
         return $this->_results;
     }
-    // a function to display the first item. the first item that appears in the query results.
+    // a function to display the FIRST item. the first item that appears in the query results.
     public function first()
     {
         return $this->results()[0];
