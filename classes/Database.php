@@ -63,7 +63,7 @@ class DataBase //a singleton class?
             if ($this->_query->execute())
             {
                 // echo "prepared and executed<br>";
-                // $this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ); // unclear as to what the error is.
+                $this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ); // fetches all the results of the query and put them in an object form.
                 $this->_count = $this->_query->rowCount();
             }
             else
@@ -109,6 +109,17 @@ class DataBase //a singleton class?
     {
         return $this->action('DELETE', $table, $where);
     }
+    // the RESULTS function which is used to return all the results of a query and not only the first part of the results.
+    public function results()
+    {
+        return $this->_results;
+    }
+    // the ALL_NAMES function which is a derivative of the RESULTS function to get all the user_names of the users in the 'table'.
+    // public function all_names()
+    // {
+    //     $all_names = $this->_results->results();
+    //     return $all_names; //i'm missing something. brb
+    // }
     // the ERROR function.
     public function error() // that's what it does, it checks for errors.
     {
