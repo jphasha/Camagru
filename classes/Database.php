@@ -114,6 +114,11 @@ class DataBase //a singleton class?
     {
         return $this->_results;
     }
+    // a function to display the first item. the first item that appears in the query results.
+    public function first()
+    {
+        return $this->results()[0];
+    }
     // the ALL_NAMES function which is a derivative of the RESULTS function to get all the user_names of the users in the 'table'.
     // public function all_names()
     // {
