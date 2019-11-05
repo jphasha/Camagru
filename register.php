@@ -28,12 +28,12 @@ if (Input::exists())
                 'matches' => 'password'
             )
             ));
-        // if ($validation->passed())
-        // {
-        //     Session::flash('success', 'Registration Successful!');
-        //     header('Location: index.php');
-        // }
-        // else
+        if ($validation->passed())
+        {
+            Session::flash('success', 'Registration Successful!');
+            header('Location: index.php');
+        }
+        else
         {
             foreach ($validation->errors() as $error)
             {
