@@ -3,35 +3,42 @@ require_once 'core/initialise.php';
 
 if (Input::exists())
 {
-    // echo Input::get('username'); // not echoing this variable even though it is suppossed to.
-    $validate = new Validate();
-    $validation = $validate->check($_POST, array(
-        'username' => array(
-            'required' => true,
-            'min' => 2,
-            'max' => 20,
-            'unique' => 'users'
-        ),
-        'email' => array(
-            'required' => true,
-            'unique' => 'users'
-        ),
-        'password' => array(
-            'required' => true,
-            'min' => 8
-        ),
-        'confirm_password' => array(
-            'required' => true,
-            'matches' => 'password'
-        )
-        ));
-    if ($validation->passed())
+    if (Token::check(Input::get('token_name')))
     {
-        // register user
-    }
-    else
-    {
-        // error
+        // echo "i have been run<br>"; //because we are not yet able to generate token, we are not able to enter this part of the code.
+        // echo Input::get('username'); // not echoing this variable even though it is suppossed to.
+        $validate = new Validate();
+        $validation = $validate->check($_POST, array(
+            'username' => array(
+                'required' => true,
+                'min' => 2,
+                'max' => 20,
+                'unique' => 'users'
+            ),
+            'email' => array(
+                'required' => true,
+                'unique' => 'users'
+            ),
+            'password' => array(
+                'required' => true,
+                'min' => 8
+            ),
+            'confirm_password' => array(
+                'required' => true,
+                'matches' => 'password'
+            )
+            ));
+        if ($validation->passed())
+        {
+            echo "passed<br>";
+        }
+        else
+        {
+            foreach ($validation->errors() as $error)
+            {
+                echo $error . "<br>";
+            }
+        }
     }
 }
 ?>
@@ -53,6 +60,6 @@ if (Input::exists())
         <label for="Confirm Password">Confirm your Password</label>
         <input type="text" name="confirm_password" id="confirm_password">
     </div>
-    <input type="hidden" name="token" value="">
+    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
     <input type="submit" value="Register">
 </form>
