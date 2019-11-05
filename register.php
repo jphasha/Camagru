@@ -53,5 +53,6 @@ if (Input::exists())
         <label for="Confirm Password">Confirm your Password</label>
         <input type="text" name="confirm_password" id="confirm_password">
     </div>
+    <input type="hidden" name="token" value="">
     <input type="submit" value="Register">
 </form>

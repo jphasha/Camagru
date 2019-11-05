@@ -22,7 +22,8 @@ $GLOBALS['config'] = array
     // setup a session.
     'sessions' => array
     (
-        'session' => 'user_session'
+        'session' => 'user_session',
+        'token_name' => 'token'
     )
 );
 // ?????
