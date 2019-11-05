@@ -8,6 +8,10 @@ class Config //what this function does is return the host path or really any pat
             // properties / variables
             $config = $GLOBALS['config']; //remember, $GLOBALS is a global variable so it can be called without requiring the file it is declared in(i think).
             $path = explode('/', $path);
+            // echo '<pre>';
+            // var_dump($config);
+            // echo '</pre>';
+            // var_dump($path);
             // print_r($GLOBALS);
             // echo "<br>";
             // print_r($path);
@@ -21,6 +25,7 @@ class Config //what this function does is return the host path or really any pat
                     $config = $config[$element]; // under ideal circumstances, localhost will be returned.(for the purposes of this project ofcourse.)
                 }
             }
+            // die();
             return $config;
         }
         return false;

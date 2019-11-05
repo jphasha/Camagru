@@ -6,7 +6,7 @@ if (Input::exists())
     if (Token::check(Input::get('token_name')))
     {
         // echo "i have been run<br>"; //because we are not yet able to generate token, we are not able to enter this part of the code.
-        // echo Input::get('username'); // not echoing this variable even though it is suppossed to.
+        echo Input::get('username'); // not echoing this variable even though it is suppossed to.
         $validate = new Validate();
         $validation = $validate->check($_POST, array(
             'username' => array(
@@ -28,11 +28,12 @@ if (Input::exists())
                 'matches' => 'password'
             )
             ));
-        if ($validation->passed())
-        {
-            echo "passed<br>";
-        }
-        else
+        // if ($validation->passed())
+        // {
+        //     Session::flash('success', 'Registration Successful!');
+        //     header('Location: index.php');
+        // }
+        // else
         {
             foreach ($validation->errors() as $error)
             {
@@ -61,5 +62,6 @@ if (Input::exists())
         <input type="text" name="confirm_password" id="confirm_password">
     </div>
     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+    <!-- no token generated. nevermind, i was directing the $_SESSION[config] to sessions wrong.--> 
     <input type="submit" value="Register">
 </form>
