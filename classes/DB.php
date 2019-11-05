@@ -1,5 +1,5 @@
 <?php
-class DataBase //a singleton class?
+class DB //a singleton class?
 {
     // the underscores before the variable names are just there to denote that the variable is private.
     private static $_instance = null;//a variable that will store our instance whenever it is available.
@@ -35,7 +35,7 @@ class DataBase //a singleton class?
     {
         if (!isset(self::$_instance))// where we have not instantiated our class:
         {
-            self::$_instance = new DataBase();// we instantiate our 'DataBase' class.
+            self::$_instance = new DB();// we instantiate our 'DataBase' class.
             // echo "instance<br>"; // wanted to see how many times it will instantiate.
         }
         return self::$_instance; //the 'getInstance()' function will instantiate our class when called upon. but only if there was no instantiation that has already occured. (i.e.) no connection has been established already.

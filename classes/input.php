@@ -6,15 +6,12 @@ class Input
         switch($type)
         {
             case 'post':
-                echo "post<br>";
                 return (!empty($_POST)) ? true : false;
             break;
             case 'get':
-                echo "get<br>";
                 return (!empty($_GET)) ? true : false;
             break;
             default:
-                echo "not set<br>";
                 return false;
             break;
         }
