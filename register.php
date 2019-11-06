@@ -33,6 +33,28 @@ if (Input::exists())
         {
             // Session::flash('success', 'Registration Successful!'); // a flash message to be displayed.
             // header('Location: index.php'); // a direction to go to after the user has been successfully registered.
+            $user = new User();
+
+            try
+            {
+                $user->create(
+                    array(
+                        'full_name' => Input::get('fullname'),
+                        'user_name' => Input::get('username'),
+                        'user_email' => Input::get('email'),
+                        'user_pass' => Hash::make(Input::get('password'), $salt),
+                        'joined' => date('Y-m-d H:i:s'),
+                        'group' => 1,
+                        'salt' => $salt
+                    )
+                );
+
+                Session::flash('home', 'you are now registered');
+            }
+            catch (Exception $some_exception)
+            {
+                die ($some_exception->getMessage()); // this is usually where you create and redirect users to som page named 404 or something. remember, you must always control where your visitors are directed.
+            }
         }
         else
         {
