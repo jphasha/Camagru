@@ -3,10 +3,10 @@ require_once 'core/initialise.php';
 
 if (Input::exists())
 {
-    if (Token::check(Input::get('token_name')))
+    if (Token::check(Input::get('token')))
     {
         // echo "i have been run<br>"; //because we are not yet able to generate token, we are not able to enter this part of the code.
-        echo Input::get('username'); // not echoing this variable even though it is suppossed to.
+        // echo Input::get('token') . "<br>"; // not echoing this variable even though it is suppossed to. again NVM, the connection to the sessions was the issue.
         $validate = new Validate();
         $validation = $validate->check($_POST, array(
             'username' => array(
@@ -27,11 +27,12 @@ if (Input::exists())
                 'required' => true,
                 'matches' => 'password'
             )
-            ));
+            )
+        );
         if ($validation->passed())
         {
-            Session::flash('success', 'Registration Successful!');
-            header('Location: index.php');
+            // Session::flash('success', 'Registration Successful!'); // a flash message to be displayed.
+            // header('Location: index.php'); // a direction to go to after the user has been successfully registered.
         }
         else
         {
@@ -47,11 +48,11 @@ if (Input::exists())
 <form action="" method="post">
     <div class="field">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" value="" autocomplete="off">
+        <input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">
     </div>
     <div class="field">
         <label for="email">Email</label>
-        <input type="text" name="email" id="email">
+        <input type="text" name="email" id="email" value="<?php echo escape(Input::get('email')); ?>">
     </div>
     <div class="field">
         <label for="password">Create a password</label>
