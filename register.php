@@ -39,9 +39,10 @@ if (Input::exists())
             {
                 $user->create(
                     array(
-                        'full_name' => Input::get('fullname'),
-                        'user_name' => Input::get('username'),
+                        'firstname' => Input::get('firstname'),
+                        'lastname' => Input::get('lastname'),
                         'user_email' => Input::get('email'),
+                        'user_name' => Input::get('username'),
                         'user_pass' => Hash::make(Input::get('password'), $salt),
                         'joined' => date('Y-m-d H:i:s'),
                         'group' => 1,
@@ -50,6 +51,8 @@ if (Input::exists())
                 );
 
                 Session::flash('home', 'you are now registered');
+
+                Redirect::to('index.php'); // direct the user to the homepage / index.php.
             }
             catch (Exception $some_exception)
             {
@@ -69,15 +72,23 @@ if (Input::exists())
 
 <form action="" method="post">
     <div class="field">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">
+        <label for="firstname">First Name(s)</label>
+        <input type="text" name="firstname" id="firstname" value="<?php echo escape(Input::get('firstname')); ?>">
+    </div>
+    <div class="field">
+        <label for="lastname">Last Name</label>
+        <input type="text" name="lastname" id="lastname" value="<?php echo escape(Input::get('lastname')); ?>">
     </div>
     <div class="field">
         <label for="email">Email</label>
         <input type="text" name="email" id="email" value="<?php echo escape(Input::get('email')); ?>">
     </div>
     <div class="field">
-        <label for="password">Create a password</label>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">
+    </div>
+    <div class="field">
+        <label for="password">Create a Password</label>
         <input type="text" name="password" id="password">
     </div>
     <div class="field">

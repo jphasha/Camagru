@@ -17,8 +17,8 @@ require_once 'core/initialise.php';
 // echo $users->first()->user_name;
 // echo '<pre>', var_dump($users->first()), '<pre>'; // the results function is acting up so for now if i want to see the results of my query but i will be back.
 // $update = DataBase::getInstance()->update('users', 33, array('full_name' => 'kopi_ya_tswikiri', 'user_pass' => 'A_good_9455'))
-if (Session::exists('success'))
+if (Session::exists('home'))
 {
-    echo Session::flash('success');
+    echo '<p>' . Session::flash('home') . '<p>';
 }
 ?>

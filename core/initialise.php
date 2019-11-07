@@ -26,7 +26,7 @@ $GLOBALS['config'] = array
         'token_name' => 'token'
     )
 );
-// ?????
+// the spl_autoload_register in this case, is used to instantiate classes in the "index.php".
 spl_autoload_register
 (
     function($class)
