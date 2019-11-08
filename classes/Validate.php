@@ -17,8 +17,19 @@ class Validate
             foreach($rules as $rule => $rule_value)
             {
                 echo "{$item} {$rule} must be {$rule_value}<br>";
+                $this->_passed = true;
             }
         }
+    }
+
+    public function passed()
+    {
+        return $this->_passed;
+    }
+
+    public function errors()
+    {
+        return $this->_errors;
     }
 }
 ?>

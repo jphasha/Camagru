@@ -29,8 +29,9 @@ if (Input::exists())
             )
             )
         );
-        if ($validation->passed())
+        if ($validate->passed()) // $validate NOT $validation
         {
+            echo "word<br>";
             // Session::flash('success', 'Registration Successful!'); // a flash message to be displayed.
             // header('Location: index.php'); // a direction to go to after the user has been successfully registered.
             $user = new User();
