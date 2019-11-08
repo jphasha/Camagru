@@ -13,9 +13,19 @@ if (Input::exists())
             )
         );
 
-        if ($validation->passed())
+        if ($validate->passed())
         {
-            
+            $user = new User();
+            $login = $user->login(Input::get('username'), Input::get('password'));
+
+            if ($login)
+            {
+                echo "successful";
+            }
+            else
+            {
+                echo "no can do jack";
+            }
         }
         else
         {
