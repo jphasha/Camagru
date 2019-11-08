@@ -21,6 +21,24 @@ require_once 'core/initialise.php';
 // {
 //     echo '<p>' . Session::flash('home') . '<p>';
 // }
-$user = new User(); // to find a current user's details
-$another_user = new User(7); // to get a specific user's details. user with id=6 in this case.
+// $user = new User(); // to find a current user's details
+// $another_user = new User(7); // to get a specific user's details. user with id=6 in this case.
+// if ($user->isLoggedIn()) // to check if the user is logged in
+// {?>
+    <!-- <p>Hello <a href="#">
+    <?php echo escape($user->data()->username); ?>
+    </a>!</p>
+    <ul>
+        <li>
+            <a href="logout.php">
+            Log out
+            </a>
+        </li>
+    </ul> -->
+<?php
+    // else
+    {
+        echo '<p>You need to <a href="login.php">log in or <a href="register.php">register<a></p>';
+    }
+// }
 ?>

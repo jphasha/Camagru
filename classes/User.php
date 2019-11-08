@@ -3,7 +3,8 @@ class User
 {
     private $_db,
             $_data,
-            $_sessionName;
+            $_sessionName,
+            $_isLoggedIn;
 
     public function __construct($user = null)
     {
@@ -78,9 +79,14 @@ class User
         return false;
     }
 
-    private function data()
+    public function data()
     {
         return $this->_data;
+    }
+
+    public function isLoggedIn() //this function is there for the purpose of returning the details of a logged in user.
+    {
+        return $this->_isLoggedIn;
     }
 }
 ?>

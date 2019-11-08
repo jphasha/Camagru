@@ -20,7 +20,7 @@ if (Input::exists())
 
             if ($login)
             {
-                echo "successful";
+                Redirect::to('index.php');
             }
             else
             {
