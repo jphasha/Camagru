@@ -79,6 +79,11 @@ class User
         return false;
     }
 
+    public function logout()
+    {
+        Session::delete($this->_sessionName); // simple, just delete the current session.
+    }
+
     public function data()
     {
         return $this->_data;

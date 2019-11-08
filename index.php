@@ -25,7 +25,7 @@ require_once 'core/initialise.php';
 // $another_user = new User(7); // to get a specific user's details. user with id=6 in this case.
 // if ($user->isLoggedIn()) // to check if the user is logged in
 // {?>
-    <!-- <p>Hello <a href="#">
+    <!-- <p>Hello <a href="profile.php?user=<?php echo escape($user->data()->username)?>">
     <?php echo escape($user->data()->username); ?>
     </a>!</p>
     <ul>
@@ -37,8 +37,8 @@ require_once 'core/initialise.php';
     </ul> -->
 <?php
     // else
-    {
-        echo '<p>You need to <a href="login.php">log in or <a href="register.php">register<a></p>';
-    }
-// }
+//     {
+//         echo '<p>You need to <a href="login.php">log in or <a href="register.php">register<a></p>';
+//     }
+// // }
 ?>
