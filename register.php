@@ -9,6 +9,16 @@ if (Input::exists())
         // echo Input::get('token') . "<br>"; // not echoing this variable even though it is suppossed to. again NVM, the connection to the sessions was the issue.
         $validate = new Validate();
         $validation = $validate->check($_POST, array(
+            'firstname' => array(
+                'required' => true,
+                'min' => 2,
+                'max' => 50,
+            ),
+            'lastname' => array(
+                'required' => true,
+                'min' => 2,
+                'max' => 50,
+            ),
             'username' => array(
                 'required' => true,
                 'min' => 2,
@@ -17,11 +27,14 @@ if (Input::exists())
             ),
             'email' => array(
                 'required' => true,
-                'unique' => 'users'
+                'unique' => 'users',
+                'min' => 2,
+                'max' => 50
             ),
             'password' => array(
                 'required' => true,
-                'min' => 8
+                'min' => 8,
+                'max' => 50
             ),
             'confirm_password' => array(
                 'required' => true,
@@ -40,14 +53,14 @@ if (Input::exists())
             {
                 $user->create(
                     array(
-                        'firstname' => Input::get('firstname'),
-                        'lastname' => Input::get('lastname'),
+                        'first_name' => Input::get('firstname'),
+                        'last_name' => Input::get('lastname'),
                         'user_email' => Input::get('email'),
                         'user_name' => Input::get('username'),
-                        'user_pass' => Hash::make(Input::get('password'), $salt),
+                        'user_pass' => Hash::make(Input::get('password'), "salt"),
                         'joined' => date('Y-m-d H:i:s'),
                         'group' => 1,
-                        'salt' => $salt
+                        'salt' => "salt"
                     )
                 );
 

@@ -16,20 +16,36 @@ class Validate
         {
             foreach($rules as $rule => $rule_value)
             {
-                echo "{$item} {$rule} must be {$rule_value}<br>";
-                $this->_passed = true;
+                $value = $source[$item];
+                
+                if ($rule === 'required' && empty($rule_value))
+                {
+                    $this->addError("{$item} is required");
+                }
             }
         }
+
+        if (empty($this->_errors))
+        {
+            $this->_passed = true;
+        }
+
+        return $this;
+    }
+
+    public function addError($error)
+    {
+        $this->_errors[] = $error;
+    }
+
+    public function errors()
+    {
+        return $this->$_errors;
     }
 
     public function passed()
     {
         return $this->_passed;
-    }
-
-    public function errors()
-    {
-        return $this->_errors;
     }
 }
 ?>

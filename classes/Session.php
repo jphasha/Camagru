@@ -8,6 +8,7 @@ class Session
 {
     public static function exists($name)
     {
+        echo "now?";
         return (isset($_SESSION[$name])) ? true : false;
     }
 

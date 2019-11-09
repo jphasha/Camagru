@@ -5,7 +5,7 @@ class Hash
     // this string is added to the end of the user's password. this makes hacking difficult.
     public static function make($string) //a function that makes/creates the hash.
     {
-        return hash('sha256', $string . $salt);
+        return hash('sha256', $string . "salt");
     }
 
     public static function salt($length) // to generate salt. $length = how long do you want your randomly generated string to be?.
