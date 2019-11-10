@@ -48,7 +48,7 @@ class User
         {
             if (is_numeric($variable)) // this will obviously be problematic if the user's username is all numbers.
             {
-                $table_field = 'id';
+                $table_field = 'userid';
             }
             else
             {

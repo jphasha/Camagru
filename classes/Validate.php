@@ -18,9 +18,44 @@ class Validate
             {
                 $value = $source[$item];
                 
-                if ($rule === 'required' && empty($rule_value))
+                if ($rule === 'required' && empty($value))
                 {
                     $this->addError("{$item} is required");
+                }
+
+                else if (!empty($value))
+                {
+                    switch ($rule)
+                    {
+                        case 'min':
+                            if (strlen($value) < $rule_value)
+                            {
+                                $this->addError("{$item} requires a minimum of {$rule_value} characters");
+                            }
+                        break;
+
+                        case 'max':
+                        if (strlen($value) > $rule_value)
+                        {
+                            $this->addError("{$item} requires a maximum of {$rule_value} characters");
+                        }
+                        break;
+
+                        case 'matches':
+                            if ($value != $source[$rule_value])
+                            {
+                                $this->addError("{$item} must match {$rule_value}");
+                            }
+                        break;
+
+                        case 'unique':
+                            $check = $this->_db->get($rule_value, array($item, '=', $value));
+                            if ($check->count())
+                            {
+                                $this->addError("{$item} already exist, try a different {$item}");
+                            }
+                        break;
+                    }
                 }
             }
         }
@@ -40,7 +75,7 @@ class Validate
 
     public function errors()
     {
-        return $this->$_errors;
+        return $this->_errors;
     }
 
     public function passed()

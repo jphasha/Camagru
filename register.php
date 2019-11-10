@@ -25,7 +25,7 @@ if (Input::exists())
                 'max' => 20,
                 'unique' => 'users'
             ),
-            'email' => array(
+            'useremail' => array(
                 'required' => true,
                 'unique' => 'users',
                 'min' => 2,
@@ -44,7 +44,7 @@ if (Input::exists())
         );
         if ($validate->passed()) // $validate NOT $validation
         {
-            echo "word<br>";
+            // echo "word<br>";
             // Session::flash('success', 'Registration Successful!'); // a flash message to be displayed.
             // header('Location: index.php'); // a direction to go to after the user has been successfully registered.
             $user = new User();
@@ -70,6 +70,7 @@ if (Input::exists())
             }
             catch (Exception $some_exception)
             {
+                echo "here?<br>";
                 die ($some_exception->getMessage()); // this is usually where you create and redirect users to som page named 404 or something. remember, you must always control where your visitors are directed.
             }
         }
