@@ -16,7 +16,8 @@ class Validate
         {
             foreach($rules as $rule => $rule_value)
             {
-                $value = $source[$item];
+                $value = trim($source[$item]); // just in case there are spaces before or after an entry, the entry must still be valid.
+                $item = escape($item); // the entered entry will be freed of backslashes and other funny characters.
                 
                 if ($rule === 'required' && empty($value))
                 {

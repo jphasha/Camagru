@@ -4,7 +4,7 @@ require_once 'core/initialise.php';
 // echo Config::get('mysql/host'); //"::" the double colons are the "->" sccessing method to access a static function (or a variable).
 // basically, right now i'm just calling the function get from the class Config. i'm trying to get the path or address of my host.
 
-// $users = DataBase::getInstance()->query('SELECT user_name FROM users');//instantiate the class DataBase and use the mysql query to get the column "user_name" from the table "users".
+// $users = DB::getInstance()->query('SELECT user_name FROM users');//instantiate the class DataBase and use the mysql query to get the column "user_name" from the table "users".
 // if ($users->count())// if there are users.
 // {
 //     foreach ($users as $user)//we will iterate through an array of $users where we will refer to each user(iteration) as $user.
@@ -12,7 +12,7 @@ require_once 'core/initialise.php';
 //         echo $user->user_name;
 //     }
 // }
-// DataBase::getInstance()->query("INSERT INTO users(user_name, user_email) VALUES ('roman', 'roman@romemail.com')");// the database class has been successfully instantiated. and data insertion into table successful.
+// DB::getInstance()->query("INSERT INTO users(user_name, user_email) VALUES ('roman', 'roman@romemail.com')");// the database class has been successfully instantiated. and data insertion into table successful.
 // $users = DataBase::getInstance()->delete('users', array('user_email' => 'po', 'user_name' => 'kfjh', 'user_pass' => 'ffff'));
 // echo $users->first()->user_name;
 // echo '<pre>', var_dump($users->first()), '<pre>'; // the results function is acting up so for now if i want to see the results of my query but i will be back.
@@ -42,3 +42,21 @@ require_once 'core/initialise.php';
 //     }
 // // }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Camagru</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="gal_con">
+        <div class="gallery">
+            <div class="gal_item">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
