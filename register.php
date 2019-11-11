@@ -88,27 +88,27 @@ if (Input::exists())
 <form action="" method="post">
     <div class="field">
         <label for="firstname">First Name(s)</label>
-        <input type="text" name="firstname" id="firstname" value="<?php echo escape(Input::get('firstname')); ?>">
+        <input type="text" name="firstname" id="firstname" value="<?php echo escape(Input::get('firstname')); ?>" required>
     </div>
     <div class="field">
         <label for="lastname">Last Name</label>
-        <input type="text" name="lastname" id="lastname" value="<?php echo escape(Input::get('lastname')); ?>">
+        <input type="text" name="lastname" id="lastname" value="<?php echo escape(Input::get('lastname')); ?>" required>
     </div>
     <div class="field">
         <label for="email">Email</label>
-        <input type="text" name="email" id="email" value="<?php echo escape(Input::get('email')); ?>">
+        <input type="text" name="email" id="email" value="<?php echo escape(Input::get('email')); ?>" required>
     </div>
     <div class="field">
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">
+        <input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off" required>
     </div>
     <div class="field">
         <label for="password">Create a Password</label>
-        <input type="text" name="password" id="password">
+        <input type="text" name="password" id="password" required>
     </div>
     <div class="field">
         <label for="Confirm Password">Confirm your Password</label>
-        <input type="text" name="confirm_password" id="confirm_password">
+        <input type="text" name="confirm_password" id="confirm_password" required>
     </div>
     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
     <!-- no token generated. nevermind, i was directing the $_SESSION[config] to sessions wrong.--> 
