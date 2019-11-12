@@ -10,11 +10,16 @@ class Gallery
 
     public function setPath($path)
     {
-        // if (substr($path, -1) === '/') // if the last charater is '/';
-        // {
-        //     $path = substr($path, 0, -1); // remove the last character;
-        // }
+        if (substr($path, -1) === '/') // if the last charater is '/';
+        {
+            $path = substr($path, 0, -1); // remove the last character;
+        }
         echo $this->path = $path;
+    }
+
+    private function getDirectory($path)
+    {
+        return scandir($path);
     }
 }
 ?>

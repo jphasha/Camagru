@@ -3,6 +3,9 @@ require 'core/initialise.php';
 
 $gallery = new Gallery();
 $gallery->setPath('images/');
+
+print_r
+
 ?>
 
 <!DOCTYPE html>
