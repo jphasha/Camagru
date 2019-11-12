@@ -1,4 +1,8 @@
 <?php
+require 'core/initialise.php';
+
+$gallery = new Gallery();
+$gallery->setPath('images/');
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +19,7 @@
         <div class="gallery cf">
             <?php for($x = 1; $x <= 2; $x++): ?>
                 <div class="gal_item">
-                    <img src="voda.jpeg" class="pre_img" style="height: 45px; width: 45px">
+                    <img src="images/voda.jpeg" class="pre_img">
                 </div>
             <?php endfor; ?>
         </div>
