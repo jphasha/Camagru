@@ -1,3 +1,6 @@
+<?php
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,9 +12,12 @@
 </head>
 <body>
     <div class="gal_con">
-        <div class="gallery">
-            <div class="gal_item">
-            </div>
+        <div class="gallery cf">
+            <?php for($x = 1; $x <= 2; $x++): ?>
+                <div class="gal_item">
+                    <img src="voda.jpeg" class="pre_img" style="height: 45px; width: 45px">
+                </div>
+            <?php endfor; ?>
         </div>
     </div>
 </body>

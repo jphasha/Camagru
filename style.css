@@ -28,17 +28,44 @@ body
     background-color: darkgreen;
 }
 
+.cf:before,
+.cf:after
+{
+    content: " ";
+    display:table;
+}
+
+.cf:after
+{
+    clear:both;
+}
+
 .gal_con
 {
     background-color: brown;
+    max-width: 940px;
+    padding: 940px;
+    margin: 0 auto;
 }
 
 .gallery
 {
     background-color: blue;
+    width: 100%;
 }
 
 .gal_item
 {
     background-color: darkorange;
+    float: left;
+    width: 19%;
+    margin: 1%;
+    padding: 2%;
+    padding-bottom: 5%;
+    box-shadow: 1px 1px 3px rgba(0,0,0,.2); /* these values are x, y, z. */
+}
+
+.pre_img
+{
+    width: 40px;
 }
