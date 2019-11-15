@@ -4,9 +4,7 @@ require 'core/initialise.php';
 $gallery = new Gallery();
 $gallery->setPath('images/');
 
-$images = $gallery->getImages();
-
-echo '<pre>'; print_r($images); echo '</pre>'; // to show an array of images that are contained inside the images directory or wherever our images path is set.
+$images = $gallery->getImages(array('png')); // it is possible that i don't quite this getImages function because it is misbehaving.
 
 ?>
 
@@ -21,13 +19,17 @@ echo '<pre>'; print_r($images); echo '</pre>'; // to show an array of images tha
 </head>
 <body>
     <div class="gal_con">
-        <div class="gallery cf">
-            <?php for($x = 1; $x <= 2; $x++): ?>
-                <div class="gal_item">
-                    <img src="images/voda.jpeg" class="pre_img">
-                </div>
-            <?php endfor; ?>
-        </div>
+        <?php if($images): ?>
+            <div class="gallery cf">
+                <?php foreach($images as $image): ?>
+                    <div class="gal_item">
+                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['thumbs']; ?>" class="pre_img"> 
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            There are no images.
+        <?php endif; ?>
     </div>
 </body>
 </html>
