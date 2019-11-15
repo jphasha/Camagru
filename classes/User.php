@@ -48,11 +48,11 @@ class User
         {
             if (is_numeric($variable)) // this will obviously be problematic if the user's username is all numbers.
             {
-                $table_field = 'userid';
+                $table_field = 'user_id';
             }
             else
             {
-                $table_field = 'username';
+                $table_field = 'user_name';
             }
             $data = $this->_db->get('users', array($table_field, '=', $variable));
 

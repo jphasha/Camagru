@@ -1,7 +1,7 @@
 <?php
 class Input
 {
-    public static function exists($type = 'post')
+    public static function exists($type = 'post') // setting the default input method to 'post'.
     {
         switch($type)
         {

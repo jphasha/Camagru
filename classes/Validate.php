@@ -12,13 +12,16 @@ class Validate
 
     public function check($source, $items = array())
     {
-        foreach($items as $item => $rules)
+        foreach($items as $item => $rules) // $items are the input fields ('username, password, etc');
         {
-            foreach($rules as $rule => $rule_value)
-            {
+            foreach($rules as $rule => $rule_value) // $rules is the array that contains the rule table (required => true, etc).
+            { // $rule is the key value(s) == required, min, max.
+              // $$rule_value are the assoc values == true, 2, 50.
                 $value = trim($source[$item]); // just in case there are spaces before or after an entry, the entry must still be valid.
                 $item = escape($item); // the entered entry will be freed of backslashes and other funny characters.
-                
+                // echo "{$item} {$rule} must be {$rule_value}";
+                // when referring to password minimum requirement.
+                // the above statement must read: password min must be 2.
                 if ($rule === 'required' && empty($value))
                 {
                     $this->addError("{$item} is required");

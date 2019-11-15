@@ -4,7 +4,9 @@ require 'core/initialise.php';
 $gallery = new Gallery();
 $gallery->setPath('images/');
 
-print_r
+$images = $gallery->getImages();
+
+echo '<pre>'; print_r($images); echo '</pre>'; // to show an array of images that are contained inside the images directory or wherever our images path is set.
 
 ?>
 

@@ -9,7 +9,7 @@ if (Input::exists())
         // echo Input::get('token') . "<br>"; // not echoing this variable even though it is suppossed to. again NVM, the connection to the sessions was the issue.
         $validate = new Validate();
         $validation = $validate->check($_POST, array(
-            'firstname' => array(
+            'firstname' => array( // key values must match the field names in the form (login/register form);
                 'required' => true,
                 'min' => 2,
                 'max' => 50,
@@ -23,7 +23,7 @@ if (Input::exists())
                 'required' => true,
                 'min' => 2,
                 'max' => 20,
-                'unique' => 'users'
+                'unique' => 'users' // 'users' in this case being the table 'users' in the database.
             ),
             'useremail' => array(
                 'required' => true,
@@ -104,11 +104,11 @@ if (Input::exists())
     </div>
     <div class="field">
         <label for="password">Create a Password</label>
-        <input type="text" name="password" id="password" required>
+        <input type="password" name="password" id="password" required>
     </div>
     <div class="field">
-        <label for="Confirm Password">Confirm your Password</label>
-        <input type="text" name="confirm_password" id="confirm_password" required>
+        <label for="confirm_password">Confirm your Password</label>
+        <input type="password" name="confirm_password" id="confirm_password" required>
     </div>
     <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
     <!-- no token generated. nevermind, i was directing the $_SESSION[config] to sessions wrong.--> 
