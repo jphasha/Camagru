@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form action="Upload.php" method="post" enctype="multipart/form-data">
+    <form action="classes/Upload.php" method="post" enctype="multipart/form-data">
         <input type="file" name="photo">
-        <input type="submit" value="upload">
+        <input type="submit" value="upload" name="upload">
     </form>
 </body>
 </html>

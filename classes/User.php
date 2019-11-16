@@ -64,7 +64,7 @@ class User
         }
         return false;
     }
-    public function login($username = null, $password = null)
+    public function login($username = null, $password = null, $remember)
     {
         $user = $this->find($username);
 
@@ -73,6 +73,12 @@ class User
             if ($this->data()->password === Hash::make($password, $this->data()->salt))
             {
                 Session::put($this->_sessionName, $this->data()->id);
+
+                if ($remember)
+                {
+                    $hash = Hash::unique();
+                }
+
                 return true;
             }
         }
