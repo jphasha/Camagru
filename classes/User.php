@@ -70,7 +70,7 @@ class User
 
         if ($user)
         {
-            if ($this->data()->password === Hash::make($password, $this->data()->salt))
+            if ($this->data()->user_pass === Hash::make($password, $this->data()->salt))
             {
                 Session::put($this->_sessionName, $this->data()->id);
 
