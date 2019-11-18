@@ -44,6 +44,8 @@ class DB //a singleton class?
     // a function to QUERY
     public function query($sql, $parameters = array())//$sql = an sql query statatement, $parameters,
     {
+        // var_dump($sql);
+        // die("out");
         $this->_query = $this->_pdo->prepare($sql);
         $this->_error = false; // to make sure that the error that is returned is not the error of the previous query as this function may end up performing multiple queries.
         if ($this->_query = $this->_pdo->prepare($sql))//to prepare and check if the preparation has been successful. | prepared statements protect against sql injections.

@@ -1,4 +1,5 @@
 <?php
+
 require_once 'core/initialise.php';
 
 if (Input::exists())
@@ -19,13 +20,13 @@ if (Input::exists())
                 'min' => 2,
                 'max' => 50,
             ),
-            'username' => array(
+            'user_name' => array(
                 'required' => true,
                 'min' => 2,
                 'max' => 20,
                 'unique' => 'users' // 'users' in this case being the table 'users' in the database.
             ),
-            'useremail' => array(
+            'user_email' => array(
                 'required' => true,
                 'unique' => 'users',
                 'min' => 2,
@@ -55,8 +56,8 @@ if (Input::exists())
                     array(
                         'first_name' => Input::get('firstname'),
                         'last_name' => Input::get('lastname'),
-                        'user_email' => Input::get('email'),
-                        'user_name' => Input::get('username'),
+                        'user_email' => Input::get('user_email'),
+                        'user_name' => Input::get('user_name'),
                         'user_pass' => Hash::make(Input::get('password'), "salt"),
                         'joined' => date('Y-m-d H:i:s'),
                         'group' => 1,
@@ -95,12 +96,12 @@ if (Input::exists())
         <input type="text" name="lastname" id="lastname" value="<?php echo escape(Input::get('lastname')); ?>" required>
     </div>
     <div class="field">
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" value="<?php echo escape(Input::get('email')); ?>" required>
+        <label for="user_email">Email</label>
+        <input type="text" name="user_email" id="user_email" value="<?php echo escape(Input::get('user_email')); ?>" required>
     </div>
     <div class="field">
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off" required>
+        <label for="user_name">Username</label>
+        <input type="text" name="user_name" id="user_name" value="<?php echo escape(Input::get('user_name')); ?>" autocomplete="off" required>
     </div>
     <div class="field">
         <label for="password">Create a Password</label>
