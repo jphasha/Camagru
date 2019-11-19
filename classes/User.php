@@ -1,9 +1,15 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 class User
 {
     private $_db,
             $_data,
             $_sessionName,
+            $_cookieName,
             $_isLoggedIn;
 
     public function __construct($user = null)
@@ -11,6 +17,7 @@ class User
         $this->_db = DB::getInstance();
 
         $this->_sessionName = Config::get('sessions/session_name');
+        $this->_cookieName = Config::get('remember/cookie_name');
 
         if (!$user)
         {
@@ -64,30 +71,63 @@ class User
         }
         return false;
     }
-    public function login($username = null, $password = null, $remember)
+    public function login($username = null, $password = null, $remember = false)
     {
-        $user = $this->find($username);
-
-        if ($user)
+        if (!$username && !$password && $this->exists())
         {
-            if ($this->data()->user_pass === Hash::make($password, $this->data()->salt))
+            Session::put($this->_sessionName, $this->_data->user_id); // user/session id???
+        }
+        else
+        {
+            $user = $this->find($username);
+            if ($user)
             {
-                Session::put($this->_sessionName, $this->data()->id);
-
-                if ($remember)
+                if ($this->data()->user_pass === Hash::make($password, $this->data()->salt))
                 {
-                    $hash = Hash::unique();
-                }
+                    Session::put($this->_sessionName, $this->data()->user_id);
 
-                return true;
+                    if ($remember)
+                    {
+                        $hashCheck = $this->_db->get('users_session', array('user_id', '=', $this->data()->user_id));
+
+                        if (!$hashCheck->count())
+                        {
+                            $hash = Hash::unique();
+                            $this->_db->insert('users_session', array(
+                                'user_id' => $this->data()->user_id,
+                                'hash' => $hash
+                            )
+                        );
+                        }
+                        else
+                        {
+                            $hash = $hashCheck->first()->hash;
+                        }
+                        Cookie::put($this->_cookieName, $hash, Config::get('remember/cookie_expiry'));
+                    }
+
+                    return true;
+                }
             }
         }
         return false;
     }
 
+    public function exists()
+    {
+        if (empty($this->_data))
+        {
+            return false;
+        }
+        return true;
+    }
+
     public function logout()
     {
+        $this->_db->delete('users_session', array('user_id', '=', $this->data()->user_id));
+
         Session::delete($this->_sessionName); // simple, just delete the current session.
+        Cookie::delete($this->_cookieName);
     }
 
     public function data()

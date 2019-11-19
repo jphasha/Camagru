@@ -13,12 +13,12 @@ $GLOBALS['config'] = array(
     ),
     // setup cookies.
     'remember' => array(
-        'cookie_name' => 'my_cookie',
+        'cookie_name' => 'hash',
         'cookie_expiry' => 3600 //setup to an hour.
     ),
     // setup a session.
     'sessions' => array(
-        'session' => 'user_session',
+        'session_name' => 'user',
         'token_name' => 'token'
     )
 );
@@ -32,4 +32,16 @@ spl_autoload_register
 );
 
 require_once 'functions/sanitize.php';
+
+if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Config::get('sessions/session_name')))
+{
+    $hash = Cookie::get(Config::get('remember/cookie_name'));
+    $hashCheck = DB::getInstance()->get('users_session', array('hash', '=', $hash));
+
+    if ($hashCheck->count())
+    {
+        $user = new User($hashCheck->first()->user_id);
+        $user->login();
+    }
+}
 ?>
