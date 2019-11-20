@@ -76,12 +76,9 @@ if (Input::exists())
                 $headers .= "Content-Type:text/html;charset=UTF-8". "\r\n";
                 mail($email, $subject, $message, $headers);
 
-                if (1)
-                {
-                    Session::flash('home', 'you are now registered');
+                Session::flash('home', 'you are now registered');
 
-                    Redirect::to('index.php'); // direct the user to the homepage / index.php.
-                }
+                Redirect::to('verify.php'); // direct the user to the homepage / index.php.
             }
             catch (Exception $some_exception)
             {
