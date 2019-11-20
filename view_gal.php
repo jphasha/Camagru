@@ -2,7 +2,7 @@
 require 'core/initialise.php';
 
 $gallery = new Gallery();
-$gallery->setPath('images/');
+$gallery->setPath('uploads/');
 
 $images = $gallery->getImages(array('png')); // it is possible that i don't quite this getImages function because it is misbehaving.
 
