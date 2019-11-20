@@ -27,7 +27,6 @@ if (isset($_POST['upload']))
 
                 if (move_uploaded_file($photo_tmp, $photo_destination))
                 {
-                    mail("tedolid717@mytmail.net", "My subject", "whats up dog");
                     echo $photo_destination;
                 }
                 else
