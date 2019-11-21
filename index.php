@@ -23,5 +23,10 @@ if ($user->isLoggedIn())
 else
 {
     echo '<p>You need to <a href="login.php">Log in</a> or <a href="register.php">Register</a></p>';
+?>
+<div>
+    <a href="view_gal.php">Gallery</a>
+</div>
+<?php
 }
 ?>
