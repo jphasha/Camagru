@@ -1,6 +1,9 @@
 <?php
+$db = mysqli_connect('localhost', 'root', '', 'db_jphasha');
+// if the upload button is pressed.
 if (isset($_POST['upload']))
 {
+    // in our super variable '$_FILES', give me data with the name 'photo'.
     $photo = $_FILES['photo'];
 
     // photo properties
@@ -28,6 +31,10 @@ if (isset($_POST['upload']))
                 if (move_uploaded_file($photo_tmp, $photo_destination))
                 {
                     echo $photo_destination;
+                    $sql = "INSERT INTO images ('image_name') VALUES ($photo_name_new)";
+                    $query = mysqli_query($db, $sql);
+                    var_dump($query);
+                    die('???');
                 }
                 else
                 {
@@ -38,6 +45,10 @@ if (isset($_POST['upload']))
             {
                 echo "photo too big <br>";
             }
+        }
+        else
+        {
+            echo "there are some errors with your photo.<br>";
         }
     } 
     else

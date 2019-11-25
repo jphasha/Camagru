@@ -9,8 +9,12 @@
 </head>
 <body>
     <form action="classes/Upload.php" method="post" enctype="multipart/form-data">
+    <div>
         <input type="file" name="photo">
+    </div>
+    <div>
         <input type="submit" value="upload" name="upload">
+    </div>
     </form>
 </body>
 </html>

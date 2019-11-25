@@ -41,6 +41,19 @@ class User
         }
     }
 
+    public function update($fields = array(), $id = null)
+    {
+        if (!$id && $this->isLoggedIn())
+        {
+            $id = $this->data()->user_id;
+        }
+
+        if (!$this->_db->update('users', $id, $fields))
+        {
+            throw new Exception('there was a problem<br>');
+        }
+    }
+
     public function create($fields = array())
     {
         if (!$this->_db->insert('users', $fields))
