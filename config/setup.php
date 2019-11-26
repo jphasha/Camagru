@@ -1,60 +1,94 @@
 <?php
-require_once("setup.php");
-try {
-    $conn = new PDO("mysql:host=$servername", $dbusername, $dbpassword);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //  echo "Connected";
-    // creat database
-    $dbase = "CREATE DATABASE IF NOT EXISTS camagru";
-    $conn->exec($dbase);
-    // echo "Database created successfully<br>";
-    }
-catch(PDOException $e)
-    {
-        echo  $dbase."<br>".$e->getMessage();
-        echo "Connection failed: " . $e->getMessage();
-    }
-try{
-    //create table
-    $conn = new PDO("mysql:host=$servername;dbname=camagru", $dbusername, $dbpassword);
-    $sql = "CREATE TABLE IF NOT EXISTS users(
-        user_id         INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
-        user_name       TINYTEXT NOT NULL,
-        firstname       TINYTEXT NULL,
-        lastname        TINYTEXT NULL,
-        country         TINYTEXT NULL,
-        city            TINYTEXT NULL,
-        user_email      TINYTEXT NOT NULL,
-        user_pwd        LONGTEXT NOT NULL,
-        user_key        LONGTEXT NOT NULL,
-        receive_email   VARCHAR(10) DEFAULT 'Yes',
-        verify          INT(11) DEFAULT 0,
-        verify_conf     INT(11) DEFAULT 0
-    )";
-     // use exc() because no results are returned
-     $conn->exec($sql);
-     //echo "Table user created";
-    }
-catch(PDOException $e)
-    {
-        echo  $sql."<br>".$e->getMessage();
-    }
-try{
-    //create table
-    $conn = new PDO("mysql:host=$servername;dbname=camagru", $dbusername, $dbpassword);
-    $sqll = "CREATE TABLE IF NOT EXISTS images(
-            img_id          INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
-            img_name        VARCHAR(200) NOT NULL,
-            img_dir         VARCHAR(300) NULL
-        )";
-         // use exc() because no results are returned
-         $conn->exec($sqll);
-         //echo "Table user created";
-        }
-    catch(PDOException $e)
-        {
-            echo  $sqll."<br>".$e->getMessage();
-        }
- //   $conn = null;
+require_once 'database.php';
+
+$pdo = new PDO("mysql:host=$HOST;charset=utf8", $DB_USER, $DB_PASSWORD);
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+$sql = 'CREATE DATABASE IF NOT EXISTS ' . $DB .' CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$sql = 'USE ' . $DB;
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$sql = "CREATE TABLE IF NOT EXISTS users (
+	user_id INT AUTO_INCREMENT PRIMARY KEY,
+	user_name VARCHAR(100) NOT NULL,
+    user_pass VARCHAR(1000) NOT NULL,
+	user_email VARCHAR(100) NOT NULL,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+	`group` INT NOT NULL,
+	salt VARCHAR(350) NOT NULL,
+	confirmed TINYINT DEFAULT 0,
+	notify	TINYINT DEFAULT 0,
+	joined DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+die('<br>end<br>');
+$sql = "SELECT count(*) FROM `users` WHERE BINARY u_name = 'Admin'";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$number_of_rows = $stmt->fetchColumn();
+if(!$number_of_rows) {
+	$sql = 'INSERT INTO users(`user_name`, `user_email`, `group`, `confirmed`, `notify`, `user_pass`, `salt`)
+	VALUES ("Admin", "vaughan.r.scott@gmail.com", 2, 1, 1, "' . $hash . '", "' . $s_hash . '")';
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute();
+}
+$sql = 'CREATE TABLE IF NOT EXISTS `groups` (
+	g_id INT AUTO_INCREMENT PRIMARY KEY,
+	g_name VARCHAR(50) NOT NULL,
+	permissions TEXT) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$sql = "SELECT count(*) FROM `groups` WHERE g_name = 'Standard user'";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$number_of_rows = $stmt->fetchColumn();
+if(!$number_of_rows) {
+	$sql = 'INSERT INTO `groups`(`g_name`) VALUES ("Standard user")';
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute();
+}
+$sql = "SELECT count(*) FROM `groups` WHERE g_name = 'Administrator user'";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$number_of_rows = $stmt->fetchColumn();
+if(!$number_of_rows) {
+	$sql = 'INSERT INTO `groups`(`g_name`, `permissions`) VALUES ("Administrator user", \'{\r\n\"admin\": 1,\r\n\"mod\": 1\r\n}\')';
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute();
+}
+$sql = 'CREATE TABLE IF NOT EXISTS user_session (
+	s_id INT AUTO_INCREMENT PRIMARY KEY,
+	u_id INT NOT NULL,
+	hash VARCHAR(64) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$sql = 'CREATE TABLE IF NOT EXISTS images (
+	i_id INT AUTO_INCREMENT PRIMARY KEY,
+	u_id INT NOT NULL,
+	i_dest VARCHAR(130) NOT NULL,
+	i_name VARCHAR(64) NOT NULL,
+	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$sql = 'CREATE TABLE IF NOT EXISTS comments (
+	c_id INT AUTO_INCREMENT PRIMARY KEY,
+	i_id INT NOT NULL,
+	u_id INT NOT NULL,
+	commenter_id INT NOT NULL,
+	comment LONGBLOB NOT NULL,
+	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$sql = 'CREATE TABLE IF NOT EXISTS likes (
+	l_id INT AUTO_INCREMENT PRIMARY KEY,
+	i_id INT NOT NULL,
+	u_id INT NOT NULL,
+	`status` TINYINT NOT NULL,
+	liker_id INT NOT NULL,
+	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
 ?>

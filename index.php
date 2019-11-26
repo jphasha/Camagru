@@ -20,6 +20,8 @@ if ($user->isLoggedIn())
     </ul>
 
 <?php
+    if ($user->hasPermission('admin'))
+    {}
 }
 else
 {

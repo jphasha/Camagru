@@ -34,7 +34,7 @@ if (Input::exists())
         {
             if (Hash::make(Input::get('current_password') . $user->data()->salt) !== $user->data()->user_pass)
             {
-                echo "current pass";
+                echo "your current password is wrong.<br>";
             }
             else
             {

@@ -126,6 +126,11 @@ class User
         return false;
     }
 
+    public function hasPermission()
+    {
+        $group = $this->_db->get('groups', array('user_id', '=', $this->data()->group));
+    }
+
     public function exists()
     {
         if (empty($this->_data))
