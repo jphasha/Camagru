@@ -19,9 +19,9 @@ else
     ?>
 
     <h3>
-        <?php echo escape($data->username); ?>
+        <?php echo escape($data->user_name); ?>
     </h3>
-    <p>Full name: <?php echo escape($data->firstname); ?> <?php echo escape($data->lastname); ?>
+    <p>Full name: <?php echo escape($data->first_name); ?> <?php echo escape($data->last_name); ?>
     </p>
     <?php
 }

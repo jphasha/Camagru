@@ -126,9 +126,20 @@ class User
         return false;
     }
 
-    public function hasPermission()
+    public function hasPermission($key)
     {
-        $group = $this->_db->get('groups', array('user_id', '=', $this->data()->group));
+        $group = $this->_db->get('groups', array('user_id', '=', $this->data()->group)); //WHAT??
+
+        if ($group->count())
+        {
+            $permission = json($group->first()->permissions, true);
+
+            if ($permission[$key] == true)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function exists()

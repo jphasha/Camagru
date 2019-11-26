@@ -11,7 +11,7 @@ if ($user->isLoggedIn())
 {
 ?>
 
-    <p>Hello <a href="#"><?php echo escape($user->data()->user_name); ?></a>!</p>
+    <p>Hello <a href="includes/profile.php?user=<?php echo escape($user->data()->user_name); ?>"><?php echo escape($user->data()->user_name); ?></a>!</p>
 
     <ul>
         <li><a href="logout.php">Log out</a></li>
@@ -21,7 +21,9 @@ if ($user->isLoggedIn())
 
 <?php
     if ($user->hasPermission('admin'))
-    {}
+    {
+        echo '<p>You are an admin.</p>';
+    }
 }
 else
 {
