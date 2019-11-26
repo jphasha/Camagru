@@ -1,5 +1,5 @@
 <?php
-require_once 'core/initialise.php';
+require_once '../core/initialise.php';
 
 $user = new User(); // call the user class.
 $user->logout(); // use the logout method in the user class to delete the current session.

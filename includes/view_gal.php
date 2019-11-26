@@ -1,8 +1,8 @@
 <?php
-require 'core/initialise.php';
+require '../core/initialise.php';
 
 $gallery = new Gallery();
-$gallery->setPath('uploads/');
+$gallery->setPath('../uploads/');
 
 $images = $gallery->getImages(array('png')); // it is possible that i don't quite this getImages function because it is misbehaving.
 
@@ -18,6 +18,8 @@ $images = $gallery->getImages(array('png')); // it is possible that i don't quit
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="header">
+    </header>
     <div class="gal_con">
         <?php if($images): ?>
             <div class="gallery cf">
@@ -38,5 +40,7 @@ $images = $gallery->getImages(array('png')); // it is possible that i don't quit
             There are no images.
         <?php endif; ?>
     </div>
+    <footer>
+    </footer>
 </body>
 </html>

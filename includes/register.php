@@ -1,6 +1,6 @@
 <?php
 
-require_once 'core/initialise.php';
+require_once '../core/initialise.php';
 
 if (Input::exists())
 {
