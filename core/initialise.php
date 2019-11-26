@@ -31,7 +31,7 @@ spl_autoload_register
     }
 );
 
-require_once ($_SERVER['DOCUMENT_ROOT'] . '/projects_github/github_camagru/functions/sanitize.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/projects_github/github_camagru/functions/sanitize.php'); // gonna need a better redirection on this one.
 
 if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Config::get('sessions/session_name')))
 {
