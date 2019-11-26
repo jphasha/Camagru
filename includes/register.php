@@ -70,7 +70,7 @@ if (Input::exists())
                 $subject = 'Signup | Verification';
                 $message = 'Thank you for registerimg. Please click the link to verify your registration:';
                 $message .= "\r\n";
-                $message .= "<a href='http://localhost:8080/projects_github/github_camagru/login.php?user=$username&salt=$salt'>Register Account</a>";
+                $message .= "<a href='http://localhost:8080/projects_github/github_camagru/includes/login.php?user=$username&salt=$salt'>Register Account</a>";
                 $headers = 'From:kingjoe@mailinator.com' . "\r\n";
                 $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-Type:text/html;charset=UTF-8". "\r\n";
@@ -97,32 +97,51 @@ if (Input::exists())
 }
 ?>
 
-<form action="" method="post">
-    <div class="field">
-        <label for="firstname">First Name(s)</label>
-        <input type="text" name="firstname" id="firstname" value="<?php echo escape(Input::get('firstname')); ?>" required>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+    </header>
+    <div class="reg_field">
+        <form action="" method="post">
+            <div class="field">
+                <label for="firstname">First Name(s)</label>
+                <input type="text" name="firstname" id="firstname" value="<?php echo escape(Input::get('firstname')); ?>" required>
+            </div>
+            <div class="field">
+                <label for="lastname">Last Name</label>
+                <input type="text" name="lastname" id="lastname" value="<?php echo escape(Input::get('lastname')); ?>" required>
+            </div>
+            <div class="field">
+                <label for="user_email">Email</label>
+                <input type="text" name="user_email" id="user_email" value="<?php echo escape(Input::get('user_email')); ?>" required>
+            </div>
+            <div class="field">
+                <label for="user_name">Username</label>
+                <input type="text" name="user_name" id="user_name" value="<?php echo escape(Input::get('user_name')); ?>" autocomplete="off" required>
+            </div>
+            <div class="field">
+                <label for="password">Create a Password</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <div class="field">
+                <label for="confirm_password">Confirm your Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" required>
+            </div>
+            <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+            <!-- no token generated. nevermind, i was directing the $_SESSION[config] to sessions wrong.--> 
+            <input type="submit" value="Register">
+        </form>
     </div>
-    <div class="field">
-        <label for="lastname">Last Name</label>
-        <input type="text" name="lastname" id="lastname" value="<?php echo escape(Input::get('lastname')); ?>" required>
-    </div>
-    <div class="field">
-        <label for="user_email">Email</label>
-        <input type="text" name="user_email" id="user_email" value="<?php echo escape(Input::get('user_email')); ?>" required>
-    </div>
-    <div class="field">
-        <label for="user_name">Username</label>
-        <input type="text" name="user_name" id="user_name" value="<?php echo escape(Input::get('user_name')); ?>" autocomplete="off" required>
-    </div>
-    <div class="field">
-        <label for="password">Create a Password</label>
-        <input type="password" name="password" id="password" required>
-    </div>
-    <div class="field">
-        <label for="confirm_password">Confirm your Password</label>
-        <input type="password" name="confirm_password" id="confirm_password" required>
-    </div>
-    <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
-    <!-- no token generated. nevermind, i was directing the $_SESSION[config] to sessions wrong.--> 
-    <input type="submit" value="Register">
-</form>
+    <footer class="footer">
+    &copy; jphasha 2019
+    </footer>
+</body>
+</html>

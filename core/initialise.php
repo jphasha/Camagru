@@ -22,16 +22,16 @@ $GLOBALS['config'] = array(
         'token_name' => 'token'
     )
 );
-// the spl_autoload_register in this case, is used to instantiate classes in the "index.php".
+// the spl_autoload_register in this case, is used to require classes in the "index.php".
 spl_autoload_register
 (
     function($class)
     {
-        require_once '../classes/' . $class . '.php';// ???????
+        require_once ($_SERVER['DOCUMENT_ROOT'] . '/projects_github/github_camagru/classes/' . $class . '.php');
     }
 );
 
-require_once '../functions/sanitize.php';
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/projects_github/github_camagru/functions/sanitize.php');
 
 if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Config::get('sessions/session_name')))
 {

@@ -40,7 +40,8 @@ $images = $gallery->getImages(array('png')); // it is possible that i don't quit
             There are no images.
         <?php endif; ?>
     </div>
-    <footer>
+    <footer class="footer">
+    &copy; jphasha 2019
     </footer>
 </body>
 </html>

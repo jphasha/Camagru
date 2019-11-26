@@ -3,14 +3,14 @@ require_once '../core/initialise.php';
 
 if (!$username = Input::get('user'))
 {
-    Redirect::to('index.php');
+    Redirect::to('../index.php');
 }
 else
 {
     $user = new User($username);
     if (!$user->exists())
     {
-        Redirect::to('errors/404.php');
+        Redirect::to('../errors/404.php');
     }
     else
     {

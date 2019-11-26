@@ -5,7 +5,7 @@ $user = new User();
 
 if (!$user->isLoggedIn())
 {
-    Redirect::to('index.php');
+    Redirect::to('../index.php');
 }
 
 if (Input::exists())
@@ -47,7 +47,7 @@ if (Input::exists())
 
             Session::flash('home', 'password changed');
 
-            Redirect::to('index.php');
+            Redirect::to('../index.php');
             }
         }
         else
