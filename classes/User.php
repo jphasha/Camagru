@@ -95,7 +95,8 @@ class User
             $user = $this->find($username);
             if ($user)
             {
-                if ($this->data()->user_pass === Hash::make($password, $this->data()->salt))
+                // if ($this->data()->user_pass === Hash::make($password, $this->data()->salt))
+                if (password_verify($password, $this->data()->user_pass))
                 {
                     Session::put($this->_sessionName, $this->data()->user_id);
 

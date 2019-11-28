@@ -58,16 +58,18 @@ if (Input::exists())
                         'last_name' => Input::get('lastname'),
                         'user_email' => Input::get('user_email'),
                         'user_name' => Input::get('user_name'),
-                        'user_pass' => Hash::make(Input::get('password'), "salt"),
+                        // 'user_pass' => Hash::make(Input::get('password'), "salt"),
+                        'user_pass' => password_hash(Input::get('password'), PASSWORD_DEFAULT),
                         'joined' => date('Y-m-d H:i:s'),
                         'group' => 1,
-                        'salt' => "salt"
+                        'salt' => "salt",
+                        // 'verified' => 0
                     )
                 );
 
                 $email = Input::get('user_email');
                 $username = Input::get('user_name');
-                $subject = 'Signup | Verification';
+                $subject = 'Registration Verification';
                 $message = 'Thank you for registerimg. Please click the link to verify your registration:';
                 $message .= "\r\n";
                 $message .= "<a href='http://localhost:8080/projects_github/github_camagru/includes/login.php?user=$username&salt=$salt'>Register Account</a>";
@@ -78,12 +80,12 @@ if (Input::exists())
 
                 Session::flash('home', 'you are now registered');
 
-                Redirect::to('verify.php'); // direct the user to the homepage / index.php.
+                Redirect::to('verify.php'); // the verification mail will handle the direction to home / index.php.
             }
             catch (Exception $some_exception)
             {
-                echo "here?<br>";
-                die ($some_exception->getMessage()); // this is usually where you create and redirect users to som page named 404 or something. remember, you must always control where your visitors are directed.
+                // die ($some_exception->getMessage()); // this is usually where you create and redirect users to som page named 404 or something. remember, you must always control where your visitors are directed.
+                Redirect::to('404');
             }
         }
         else

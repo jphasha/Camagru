@@ -32,16 +32,18 @@ if (Input::exists())
 
         if ($validation->passed())
         {
-            if (Hash::make(Input::get('current_password') . $user->data()->salt) !== $user->data()->user_pass)
+            // if (Hash::make(Input::get('current_password') . $user->data()->salt) !== $user->data()->user_pass)
+            if (!password_verify(Input::get('current_password'), $user->data()->user_pass))
             {
                 echo "your current password is wrong.<br>";
             }
             else
             {
-                $salt = Hash::salt(32);
+                // $salt = Hash::salt(32);
                 $user->update(array(
-                    'password' => Hash::make(Input::get('new_password') . $salt),
-                    'salt' => $salt
+                //     'password' => Hash::make(Input::get('new_password') . $salt),
+                //     'salt' => $salt
+                'user_pass' => password_hash(Input::get('new_password'), PASSWORD_DEFAULT)
                 )
             );
 
