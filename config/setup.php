@@ -24,29 +24,28 @@ $sql = "CREATE TABLE IF NOT EXISTS users (
 	joined DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
-die('<br>end<br>');
-$sql = "SELECT count(*) FROM `users` WHERE BINARY u_name = 'Admin'";
-$stmt = $pdo->prepare($sql);
-$stmt->execute();
-$number_of_rows = $stmt->fetchColumn();
-if(!$number_of_rows) {
-	$sql = 'INSERT INTO users(`user_name`, `user_email`, `group`, `confirmed`, `notify`, `user_pass`, `salt`)
-	VALUES ("Admin", "vaughan.r.scott@gmail.com", 2, 1, 1, "' . $hash . '", "' . $s_hash . '")';
-	$stmt = $pdo->prepare($sql);
-	$stmt->execute();
-}
+// $sql = "SELECT count(*) FROM `users` WHERE BINARY user_name = 'Admin'";
+// $stmt = $pdo->prepare($sql);
+// $stmt->execute();
+// $number_of_rows = $stmt->fetchColumn();
+// if(!$number_of_rows) {
+// 	$sql = 'INSERT INTO users(`user_name`, `user_email`, `group`, `confirmed`, `notify`, `user_pass`, `salt`)
+// 	VALUES ("Admin", "", 2, 1, 1, "' . $hash . '", "' . $s_hash . '")';
+// 	$stmt = $pdo->prepare($sql);
+// 	$stmt->execute();
+// }
 $sql = 'CREATE TABLE IF NOT EXISTS `groups` (
-	g_id INT AUTO_INCREMENT PRIMARY KEY,
-	g_name VARCHAR(50) NOT NULL,
+	group_id INT AUTO_INCREMENT PRIMARY KEY,
+	group_name VARCHAR(50) NOT NULL,
 	permissions TEXT) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
-$sql = "SELECT count(*) FROM `groups` WHERE g_name = 'Standard user'";
+$sql = "SELECT count(*) FROM `groups` WHERE group_name = 'Standard user'";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $number_of_rows = $stmt->fetchColumn();
 if(!$number_of_rows) {
-	$sql = 'INSERT INTO `groups`(`g_name`) VALUES ("Standard user")';
+	$sql = 'INSERT INTO `groups`(`group_name`) VALUES ("Standard user")';
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
 }
