@@ -1,5 +1,8 @@
 <?php
-$db = mysqli_connect('localhost', 'root', '', 'db_jphasha');
+
+require_once '../core/initialise.php';
+
+$db = DB::getInstance();
 // if the upload button is pressed.
 if (isset($_POST['upload']))
 {
@@ -30,11 +33,10 @@ if (isset($_POST['upload']))
 
                 if (move_uploaded_file($photo_tmp, $photo_destination))
                 {
-                    echo $photo_destination;
-                    $sql = "INSERT INTO images ('image_name') VALUES ($photo_name_new)";
-                    $query = mysqli_query($db, $sql);
-                    var_dump($query);
-                    die('???');
+                    $db->insert('pictures', [
+                        'user_id' => Session::get('user'),
+                        'picture_name' => $photo_name_new
+                    ]);
                 }
                 else
                 {

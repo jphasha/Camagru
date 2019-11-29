@@ -22,7 +22,7 @@ class Gallery
         return scandir($path);
     }
 
-    public function getImages($extensions = array('jpg', 'png', 'jpeg'))
+    public function getImages()
     {
         $images = $this->getDirectory($this->path);
 
@@ -30,7 +30,7 @@ class Gallery
         {
             $sep_data = explode('.', $image);
             $extension = strtolower(end($sep_data));
-            if (!in_array($extension, $extensions))
+            if (!in_array($extension, array('jpg', 'png', 'jpeg')))
             {
                 unset($images[$index]);
             }

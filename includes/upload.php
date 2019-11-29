@@ -9,7 +9,7 @@
 </head>
 <body>
     <a href="logout.php">Log out</a>
-    <form action="classes/Upload.php" method="post" enctype="multipart/form-data">
+    <form action="../classes/Upload.php" method="post" enctype="multipart/form-data">
     <div>
         <input type="file" name="photo">
     </div>
