@@ -20,6 +20,7 @@ $images = $gallery->getImages(array('png')); // it is possible that i don't quit
 <body>
     <header class="header">
     </header>
+    <a href="logout.php">Log out</a>
     <div class="gal_con">
         <?php if($images): ?>
             <div class="gallery cf">

@@ -75,6 +75,7 @@ if (Input::exists())
 <body>
     <header class="header">
     </header>
+    <li><a href="logout.php">Log out</a></li>
     <div class="cng_field">
         <form action="" method="post">
             <div class="field">

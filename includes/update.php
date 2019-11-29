@@ -63,6 +63,7 @@ if (Input::exists())
 <body>
     <header class="header">
     </header>
+    <a href="logout.php">Log out</a>
     <div class="upd_field">
         <form action="" method="post">
             <div class="field">

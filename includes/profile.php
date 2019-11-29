@@ -23,6 +23,7 @@ else
     </h3>
     <p>Full name: <?php echo escape($data->first_name); ?> <?php echo escape($data->last_name); ?>
     </p>
+    <a href="logout.php">Log out</a>
     <?php
 }
 ?>
