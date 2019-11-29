@@ -22,22 +22,23 @@ class Gallery
         return scandir($path);
     }
 
-    public function getImages($extensions = array('jpg', 'png'))
+    public function getImages($extensions = array('jpg', 'png', 'jpeg'))
     {
         $images = $this->getDirectory($this->path);
 
         foreach ($images as $index => $image)
         {
-            $extension = strtolower(end(explode('.', $image))) . "<br>"; // some funny notice is popping up.
-            if (in_array($extension, $extensions))
+            $sep_data = explode('.', $image);
+            $extension = strtolower(end($sep_data));
+            if (!in_array($extension, $extensions))
             {
                 unset($images[$index]);
             }
             else
             {
                 $images[$index] = array(
-                    'full' => $this->path . '/' . $image,
-                    'thumb' => $this->path . '/thumbs/' . $image
+                    'full' => $this->path . '/' . $image
+                    // 'thumb' => $this->path . '/thumbs/' . $image
                 );
             }
         }
