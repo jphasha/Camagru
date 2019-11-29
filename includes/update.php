@@ -33,7 +33,7 @@ if (Input::exists())
 
             Session::flash('home', 'updated');
 
-            Redirect::to('index.php');
+            Redirect::to('../index.php');
             }
             catch(Exception $someException)
             {
@@ -51,12 +51,31 @@ if (Input::exists())
 }
 ?>
 
-<form action="" method="post">
-    <div class="field">
-        <label for="user_name">User Name</label>
-        <input type="text" name="user_name" value="<?php echo escape($user->data()->user_name); ?>">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+    </header>
+    <div class="upd_field">
+        <form action="" method="post">
+            <div class="field">
+                <label for="user_name">User Name</label>
+                <input type="text" name="user_name" value="<?php echo escape($user->data()->user_name); ?>">
 
-        <input type="submit" value="Update">
-        <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+                <input type="submit" value="Update">
+                <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+            </div>
+        </form>
     </div>
-</form>
+    <footer class="footer">
+    &copy; jphasha 2019
+    </footer>
+</body>
+</html>

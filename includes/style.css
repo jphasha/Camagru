@@ -103,3 +103,19 @@ body
     width: 50%;
     height: 400px;
 }
+
+.upd_field
+{
+    background-color: aquamarine;
+    margin-left: 20%;
+    width: 50%;
+    height: 100px;
+}
+
+.cng_field
+{
+    background-color: aquamarine;
+    margin-left: 20%;
+    width: 50%;
+    height: 100px;
+}

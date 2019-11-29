@@ -75,24 +75,26 @@ if (Input::exists())
 <body>
     <header class="header">
     </header>
-    <form action="" method="post">
-        <div class="field">
-            <label for="current_password">current password</label>
-            <input type="password" name="current_password" id="current_password">
-        </div>
+    <div class="cng_field">
+        <form action="" method="post">
+            <div class="field">
+                <label for="current_password">current password</label>
+                <input type="password" name="current_password" id="current_password">
+            </div>
 
-        <div class="field">
-            <label for="new_password">new password</label>
-            <input type="password" name="new_password" id="new_password">
-        </div>
-        <div class="field">
-            <label for="confirm_new_password">confirm new password</label>
-            <input type="password" name="confirm_new_password" id="confirm_new_password">
-        </div>
+            <div class="field">
+                <label for="new_password">new password</label>
+                <input type="password" name="new_password" id="new_password">
+            </div>
+            <div class="field">
+                <label for="confirm_new_password">confirm new password</label>
+                <input type="password" name="confirm_new_password" id="confirm_new_password">
+            </div>
 
-        <input type="submit" value="change">
-        <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
-    </form>
+            <input type="submit" value="change">
+            <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+        </form>
+    </div>
     <footer class="footer">
     &copy; jphasha 2019
     </footer>
