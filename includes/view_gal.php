@@ -22,6 +22,9 @@ if (!$user->isLoggedIn())
 </head>
 <body>
     <header class="header">
+        <p>
+            <?php echo '<p>You need to <a href="includes/login.php">Log in</a> or <a href="includes/register.php">Register</a></p>'; ?>
+        </p>
     </header>
     <div class="gal_con">
         <?php if($images): ?>
