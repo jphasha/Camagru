@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 class Config //what this function does is return the host path or really any path it is directed towards. but what it does is check if the path exists.
 {
     public static function get($path = null)

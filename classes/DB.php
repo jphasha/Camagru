@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 class DB //a singleton class?
 {
     // the underscores before the variable names are just there to denote that the variable is private.

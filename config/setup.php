@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once 'database.php';
 
 $pdo = new PDO("mysql:host=$HOST;charset=utf8", $DB_USER, $DB_PASSWORD);

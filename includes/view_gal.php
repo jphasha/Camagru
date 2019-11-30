@@ -33,7 +33,12 @@ if (!$user->isLoggedIn())
                     <div class="gal_item">
                         <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img">
                         <div class="like_field">
-                            <p>3</p>
+                            <a href="like.php?type=file&id=1">like</a>
+                        </div>
+                        <div>
+                            <p>
+                                x likes
+                            </p>
                         </div>
                         <div class="comment_field">
                             <a href="">Comment</a>
