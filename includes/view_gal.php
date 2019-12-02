@@ -4,6 +4,9 @@ require '../core/initialise.php';
 $gallery = new Gallery();
 $user = new User();
 $gallery->setPath('../uploads/');
+$db = DB::getInstance();
+$likes = $db->get('likes', array('like_id', '>', 0));
+$count = $likes->count();
 
 $images = $gallery->getImages(array()); 
 
@@ -81,7 +84,7 @@ else if ($user->isLoggedIn())
                             <form action="like.php" method="post">
                                 <input type="submit" value="like" name="like" id="like"/>
                             </form>
-                            <p><?php  ?></p>
+                            <p><?php echo $count . " likes"; ?></p>
                         </div>
                         <div class="comment_field">
                             <a href="">Comment</a>
