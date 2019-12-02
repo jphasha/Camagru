@@ -23,7 +23,7 @@ if (!$user->isLoggedIn())
 <body>
     <header class="header">
         <p>
-            <?php echo '<p>You need to <a href="includes/login.php">Log in</a> or <a href="includes/register.php">Register</a></p>'; ?>
+            <?php echo '<p>You need to <a href="login.php">Log in</a> or <a href="includes/register.php">Register</a></p>'; ?>
         </p>
     </header>
     <div class="gal_con">
@@ -32,9 +32,6 @@ if (!$user->isLoggedIn())
                 <?php foreach($images as $image): ?>
                     <div class="gal_item">
                         <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img">
-                        <div class="like_field">
-                            <a href="like.php?type=file&id=1">like</a>
-                        </div>
                         <div>
                             <p>
                                 x likes
@@ -81,8 +78,10 @@ else if ($user->isLoggedIn())
                     <div class="gal_item">
                         <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img">
                         <div class="like_field">
-                            <a href="">Like</a>
-                            <p>3</p>
+                            <form action="like.php" method="post">
+                                <input type="submit" value="like" name="like" id="like"/>
+                            </form>
+                            <p><?php  ?></p>
                         </div>
                         <div class="comment_field">
                             <a href="">Comment</a>
