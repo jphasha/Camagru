@@ -6,7 +6,7 @@ $user = new User();
 $gallery->setPath('../uploads/');
 $db = DB::getInstance();
 $likes = $db->get('likes', array('like_id', '>', 0));
-$count = $likes->count();
+$like_count = $likes->count();
 
 $images = $gallery->getImages(array()); 
 
@@ -35,11 +35,6 @@ if (!$user->isLoggedIn())
                 <?php foreach($images as $image): ?>
                     <div class="gal_item">
                         <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img">
-                        <div>
-                            <p>
-                                x likes
-                            </p>
-                        </div>
                         <div class="comment_field">
                             <a href="">Comment</a>
                         </div>
@@ -84,7 +79,7 @@ else if ($user->isLoggedIn())
                             <form action="like.php" method="post">
                                 <input type="submit" value="like" name="like" id="like"/>
                             </form>
-                            <p><?php echo $count . " likes"; ?></p>
+                            <p><?php echo $like_count . " likes"; ?></p>
                         </div>
                         <div class="comment_field">
                             <a href="">Comment</a>

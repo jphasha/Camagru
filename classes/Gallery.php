@@ -7,10 +7,12 @@ error_reporting(E_ALL);
 class Gallery
 {
     public $path;
+    private $_db;
 
     public function __construct()
     {
-        $this->path = __DIR__ . '\images';
+        $this->path = __DIR__ . '/../uploads';
+        $this->_db = DB::getInstance();
     }
 
     public function setPath($path)
@@ -22,33 +24,21 @@ class Gallery
         $this->path = $path;
     }
 
-    private function getDirectory($path)
-    {
-        return scandir($path);
-    }
-
     public function getImages()
     {
-        $images = $this->getDirectory($this->path);
+        $imgObj = $this->_db->get('pictures', ['picture_id', '>', 0]); // returns an array of results refer db class
+        $i = 0;
+        $img = [];
 
-        foreach ($images as $index => $image)
+        while ($i < $imgObj->count())
         {
-            $sep_data = explode('.', $image);
-            $extension = strtolower(end($sep_data));
-            if (!in_array($extension, array('jpg', 'png', 'jpeg')))
-            {
-                unset($images[$index]);
-            }
-            else
-            {
-                $images[$index] = array(
-                    'full' => $this->path . '/' . $image
-                    // 'thumb' => $this->path . '/thumbs/' . $image
-                );
-            }
+            $img[$i] =  [
+                'full' => $this->path . '/' . $imgObj->results()[$i]->picture_name
+                // 'thumb' => $this->path . '/thumbs/' . $image
+            ];
+            $i += 1;
         }
-
-        return (count($images)) ? $images : false;
+        return (count($img)) ? $img : false;
     }
 }
 ?>
