@@ -41,6 +41,7 @@ $stmt->execute();
 // }
 $sql = 'CREATE TABLE IF NOT EXISTS `groups` (
 	group_id INT AUTO_INCREMENT PRIMARY KEY,
+	user_id INT NOT NULL,
 	group_name VARCHAR(50) NOT NULL,
 	permissions TEXT) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
 $stmt = $pdo->prepare($sql);
@@ -54,43 +55,41 @@ if(!$number_of_rows) {
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
 }
-$sql = "SELECT count(*) FROM `groups` WHERE g_name = 'Administrator user'";
+$sql = "SELECT count(*) FROM `groups` WHERE group_name = 'Administrator'";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $number_of_rows = $stmt->fetchColumn();
 if(!$number_of_rows) {
-	$sql = 'INSERT INTO `groups`(`g_name`, `permissions`) VALUES ("Administrator user", \'{\r\n\"admin\": 1,\r\n\"mod\": 1\r\n}\')';
+	$sql = 'INSERT INTO `groups`(`group_name`, `permissions`) VALUES ("Administrator", \'{\r\n\"admin\": 1,\r\n\"mod\": 1\r\n}\')';
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
 }
 $sql = 'CREATE TABLE IF NOT EXISTS user_session (
-	s_id INT AUTO_INCREMENT PRIMARY KEY,
-	u_id INT NOT NULL,
+	session_id INT AUTO_INCREMENT PRIMARY KEY,
+	user_id INT NOT NULL,
 	hash VARCHAR(64) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
-$sql = 'CREATE TABLE IF NOT EXISTS images (
-	i_id INT AUTO_INCREMENT PRIMARY KEY,
-	u_id INT NOT NULL,
-	i_dest VARCHAR(130) NOT NULL,
-	i_name VARCHAR(64) NOT NULL,
-	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
+$sql = 'CREATE TABLE IF NOT EXISTS pictures (
+	picture_id INT AUTO_INCREMENT PRIMARY KEY,
+	user_id INT NOT NULL,
+	picture_name VARCHAR(100) NOT NULL,
+	upload_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $sql = 'CREATE TABLE IF NOT EXISTS comments (
-	c_id INT AUTO_INCREMENT PRIMARY KEY,
-	i_id INT NOT NULL,
-	u_id INT NOT NULL,
-	commenter_id INT NOT NULL,
+	comment_id INT AUTO_INCREMENT PRIMARY KEY,
+	picture_id INT NOT NULL,
+	user_id INT NOT NULL,
+	commentor_id INT NOT NULL,
 	comment LONGBLOB NOT NULL,
 	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $sql = 'CREATE TABLE IF NOT EXISTS likes (
-	l_id INT AUTO_INCREMENT PRIMARY KEY,
-	i_id INT NOT NULL,
-	u_id INT NOT NULL,
-	`status` TINYINT NOT NULL,
+	like_id INT AUTO_INCREMENT PRIMARY KEY,
+	picture_id INT NOT NULL,
+	user_id INT NOT NULL,
 	liker_id INT NOT NULL,
 	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
 $stmt = $pdo->prepare($sql);

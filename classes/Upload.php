@@ -66,4 +66,6 @@ else
 {
     echo "nah";
 }
+
+Redirect::to('view_gal.php');
 ?>
