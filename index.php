@@ -46,10 +46,10 @@ if ($user->isLoggedIn())
 </body>
 </html>
 <?php
-    if ($user->hasPermission('admin'))
-    {
-        echo '<p>You are an admin.</p>';
-    }
+    // if ($user->hasPermission('admin'))
+    // {
+    //     echo '<p>You are an admin.</p>';
+    // }
 }
 else
 {
