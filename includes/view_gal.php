@@ -26,7 +26,7 @@ if (!$user->isLoggedIn())
 <body>
     <header class="header">
         <p>
-            <?php echo '<p>You need to <a href="login.php">Log in</a> or <a href="includes/register.php">Register</a></p>'; ?>
+            <?php echo '<p>You need to <a href="login.php">Log in</a> or <a href="register.php">Register</a></p>'; ?>
         </p>
     </header>
     <div class="gal_con">

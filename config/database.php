@@ -8,7 +8,7 @@ $DB = 'camagru';
 $HOST = 'localhost';
 $DB_DSN = 'mysql:dbname=' . $DB . ';host=' . $HOST;//Data Source Name: the database we wish to connect to within our server/host.
 $DB_USER = 'root';//the user who is accessing the server and database.
-$DB_PASSWORD = '';//user's password.
+$DB_PASSWORD = '123456';//user's password.
 
 //now to connect to the database.
 // try

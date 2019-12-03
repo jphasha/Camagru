@@ -41,7 +41,6 @@ $stmt->execute();
 // }
 $sql = 'CREATE TABLE IF NOT EXISTS `groups` (
 	group_id INT AUTO_INCREMENT PRIMARY KEY,
-	user_id INT NOT NULL,
 	group_name VARCHAR(50) NOT NULL,
 	permissions TEXT) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';
 $stmt = $pdo->prepare($sql);
