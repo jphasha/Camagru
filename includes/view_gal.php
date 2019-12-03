@@ -88,10 +88,10 @@ else if ($user->isLoggedIn())
                         <div class="comment_field">
                             <form action="comment.php" method="post">
                                 <div>
-                                    <textarea name="right" id="" cols="30" rows="10" value=""></textarea>
+                                    <textarea name="right" id="" cols="30" rows="10"></textarea>
                                 </div>
                                 <div>
-                                    <input type="submit" value="test" name="comment_btn" id="comment">
+                                    <input type="submit" value="comment" name="comment_btn" id="comment">
                                 </div>
                             </form>
                         </div>
