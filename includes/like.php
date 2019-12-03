@@ -9,11 +9,6 @@ require_once '../core/initialise.php';
 $db = DB::getInstance();
 $lik_tab = $db->get('likes', ['picture_id', '>', 0]);
 
-echo '<pre>';
-var_dump($lik_tab);
-echo '</pre>';
-die("<br>okay<br>");
-
 // if (isset($_GET['type'], $_GET['id']))
 // {
 //     $type = $_GET['type'];
@@ -49,7 +44,8 @@ if (isset($_POST['like']))
 {
     $db->insert('likes', array(
         'picture_id' => 1,
-        'liker_id' => Session::get('user')
+        'liker_id' => Session::get('user'),
+        'user_id' => 1
     ));
 }
 

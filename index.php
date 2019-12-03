@@ -37,6 +37,7 @@ if ($user->isLoggedIn())
         <li><a href="includes/logout.php">Log out</a></li>
         <li><a href="includes/update.php">Update</a></li>
         <li><a href="includes/changepassword.php">change password</a></li>
+        <li><a href="includes/upload.php">Upload a picture</a></li>
     </ul>
     
     <footer class="footer">

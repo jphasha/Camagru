@@ -7,11 +7,12 @@ $gallery->setPath('../uploads/');
 $db = DB::getInstance();
 $likes = $db->get('likes', array('like_id', '>', 0));
 $like_count = $likes->count();
-
-$images = $gallery->getImages(); 
+$images = $gallery->getImages();
+$img_id = $gallery->getImageId();
 
 if (!$user->isLoggedIn())
 {
+    $id_counter = 0;
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +35,8 @@ if (!$user->isLoggedIn())
             <div class="gallery cf">
                 <?php foreach($images as $image): ?>
                     <div class="gal_item">
-                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img">
+                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img" id="<?= $img_id[$id_counter] ?>">
+                        <?php $id_counter = $id_counter + 1; ?>
                         <div class="comment_field">
                             <a href="">Comment</a>
                         </div>
@@ -55,6 +57,7 @@ if (!$user->isLoggedIn())
 
 else if ($user->isLoggedIn())
 {
+    $id_counter = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,20 +70,21 @@ else if ($user->isLoggedIn())
 </head>
 <body>
     <header class="header">
+        <a href="logout.php">Log out</a>
     </header>
-    <a href="logout.php">Log out</a>
     <div class="gal_con">
         <?php if($images): ?>
             <div class="gallery cf">
                 <?php foreach($images as $image): ?>
                     <div class="gal_item">
-                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img">
+                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img" id="<?= $img_id[$id_counter] ?>">
                         <div class="like_field">
-                            <form action="like.php" method="post">
+                            <form action="like.php" method="post" name="like" id="">
                                 <input type="submit" value="like" name="like" id="like"/>
                             </form>
                             <p><?php echo $like_count . " likes"; ?></p>
                         </div>
+                        <?php $id_counter = $id_counter + 1; ?>
                         <div class="comment_field">
                             <a href="">Comment</a>
                         </div>

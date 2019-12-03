@@ -63,7 +63,7 @@ if(!$number_of_rows) {
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute();
 }
-$sql = 'CREATE TABLE IF NOT EXISTS user_session (
+$sql = 'CREATE TABLE IF NOT EXISTS users_session (
 	session_id INT AUTO_INCREMENT PRIMARY KEY,
 	user_id INT NOT NULL,
 	hash VARCHAR(64) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';

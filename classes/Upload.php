@@ -67,5 +67,5 @@ else
     echo "nah";
 }
 
-Redirect::to('view_gal.php');
+Redirect::to('../includes/view_gal.php');
 ?>

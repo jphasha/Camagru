@@ -36,9 +36,25 @@ class Gallery
                 'full' => $this->path . '/' . $imgObj->results()[$i]->picture_name
                 // 'thumb' => $this->path . '/thumbs/' . $image
             ];
-            $i += 1;
+            $i = $i + 1;
         }
         return (count($img)) ? $img : false;
+    }
+
+    public function getImageId()
+    {
+        $imgIdObj = $this->_db->get('pictures', ['picture_id', '>', 0]);
+        $itd = 0;
+        $imd = [];
+
+        while ($itd < $imgIdObj->count())
+        {
+            $imd[$itd] = [
+                $itd => $imgIdObj->results()[$itd]->picture_id
+            ];
+            $itd = $itd + 1;
+        }
+        return (count($imd)) ? $imd : false;
     }
 }
 ?>
