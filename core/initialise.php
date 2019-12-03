@@ -14,7 +14,7 @@ $GLOBALS['config'] = array(
         'host' => 'localhost',
         'username' => 'root',
         'password' => '',
-        'db' => 'db_jphasha'
+        'db' => 'camagru'
     ),
     // setup cookies.
     'remember' => array(

@@ -8,7 +8,7 @@ $db = DB::getInstance();
 $likes = $db->get('likes', array('like_id', '>', 0));
 $like_count = $likes->count();
 
-$images = $gallery->getImages(array()); 
+$images = $gallery->getImages(); 
 
 if (!$user->isLoggedIn())
 {
