@@ -64,7 +64,7 @@ class Gallery
 
     public function getComments($imageId)
     {
-        $comments = $this->_db->get('comments', ['comment_id', '=', $imageId])->results();
+        $comments = $this->_db->get('comments', ['picture_id', '=', $imageId])->results();
         
         return $comments;
     }

@@ -82,8 +82,9 @@ else if ($user->isLoggedIn())
                         <div class="comments">
                             <?php
                             $comment_cntr = 0;
-                            $comments = $gallery->getComments($img_id[$id_counter][$id_counter]);
-                            var_dump($comments);
+                            $comments_objByImg = $gallery->getComments($img_id[$id_counter][$id_counter]);
+                            $comment = $comments_objByImg[$comment_cntr]->comment;
+                            echo $comment;
                             ?>
                         </div>
                         <div class="like_field">
@@ -105,8 +106,8 @@ else if ($user->isLoggedIn())
                                 </div>
                             </form>
                         </div>
+                        <?php $id_counter = $id_counter + 1; ?>
                     </div>
-                    <?php $id_counter = $id_counter + 1; ?>
                 <?php endforeach; ?>
             </div>
         <?php else: ?>
