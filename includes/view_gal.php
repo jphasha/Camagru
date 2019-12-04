@@ -75,9 +75,17 @@ else if ($user->isLoggedIn())
     <div class="gal_con">
         <?php if($images): ?>
             <div class="gallery cf">
+            
                 <?php foreach($images as $image): ?>
                     <div class="gal_item">
                         <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img" id=""></a>
+                        <div class="comments">
+                            <?php
+                            $comment_cntr = 0;
+                            $comments = $gallery->getComments($img_id[$id_counter][$id_counter]);
+                            echo $comments[0]->comment;
+                            ?>
+                        </div>
                         <div class="like_field">
                             <form action="like.php" method="post" name="like">
                                 <input type="hidden" name="img_id" value="<?php echo $img_id[$id_counter][$id_counter]; ?>">

@@ -11,6 +11,13 @@ if (isset($_POST['comment_btn']))
 {
     echo "commented<br>";
     echo $_POST['right'] . "<br>";
+
+    // echo '<pre>';
+    // var_dump($_POST);
+    // echo '</pre>';
+
+    die('okay');
+
     $test->insert('comments', [
         'picture_id' => 1,
         'user_id' => 1,
@@ -18,9 +25,4 @@ if (isset($_POST['comment_btn']))
         'comment' => $_POST['right']
     ]);
 }
-echo '<pre>';
-var_dump($_POST);
-echo '</pre>';
-
-die('okay');
 ?>

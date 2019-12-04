@@ -61,5 +61,12 @@ class Gallery
     {
         return $this->_db->get('likes', ['picture_id', '=', $imageId])->count();
     }
+
+    public function getComments($imageId)
+    {
+        $comments = $this->_db->get('comments', ['comment_id', '=', $imageId])->results();
+        
+        return $comments;
+    }
 }
 ?>
