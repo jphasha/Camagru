@@ -79,7 +79,7 @@ $stmt->execute();
 $sql = 'CREATE TABLE IF NOT EXISTS comments (
 	comment_id INT AUTO_INCREMENT PRIMARY KEY,
 	picture_id INT NOT NULL,
-	user_id INT NOT NULL,
+	-- user_id INT NOT NULL,
 	commentor_id INT NOT NULL,
 	comment LONGBLOB NOT NULL,
 	creation_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci';

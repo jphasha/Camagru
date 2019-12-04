@@ -11,17 +11,12 @@ if (isset($_POST['comment_btn']))
 {
     echo "commented<br>";
     echo $_POST['right'] . "<br>";
-
-    // echo '<pre>';
-    // var_dump($_POST);
-    // echo '</pre>';
-
-    die('okay');
+    echo $_POST['img_id'];
 
     $test->insert('comments', [
-        'picture_id' => 1,
+        'picture_id' => $_POST['img_id'],
         'user_id' => 1,
-        'commentor_id' => 1,
+        'commentor_id' => Session::get('user'),
         'comment' => $_POST['right']
     ]);
 }

@@ -83,7 +83,7 @@ else if ($user->isLoggedIn())
                             <?php
                             $comment_cntr = 0;
                             $comments = $gallery->getComments($img_id[$id_counter][$id_counter]);
-                            echo $comments[0]->comment;
+                            var_dump($comments);
                             ?>
                         </div>
                         <div class="like_field">
@@ -93,18 +93,20 @@ else if ($user->isLoggedIn())
                             </form>
                             <p><?php echo $gallery->getLikes($img_id[$id_counter][$id_counter]) . " likes"; ?></p>
                         </div>
-                        <?php $id_counter = $id_counter + 1; ?>
+                        
                         <div class="comment_field">
                             <form action="comment.php" method="post">
                                 <div>
                                     <textarea name="right" id="" cols="30" rows="10"></textarea>
                                 </div>
                                 <div>
+                                    <input type="hidden" name="img_id" value="<?php echo $img_id[$id_counter][$id_counter]; ?>">
                                     <input type="submit" value="comment" name="comment_btn" id="comment">
                                 </div>
                             </form>
                         </div>
                     </div>
+                    <?php $id_counter = $id_counter + 1; ?>
                 <?php endforeach; ?>
             </div>
         <?php else: ?>
