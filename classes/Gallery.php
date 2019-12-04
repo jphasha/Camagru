@@ -56,5 +56,10 @@ class Gallery
         }
         return (count($imd)) ? $imd : false;
     }
+
+    public function getLikes($imageId)
+    {
+        return $this->_db->get('likes', ['picture_id', '=', $imageId])->count();
+    }
 }
 ?>

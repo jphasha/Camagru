@@ -42,12 +42,9 @@ $lik_tab = $db->get('likes', ['picture_id', '>', 0]);
 
 if (isset($_POST['like']))
 {
-    var_dump($_POST);
-    die('and now?');
     $db->insert('likes', array(
-        'picture_id' => 1,
-        'liker_id' => Session::get('user'),
-        'user_id' => 1
+        'picture_id' => $_POST['img_id'],
+        'liker_id' => Session::get('user')
     ));
 }
 

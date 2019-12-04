@@ -77,12 +77,13 @@ else if ($user->isLoggedIn())
             <div class="gallery cf">
                 <?php foreach($images as $image): ?>
                     <div class="gal_item">
-                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img"></a>
+                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img" id=""></a>
                         <div class="like_field">
                             <form action="like.php" method="post" name="like">
-                                <input type="submit" value="like" name="like" id="<?= $img_id[$id_counter] ?>"/>
+                                <input type="hidden" name="img_id" value="<?php echo $img_id[$id_counter][$id_counter]; ?>">
+                                <input type="submit" value="like" name="like"/>
                             </form>
-                            <p><?php echo $like_count . " likes"; ?></p>
+                            <p><?php echo $gallery->getLikes($img_id[$id_counter][$id_counter]) . " likes"; ?></p>
                         </div>
                         <?php $id_counter = $id_counter + 1; ?>
                         <div class="comment_field">
