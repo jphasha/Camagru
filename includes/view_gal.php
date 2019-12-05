@@ -82,9 +82,21 @@ else if ($user->isLoggedIn())
                         <div class="comments">
                             <?php
                             $comment_cntr = 0;
-                            $comments_objByImg = $gallery->getComments($img_id[$id_counter][$id_counter]);
-                            $comment = $comments_objByImg[$comment_cntr]->comment;
-                            echo $comment;
+                            $comment_lmt = 
+                            $comments_objByImg = $gallery->getComments()[$comment_cntr]->comment;
+                            var_dump($comments_objByImg);
+                            // try
+                            // {
+                            //     while($comment = $comments_objByImg[$comment_cntr]->comment)
+                            //     {
+                            //         echo $comment . "<br>";
+                            //         $comment_cntr = $comment_cntr + 1;
+                            //     }
+                            // }
+                            // catch (Exception $er)
+                            // {
+                            //     echo $er;
+                            // }
                             ?>
                         </div>
                         <div class="like_field">
