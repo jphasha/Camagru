@@ -8,6 +8,8 @@ require_once '../core/initialise.php';
 
 $db = DB::getInstance();
 $lik_tab = $db->get('likes', ['picture_id', '>', 0]);
+$try = new Like();
+$and = $try->getLikes();
 
 // if (isset($_GET['type'], $_GET['id']))
 // {
@@ -42,10 +44,20 @@ $lik_tab = $db->get('likes', ['picture_id', '>', 0]);
 
 if (isset($_POST['like']))
 {
-    $db->insert('likes', array(
-        'picture_id' => $_POST['img_id'],
-        'liker_id' => Session::get('user')
-    ));
+    $liked = 1;
+    var_dump($_POST);
+    echo "<br><br>";
+    var_dump($lik_tab);
+    echo "<br><br>now check it<br><br>";
+    var_dump($and);
+    die('whar');
+    if (!$liked)
+    {
+        $db->insert('likes', array(
+            'picture_id' => $_POST['img_id'],
+            'liker_id' => Session::get('user')
+        ));
+    }
 }
 
 Redirect::to('view_gal.php');

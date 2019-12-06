@@ -101,6 +101,7 @@ else if ($user->isLoggedIn())
                         <div class="like_field">
                             <form action="like.php" method="post" name="like">
                                 <input type="hidden" name="img_id" value="<?php echo $img_id[$id_counter][$id_counter]; ?>">
+                                <input type="hidden" name="liker_id" value="<?php echo Session::get('user') ?>">
                                 <input type="submit" value="like" name="like"/>
                             </form>
                             <p><?php echo $gallery->getLikes($img_id[$id_counter][$id_counter]) . " likes"; ?></p>
