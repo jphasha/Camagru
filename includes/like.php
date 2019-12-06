@@ -7,9 +7,7 @@ error_reporting(E_ALL);
 require_once '../core/initialise.php';
 
 $db = DB::getInstance();
-$lik_tab = $db->get('likes', ['picture_id', '>', 0]);
-$try = new Like();
-$and = $try->getLikes();
+$lik_tab = $db->get('likes', ['picture_id', '>', 0])->results()[0]->liker_id;
 
 // if (isset($_GET['type'], $_GET['id']))
 // {
@@ -49,7 +47,6 @@ if (isset($_POST['like']))
     echo "<br><br>";
     var_dump($lik_tab);
     echo "<br><br>now check it<br><br>";
-    var_dump($and);
     die('whar');
     if (!$liked)
     {
