@@ -25,12 +25,10 @@
 
     <script>
         'use strict';
-
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
         const snap = document.getElementById('snap');
         const errorMsgElement = document.getElementById('spanError');
-
         const costraints = {
             audio: true,
             video: {
@@ -47,16 +45,13 @@
                 errorMsgElement.innerHTML = `navigator.getUserMedia.error:${e.toString()}`;
             }
         }
-
         // success
         function handleSuccess(stream) {
             window.stream = stream;
             video.srcObject = stream;
         }
-
         // load init
         init();
-
         // Draw image
         var context = canvas.getContext('2d');
         snap.addEventListener("click", function() {

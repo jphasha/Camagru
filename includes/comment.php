@@ -15,7 +15,7 @@ if (isset($_POST['comment_btn']))
 
     $test->insert('comments', [
         'picture_id' => $_POST['img_id'],
-        'user_id' => 1,
+        // 'user_id' => 1,
         'commentor_id' => Session::get('user'),
         'comment' => $_POST['right']
     ]);
