@@ -42,13 +42,15 @@ $lik_tab = $db->get('likes', ['picture_id', '>', 0])->results()[0]->liker_id;
 
 if (isset($_POST['like']))
 {
-    $liked = 1;
-    var_dump($_POST);
-    echo "<br><br>";
-    var_dump($lik_tab);
-    echo "<br><br>now check it<br><br>";
-    die('whar');
-    if (!$liked)
+    // $liked = 1;
+    // if($_POST['liker_id'] == $lik_tab)
+    // {
+    //     echo "alright<br>";
+    // }
+    // echo $_POST['liker_id'] . "<br>";
+    // echo $lik_tab . "<br>";
+    // die('whar');
+    if (!$_POST['liker_id'] == $lik_tab)
     {
         $db->insert('likes', array(
             'picture_id' => $_POST['img_id'],
