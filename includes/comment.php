@@ -9,10 +9,6 @@ $test = DB::getInstance();
 
 if (isset($_POST['comment_btn']))
 {
-    echo "commented<br>";
-    echo $_POST['right'] . "<br>";
-    echo $_POST['img_id'];
-
     $test->insert('comments', [
         'picture_id' => $_POST['img_id'],
         // 'user_id' => 1,
@@ -20,4 +16,6 @@ if (isset($_POST['comment_btn']))
         'comment' => $_POST['right']
     ]);
 }
+
+Redirect::to('view_gal.php');
 ?>
