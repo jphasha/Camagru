@@ -14,6 +14,7 @@ if (Session::exists('home'))
 }
 
 $user = new User();
+
 if ($user->isLoggedIn())
 {
 ?>

@@ -178,18 +178,11 @@ class DB //a singleton class?
     {
         return $this->results()[0];
     }
-    // the ALL_NAMES function which is a derivative of the RESULTS function to get all the user_names of the users in the 'table'.
-    // public function all_names()
-    // {
-    //     $all_names = $this->_results->results();
-    //     return $all_names; //i'm missing something. brb
-    // }
     // the ERROR function.
     public function error() // that's what it does, it checks for errors.
     {
         return $this->_error;
     }
-
     // the COUNT function. checks for existence of content.
     public function count()
     {

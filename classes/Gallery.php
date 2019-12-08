@@ -57,7 +57,7 @@ class Gallery
         return (count($imd)) ? $imd : false;
     }
 
-    public function getLikes($imageId)
+    public function getLikesCount($imageId)
     {
         return $this->_db->get('likes', ['picture_id', '=', $imageId])->count();
     }
@@ -67,6 +67,13 @@ class Gallery
         $comments = $this->_db->get('comments', ['picture_id', '=', $imageId])->results();
         
         return $comments;
+    }
+
+    public function getLikes($currentUserId, $imageId)
+    {
+        $imageLikes = $this->_db->query('SELECT * FROM likes WHERE picture_id = ? AND liker_id = ?', [$imageId, $currentUserId]);
+
+        return $imageLikes->count();
     }
 }
 ?>

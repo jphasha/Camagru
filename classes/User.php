@@ -18,6 +18,8 @@ class User
 
         $this->_sessionName = Config::get('sessions/session_name');
         $this->_cookieName = Config::get('remember/cookie_name');
+        var_dump($this->_cookieName);
+        die();
 
         if (!$user)
         {
@@ -32,6 +34,7 @@ class User
                 else
                 {
                     // process logout
+                    $this->_isLoggedIn = false;
                 }
             }
         }

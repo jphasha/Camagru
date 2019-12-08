@@ -4,9 +4,7 @@ require '../core/initialise.php';
 $gallery = new Gallery();
 $user = new User();
 $gallery->setPath('../uploads/');
-$db = DB::getInstance();
-$likes = $db->get('likes', array('like_id', '>', 0));
-$like_count = $likes->count();
+
 $images = $gallery->getImages();
 $img_id = $gallery->getImageId();
 
@@ -101,10 +99,14 @@ else if ($user->isLoggedIn())
                         <div class="like_field">
                             <form action="like.php" method="post" name="like">
                                 <input type="hidden" name="img_id" value="<?php echo $img_id[$id_counter][$id_counter]; ?>">
-                                <input type="hidden" name="liker_id" value="<?php echo Session::get('user') ?>">
-                                <input type="submit" value="like" name="like"/>
+                                <input type="submit"
+                                        value="<?php if ($gallery->getLikes(Session::get('user'), $img_id[$id_counter][$id_counter]) === 0 )
+                                                        echo 'like';
+                                                    else
+                                                        echo 'unlike';?>"
+                                        name="like"/>
                             </form>
-                            <p><?php echo $gallery->getLikes($img_id[$id_counter][$id_counter]) . " likes"; ?></p>
+                            <p><?php echo $gallery->getLikesCount($img_id[$id_counter][$id_counter]) . " likes"; ?></p>
                         </div>
                         
                         <div class="comment_field">

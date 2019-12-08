@@ -35,6 +35,9 @@ if (isset($_POST['upload']))
                 $photo_name_new = uniqid('', true) . '.' . $photo_ext;
                 $photo_destination = '../uploads/' . $photo_name_new;
 
+                if (!file_exists('../uploads'))
+                    mkdir('../uploads');
+
                 if (move_uploaded_file($photo_tmp, $photo_destination))
                 {
                     $db->insert('pictures', [
