@@ -20,6 +20,20 @@
         <button id="snap">Capture</button>
     </div>
 
+    <!-- stickers -->
+    <p>stickers</p>
+    <div class="sticker_field">
+        <button id="sticker_1">
+            <img src="../stickers/lacoste.png" alt="lacoste">
+        </button>
+    </div>
+
+    <!-- image saving -->
+    <form action="upload.php" method="post">
+        <input type="hidden" id="img_enc" name="image_encrypt"> <!-- nzolo?????? -->
+        <input type="submit" id="" name="" value="save image">
+    </form>
+
     <!-- webcam video snapshot -->
     <canvas id="canvas" width="640" height="480"></canvas>
 
@@ -54,8 +68,11 @@
         init();
         // Draw image
         var context = canvas.getContext('2d');
+
         snap.addEventListener("click", function() {
             context.drawImage(video, 0, 0, 640, 480);
+
+            document.getElementById("img_enc").value = canvas.toDataURL("images/png");
         })
     </script>
 </body>
