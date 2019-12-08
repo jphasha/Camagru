@@ -24,13 +24,13 @@
     <p>stickers</p>
     <div class="sticker_field">
         <button id="sticker_1">
-            <img src="../stickers/lacoste.png" alt="lacoste">
+            <img src="../stickers/lacoste.png" alt="lacoste" id="lacoste_stk">
         </button>
     </div>
 
     <!-- image saving -->
     <form action="upload.php" method="post">
-        <input type="hidden" id="img_enc" name="image_encrypt"> <!-- nzolo?????? -->
+        <input type="hidden" id="img_enc" name="image_encrypt"> <!-- nvm i'm getting something here -->
         <input type="submit" id="" name="" value="save image">
     </form>
 
@@ -46,8 +46,8 @@
         const costraints = {
             audio: true,
             video: {
-                width: 1280,
-                height: 720
+                width: 500,
+                height: 500
             }
         };
         // access webcam
@@ -70,10 +70,17 @@
         var context = canvas.getContext('2d');
 
         snap.addEventListener("click", function() {
-            context.drawImage(video, 0, 0, 640, 480);
+            context.drawImage(video, 0, 0, 300, 300);
 
             document.getElementById("img_enc").value = canvas.toDataURL("images/png");
-        })
+        });
+
+        document.getElementById("sticker_1").addEventListener("click", function()
+        {
+            context.drawImage(getElementById("lacoste_stk"), 0, 0, 50, 50);
+
+            document.getElementById("img_enc").value = canvas.toDataURL("images/png");
+        });
     </script>
 </body>
 
