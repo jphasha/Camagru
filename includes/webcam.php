@@ -1,3 +1,13 @@
+<?php
+
+require_once '../core/initialise.php';
+
+$user = new User();
+
+if ($user->isLoggedIn())
+{
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +54,7 @@
         const snap = document.getElementById('snap');
         const errorMsgElement = document.getElementById('spanError');
         const costraints = {
-            audio: true,
+            // audio: true,
             video: {
                 width: 500,
                 height: 500
@@ -66,6 +76,7 @@
         }
         // load init
         init();
+
         // Draw image
         var context = canvas.getContext('2d');
 
@@ -75,6 +86,7 @@
             document.getElementById("img_enc").value = canvas.toDataURL("images/png");
         });
 
+        // draw sticker to canvas
         document.getElementById("sticker_1").addEventListener("click", function()
         {
             context.drawImage(getElementById("lacoste_stk"), 0, 0, 50, 50);
@@ -85,3 +97,12 @@
 </body>
 
 </html>
+
+<?php
+}
+
+else
+{
+    Redirect::to('../index.php');
+}
+?>

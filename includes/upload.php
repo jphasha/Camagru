@@ -4,6 +4,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+require_once '../core/initialise.php';
+
+$user = new User();
+
+if ($user->isLoggedIn())
+{
 ?>
 
 <!DOCTYPE html>
@@ -27,3 +33,11 @@ error_reporting(E_ALL);
     </form>
 </body>
 </html>
+<?php
+}
+
+else
+{
+    Redirect::to('../index.php');
+}
+?>

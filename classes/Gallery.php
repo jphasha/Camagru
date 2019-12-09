@@ -83,9 +83,10 @@ class Gallery
 
     public function likePictures($imageId, $currentUserId)
     {
-        return $this->_db->insert('likes',
-        ['picture_id' => $imageId,
-        'liker_id' => $currentUserId]
+        return $this->_db->insert('likes',[
+            'picture_id' => $imageId,
+            'liker_id' => $currentUserId
+        ]
     );
     }
 }

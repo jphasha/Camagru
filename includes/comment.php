@@ -10,10 +10,10 @@ $test = DB::getInstance();
 if (isset($_POST['comment_btn']))
 {
     $test->insert('comments', [
-        'picture_id' => $_POST['img_id'],
+        'picture_id' => escape($_POST['img_id']),
         // 'user_id' => 1,
         'commentor_id' => Session::get('user'),
-        'comment' => $_POST['right']
+        'comment' => escape($_POST['right']) //filter_var($_POST['right'], FILTER_SANITIZE_STRING)
     ]);
 }
 
