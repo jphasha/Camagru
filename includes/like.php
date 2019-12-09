@@ -12,16 +12,17 @@ if (isset($_POST['like']))
     $gallery = new Gallery();
     if ($gallery->getLikes(Session::get('user'), $_POST['img_id']) === 0)
     {
-        $db->insert('likes', array(
-            'picture_id' => $_POST['img_id'],
-            'liker_id' => Session::get('user')
-        ));
+        $gallery->likePictures($_POST['img_id'], Session::get('user'));
     }
     else {
-        $db->delete(
-            'likes',
-            ['liker_id', '=', Session::get('user')]
-        );
+        $gallery->deleteLikes($_POST['img_id'], Session::get('user'));
+
+        // $db->delete(
+        //     'likes',
+
+        //     // ['liker_id', '=', Session::get('user')]   // had to remove this one because it removes all the likes in the table.
+        //     // ['picture_id', '=', $_POST['img_id']]     // this one also removes all the likes associated with that picture.
+        // );
     }
 }
 

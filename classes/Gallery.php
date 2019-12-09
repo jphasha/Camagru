@@ -75,5 +75,18 @@ class Gallery
 
         return $imageLikes->count();
     }
+
+    public function deleteLikes($imageId, $currentUserId)
+    {
+        return $this->_db->query('DELETE FROM likes WHERE picture_id = ? AND liker_id = ?', [$imageId, $currentUserId]);
+    }
+
+    public function likePictures($imageId, $currentUserId)
+    {
+        return $this->_db->insert('likes',
+        ['picture_id' => $imageId,
+        'liker_id' => $currentUserId]
+    );
+    }
 }
 ?>
