@@ -108,7 +108,7 @@ if ($user->isLoggedIn())
             save();
         });
 
-        // draw sticker to canvas
+        // stickers
         document.getElementById("sticker_1").addEventListener("click", function()
         {
             document.getElementById("img_enc").value = "sticker1.png";
@@ -133,7 +133,7 @@ if ($user->isLoggedIn())
             {
                 if (this.OnreadyState == 4 && this.status == 200)
                 {
-
+                    // hang on.
                 }
             }
             http.open('POST', 'save_img.php', true);
