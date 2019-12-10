@@ -1,6 +1,9 @@
 <?php
-    // require_once "config/database.php";
+    require_once "../config/setup.php";
      session_start();
+
+     
+
      function super_impose($img_src,$upload_dest,$sticker)
      {
          $superpose;
@@ -19,14 +22,15 @@
          $name = time().'.png';
          file_put_contents('../uploads/'.$name, $image);
          super_impose('../uploads/'.$name,'../uploads/'.$name,'../stickers/'.$_POST['sticker']);
-      /*   $out = 'uploads/'.$name;
-         $sql = $conn->prepare("INSERT INTO `camagru`.`images` (`img_name`, `img_dir`)
-         VALUES (:img_name,:img_dir)");
-         $sql->bindValue(':img_name',$name);
-         $sql->bindValue(':img_dir',$out);
+         $userId = $_SESSION['user_id'];
+         $imageName = $name;
+         $sql = $pdo->prepare("INSERT INTO pictures (`user_id`, `picture_name`)
+         VALUES (`:u_id`,:pic_name)");
+         $sql->bindValue(':u_id',$userId);
+         $sql->bindValue(':pic_name',$imageName);
          $sql->execute();
          if ($sql->rowCount())
-             echo "success";*/
+             echo "success";
      }
      else 
      {
