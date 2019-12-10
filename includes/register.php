@@ -119,19 +119,19 @@ if (Input::exists())
         <form action="" method="post">
             <div class="field">
                 <label for="firstname">First Name(s)</label>
-                <input type="text" name="firstname" id="firstname" value="<?php echo escape(Input::get('firstname')); ?>" required>
+                <input type="text" name="firstname" id="firstname" value="<?php echo Input::get('firstname'); ?>" required>
             </div>
             <div class="field">
                 <label for="lastname">Last Name</label>
-                <input type="text" name="lastname" id="lastname" value="<?php echo escape(Input::get('lastname')); ?>" required>
+                <input type="text" name="lastname" id="lastname" value="<?php echo Input::get('lastname'); ?>" required>
             </div>
             <div class="field">
                 <label for="user_email">Email</label>
-                <input type="text" name="user_email" id="user_email" value="<?php echo escape(Input::get('user_email')); ?>" required>
+                <input type="text" name="user_email" id="user_email" value="<?php echo Input::get('user_email'); ?>" required>
             </div>
             <div class="field">
                 <label for="user_name">Username</label>
-                <input type="text" name="user_name" id="user_name" value="<?php echo escape(Input::get('user_name')); ?>" autocomplete="off" required>
+                <input type="text" name="user_name" id="user_name" value="<?php echo Input::get('user_name'); ?>" autocomplete="off" required>
             </div>
             <div class="field">
                 <label for="password">Create a Password</label>

@@ -35,7 +35,7 @@ if (Input::exists())
                 $remember = false;
             }
 
-            $login = $user->login(Input::get('username'), Input::get('password'), $remember);
+            $login = $user->login(escape(Input::get('username')), escape(Input::get('password'), $remember));
 
             if ($login)
             {
@@ -43,7 +43,7 @@ if (Input::exists())
             }
             else
             {
-                echo "no can do jack<br>just kidding, your password is wrong chief";
+                echo "no can do jack<br>just kidding, your password is wrong chief<br>wanna try again?";
             }
         }
         else
