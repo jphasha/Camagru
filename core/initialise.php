@@ -13,7 +13,7 @@ $GLOBALS['config'] = array(
     'mysql' => array(
         'host' => 'localhost',
         'username' => 'root',
-        'password' => '',
+        'password' => '123456',
         'db' => 'camagru'
     ),
     // setup cookies.
@@ -50,3 +50,4 @@ if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Conf
     }
 }
 ?>
+
