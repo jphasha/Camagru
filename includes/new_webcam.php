@@ -75,7 +75,7 @@ if (!$user->isLoggedIn())
             const canvas = document.getElementById('canvas');
 
             const capture = document.getElementById('capture');
-            
+
             const flame_emoji = document.getElementById('flame_emoji');
             const bandaid_emoji = document.getElementById('bandaid_emoji');
             const cool_emoji = document.getElementById('cool_emoji');
@@ -130,15 +130,15 @@ if (!$user->isLoggedIn())
             });
 
             sticker2.addEventListener("click", function() {
-                context.drawImage(bandaid_emoji, 0, 0, 100, 100);
+                context.drawImage(bandaid_emoji, 400, 0, 100, 100);
             });
 
             sticker3.addEventListener("click", function() {
-                context.drawImage(cool_emoji, 0, 0, 100, 100);
+                context.drawImage(cool_emoji, 0, 400, 100, 100);
             });
 
             sticker4.addEventListener("click", function() {
-                context.drawImage(instagram_emoji, 0, 0, 100, 100);
+                context.drawImage(instagram_emoji, 400, 400, 100, 100);
             });
         </script>
     </div>
