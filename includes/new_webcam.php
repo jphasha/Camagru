@@ -65,9 +65,22 @@ if (!$user->isLoggedIn())
 
         <!-- enter javascript. we need it to activate the camera and take pictures -->
         <script>
-            const video = document.getElementById('video'); // to access and manipulate the video streaming space.
-            const canvas = document.getElementById('canvas'); // || ||
+            const video = document.getElementById('video'); // to ac cess and manipulate the video streaming space.
+
+            const sticker1 = document.getElementById('sticker_1');
+            const sticker2 = document.getElementById('sticker_2');
+            const sticker3 = document.getElementById('sticker_3');
+            const sticker4 = document.getElementById('sticker_4');
+
+            const canvas = document.getElementById('canvas');
+
             const capture = document.getElementById('capture');
+            
+            const flame_emoji = document.getElementById('flame_emoji');
+            const bandaid_emoji = document.getElementById('bandaid_emoji');
+            const cool_emoji = document.getElementById('cool_emoji');
+            const instagram_emoji = document.getElementById('instagram_emoji');
+
             const errorMsgElement = document.getElementById('spanError'); // in case of errors we may encounter when trying to access webcam
             const costraints = {
             video: {
@@ -94,7 +107,7 @@ if (!$user->isLoggedIn())
             }
 
             // now to activate that webcam
-            // init();
+            init();
 
             // draw on the canvas
             var context = canvas.getContext('2d'); // set the canvas drawing method to "2d" (getContext('2d'))
@@ -109,8 +122,24 @@ if (!$user->isLoggedIn())
             // capture.addEventListener("click", draw_image()); // in the event that click is true. apply function draw_image()
 
             capture.addEventListener("click", function() {
-            context.drawImage(video, 0, 0, 500, 500);});
+                context.drawImage(video, 0, 0, 500, 500);
+            });
 
+            sticker1.addEventListener("click", function() {
+                context.drawImage(flame_emoji, 0, 0, 100, 100);
+            });
+
+            sticker2.addEventListener("click", function() {
+                context.drawImage(bandaid_emoji, 0, 0, 100, 100);
+            });
+
+            sticker3.addEventListener("click", function() {
+                context.drawImage(cool_emoji, 0, 0, 100, 100);
+            });
+
+            sticker4.addEventListener("click", function() {
+                context.drawImage(instagram_emoji, 0, 0, 100, 100);
+            });
         </script>
     </div>
     <div class="view_prev_pics"></div>
