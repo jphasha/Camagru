@@ -84,13 +84,18 @@ if (Input::exists())
             <input type="password" name="password" id="password" autocomplete="off">
         </div>
 
+        <br>
+
         <div class="field">
             <label for="remember">
                 <input type="checkbox" name="remember" id="remember"> Remember me
             </label>
         </div>
+        <br>
         <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
         <input type="submit" value="Log in">
+        <br><br>
+        <a href="forgot_passwrd.php">Forgot Password?</a>
     </form>
     <footer class="footer">
     &copy; jphasha 2019
