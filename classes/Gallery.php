@@ -89,5 +89,28 @@ class Gallery
         ]
     );
     }
+
+    public function getUserPics($userId)
+    {
+        $imgObj = $this->_db->get('pictures', ['picture_id', '=', $userId]);
+        $itr = 0;
+        $pictures = [];
+
+        while ($itr < $imgObj->count())
+        {
+            $pictures = [
+                $itr => $imgObj[$itr]->picture_name
+            ];
+            $itr = $itr + 1;
+        }
+        if (count($pictures))
+        {
+            return $pictures;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 ?>
