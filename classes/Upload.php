@@ -61,6 +61,8 @@ if (isset($_POST['upload']))
     {
         echo "file type not allowed <br>";
     }
+
+    Redirect::to('../includes/view_gal.php');
 }
 
 
@@ -81,12 +83,12 @@ if (isset($_POST['image_saver']))
     {
         $gallery->insertImage(Session::get('user'), $pic_name);
     }
+
+    Redirect::to('../includes/new_webcam.php');
 }
 
 else
 {
     echo "nah<br>";
 }
-
-Redirect::to('../includes/view_gal.php');
 ?>
