@@ -63,6 +63,12 @@ if (!$user->isLoggedIn())
         <!-- there is that canvas -->
         <canvas id="canvas" width="500" height="500"></canvas>
 
+        <!-- image saving -->
+        <form action="../classes/Upload.php" method="post">
+            <input type="hidden" id="img_enc" name="image_encrypt">
+            <input type="submit" id="image_saver" name="image_saver" value="save image">
+        </form>
+
         <!-- enter javascript. we need it to activate the camera and take pictures -->
         <script>
             const video = document.getElementById('video'); // to ac cess and manipulate the video streaming space.
@@ -80,6 +86,8 @@ if (!$user->isLoggedIn())
             const bandaid_emoji = document.getElementById('bandaid_emoji');
             const cool_emoji = document.getElementById('cool_emoji');
             const instagram_emoji = document.getElementById('instagram_emoji');
+
+            var image_saver = document.getElementById('image_saver');
 
             const errorMsgElement = document.getElementById('spanError'); // in case of errors we may encounter when trying to access webcam
             const costraints = {
@@ -140,6 +148,11 @@ if (!$user->isLoggedIn())
             sticker4.addEventListener("click", function() {
                 context.drawImage(instagram_emoji, 400, 400, 100, 100);
             });
+
+            image_saver.addEventListener("click", function() {
+                image = canvas.toDataURL("images/png");
+                document.getElementById("img_enc").value = image;
+            })
         </script>
     </div>
     <div class="view_prev_pics"></div>

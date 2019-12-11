@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 require_once '../core/initialise.php';
 
-$db = DB::getInstance();
+$gallery = new Gallery();
 // if the upload button is pressed.
 if (isset($_POST['upload']))
 {
@@ -40,10 +40,7 @@ if (isset($_POST['upload']))
 
                 if (move_uploaded_file($photo_tmp, $photo_destination))
                 {
-                    $db->insert('pictures', [
-                        'user_id' => Session::get('user'),
-                        'picture_name' => $photo_name_new
-                    ]);
+                    $gallery->insertImage(Session::get('user'), $photo_name_new);
                 }
                 else
                 {
@@ -65,9 +62,30 @@ if (isset($_POST['upload']))
         echo "file type not allowed <br>";
     }
 }
+
+
+if (isset($_POST['image_saver']))
+{
+    $encd_data = Input::get('image_encrypt');
+    $filtered_data = str_replace("data:image/png;base64,", "", $encd_data); //remove the "data:image/png;base64," at the beginning of the encrypted data string. this will allow decryption.
+    $decrpt_image_data = base64_decode($filtered_data); // ofcourse we decode.
+    $pic_name = uniqid('', true) . '.png'; // unique id so that there won't be any images with the same name which may end up being overwritten by function file_put_contents() below.
+    $upload_dest = '../uploads';
+
+    if (!file_exists($upload_dest)) // no need to mkdir everytime we start afresh.
+    {
+        mkdir($upload_dest);
+    }
+
+    if (file_put_contents($upload_dest . '/' . $pic_name, $decrpt_image_data))
+    {
+        $gallery->insertImage(Session::get('user'), $pic_name);
+    }
+}
+
 else
 {
-    echo "nah";
+    echo "nah<br>";
 }
 
 Redirect::to('../includes/view_gal.php');

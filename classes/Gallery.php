@@ -112,5 +112,13 @@ class Gallery
             return false;
         }
     }
+
+    public function insertImage($userId, $imageName)
+    {
+        return $this->_db->insert('pictures', [
+            'user_id' => $userId,
+            'picture_name' => $imageName
+        ]);
+    }
 }
 ?>
