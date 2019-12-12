@@ -88,7 +88,8 @@ class User
         }
         return false;
     }
-      public function login($username = null, $password = null, $remember = false)
+    
+    public function login($username = null, $password = null, $remember = false)
     {
         if (!$username && !$password && $this->exists())
         {

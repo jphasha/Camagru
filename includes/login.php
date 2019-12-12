@@ -6,15 +6,11 @@ error_reporting(E_ALL);
 
 require_once '../core/initialise.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
-
-if (isset($_POST['user']))
+if (isset($_GET['user']))
 {
-    var_dump($_POST);
-    die('<br><br>yoh<br><br>');
+    var_dump($_GET);
+    die('<br><br>well?<br><br>');
 }
 
 if (Input::exists())

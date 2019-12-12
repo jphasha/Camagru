@@ -8,10 +8,13 @@ require_once '../core/initialise.php';
 
 if (Input::exists())
 {
-    if (Token::check(Input::get('token')))
+    echo "<br>well?<br>";
+    $salt = Input::get('token');
+    if (Token::check($salt))
     {
+        echo "<br>" . $salt . "<br>";
         // echo "i have been run<br>"; //because we are not yet able to generate token, we are not able to enter this part of the code.
-        // echo Input::get('token') . "<br>"; // not echoing this variable even though it is suppossed to. again NVM, the connection to the sessions was the issue.
+        echo Input::get('token') . "<br>"; // not echoing this variable even though it is suppossed to. again NVM, the connection to the sessions was the issue.
         $validate = new Validate();
         $validation = $validate->check($_POST, array(
             'firstname' => array( // key values must match the field names in the form (login/register form);
@@ -47,6 +50,7 @@ if (Input::exists())
             )
             )
         );
+
         if ($validate->passed()) // $validate NOT $validation
         {
             // echo "word<br>";
@@ -66,18 +70,17 @@ if (Input::exists())
                         'user_pass' => password_hash(Input::get('password'), PASSWORD_DEFAULT),
                         'joined' => date('Y-m-d H:i:s'),
                         'group' => 1,
-                        'salt' => "salt",
+                        'salt' => $salt,
                         // 'verified' => 0
                     )
                 );
                 
-                $token = Token::generate();
                 $email = Input::get('user_email');
                 $username = Input::get('user_name');
                 $subject = 'Registration Verification';
                 $message = 'Thank you for registerimg. Please click the link to verify your registration:';
                 $message .= "\r\n";
-                $message .= "<a href='http://localhost:8080/projects_github/github_camagru/includes/login.php?user=$username&salt=$token'>Register Account</a>";
+                $message .= "<a href='http://localhost:8080/projects_github/github_camagru/includes/login.php?user=$username&salt=$salt'>Register Account</a>";
                 $headers = 'From:kingjoe@mailinator.com' . "\r\n";
                 $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-Type:text/html;charset=UTF-8". "\r\n";
