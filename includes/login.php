@@ -10,9 +10,20 @@ require_once '../core/initialise.php';
 if (isset($_GET['user']))
 {
     $user = new User();
-    $status = $user->find($_GET['user']);
-    var_dump($status);
-    die('<br><br>well?<br><br>');
+    $status = $user->find(Input::get('user'));
+    
+    if ($status)
+    {
+        $mail_salt = Input::get('salt');
+        $db_salt = $user->data()->salt;
+        $user_id = $user->data()->user_id;
+
+        if ($db_salt == $mail_salt)
+        {
+            $user->update(['confirmed' => 1], $user_id);
+        }
+        
+    }
 }
 
 if (Input::exists())

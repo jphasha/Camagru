@@ -137,7 +137,7 @@ class DB //a singleton class?
             }
 
             $sql = "INSERT INTO {$table} (`" . implode("`, `", $keys) . "`) VALUES ({$values})";
-            // echo $sql;
+            
             if (!$this->query($sql, $fields)->error())
             {
                 return true;
@@ -161,7 +161,7 @@ class DB //a singleton class?
             $stp_con++;
         }
         $sql_query = "UPDATE {$table} SET {$set} WHERE user_id = {$id}";
-        echo $sql_query;
+        
         if (!$this->query($sql_query, $fields)->error())
         {
             return true;
