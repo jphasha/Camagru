@@ -119,15 +119,15 @@ if (Input::exists())
         <form action="" method="post">
             <div class="field">
                 <label for="firstname">First Name(s)</label>
-                <input type="text" name="firstname" id="firstname" value="<?php echo Input::get('firstname'); ?>" required>
+                <input type="text" name="firstname" id="firstname" value="<?php echo Input::get('firstname'); ?>" required pattern="(?=.*[a-zA-Z]).{2,}" title="min 2 chars and alphabets are a must">
             </div>
             <div class="field">
                 <label for="lastname">Last Name</label>
-                <input type="text" name="lastname" id="lastname" value="<?php echo Input::get('lastname'); ?>" required>
+                <input type="text" name="lastname" id="lastname" value="<?php echo Input::get('lastname'); ?>" required pattern="(?=.*[a-zA-Z]).{2,}" title="min 2 chars and alphabets are a must">
             </div>
             <div class="field">
                 <label for="user_email">Email</label>
-                <input type="text" name="user_email" id="user_email" value="<?php echo Input::get('user_email'); ?>" required>
+                <input type="email" name="user_email" id="user_email" value="<?php echo Input::get('user_email'); ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
             </div>
             <div class="field">
                 <label for="user_name">Username</label>
@@ -135,11 +135,11 @@ if (Input::exists())
             </div>
             <div class="field">
                 <label for="password">Create a Password</label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password" required pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" title="8 or more characters with atleast one uppercase and one lower case character">
             </div>
             <div class="field">
                 <label for="confirm_password">Confirm your Password</label>
-                <input type="password" name="confirm_password" id="confirm_password" required>
+                <input type="password" name="confirm_password" id="confirm_password" required pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" title="must be the same as 'create password'">
             </div>
             <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
             <!-- no token generated. nevermind, i was directing the $_SESSION[config] to sessions wrong.--> 
