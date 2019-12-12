@@ -68,7 +68,11 @@ if (isset($_POST['upload']))
 
 if (isset($_POST['image_saver']))
 {
-    $encd_data = Input::get('image_encrypt');
+    var_dump($_POST);
+    die('<br><br>hold on<br><br>');
+    if (isset($_POST['capture']))
+    {
+        $encd_data = Input::get('image_encrypt');
     $filtered_data = str_replace("data:image/png;base64,", "", $encd_data); //remove the "data:image/png;base64," at the beginning of the encrypted data string. this will allow decryption.
     $decrpt_image_data = base64_decode($filtered_data); // ofcourse we decode.
     $pic_name = uniqid('', true) . '.png'; // unique id so that there won't be any images with the same name which may end up being overwritten by function file_put_contents() below.
@@ -82,6 +86,7 @@ if (isset($_POST['image_saver']))
     if (file_put_contents($upload_dest . '/' . $pic_name, $decrpt_image_data))
     {
         $gallery->insertImage(Session::get('user'), $pic_name);
+    }
     }
 
     Redirect::to('../includes/new_webcam.php');

@@ -75,6 +75,11 @@ if (Input::exists())
                 <label for="user_name">User Name</label>
                 <input type="text" name="user_name" value="<?php echo escape($user->data()->user_name); ?>">
 
+                <label for="user_pass">Password</label>
+                <input type="text" name="user_pass" value="<?php echo escape($user->data()->user_pass); ?>">
+
+                <label for="email">Email</label>
+
                 <input type="submit" value="Update">
                 <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
             </div>

@@ -32,7 +32,7 @@ if (!$user->isLoggedIn())
 
         <!-- strike a pose -->
         <div class="controller">
-            <button id="capture">Capture</button>
+            <button id="capture" name="capture">Capture</button>
         </div>
 
         <!-- stickers -->
