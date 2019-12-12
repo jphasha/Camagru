@@ -22,7 +22,6 @@ if (isset($_GET['user']))
         {
             $user->update(['confirmed' => 1], $user_id);
         }
-        
     }
 }
 
