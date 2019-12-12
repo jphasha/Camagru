@@ -12,9 +12,6 @@ if (Input::exists())
     $salt = Input::get('token');
     if (Token::check($salt))
     {
-        echo "<br>" . $salt . "<br>";
-        // echo "i have been run<br>"; //because we are not yet able to generate token, we are not able to enter this part of the code.
-        echo Input::get('token') . "<br>"; // not echoing this variable even though it is suppossed to. again NVM, the connection to the sessions was the issue.
         $validate = new Validate();
         $validation = $validate->check($_POST, array(
             'firstname' => array( // key values must match the field names in the form (login/register form);
@@ -145,7 +142,7 @@ if (Input::exists())
                 <label for="confirm_password">Confirm your Password</label>
                 <input type="password" name="confirm_password" id="confirm_password" required pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" title="must be the same as 'create password'">
             </div>
-            <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+            <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"> <!-- this is the salt above -->
             <!-- no token generated. nevermind, i was directing the $_SESSION[config] to sessions wrong.--> 
             <input type="submit" value="Register">
         </form>

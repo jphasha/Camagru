@@ -9,7 +9,9 @@ require_once '../core/initialise.php';
 
 if (isset($_GET['user']))
 {
-    var_dump($_GET);
+    $user = new User();
+    $status = $user->find($_GET['user']);
+    var_dump($status);
     die('<br><br>well?<br><br>');
 }
 
