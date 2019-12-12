@@ -10,6 +10,13 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+
+if (isset($_POST['user']))
+{
+    var_dump($_POST);
+    die('<br><br>yoh<br><br>');
+}
+
 if (Input::exists())
 {
     if (Token::check(Input::get('token')))

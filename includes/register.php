@@ -70,13 +70,14 @@ if (Input::exists())
                         // 'verified' => 0
                     )
                 );
-
+                
+                $token = Token::generate();
                 $email = Input::get('user_email');
                 $username = Input::get('user_name');
                 $subject = 'Registration Verification';
                 $message = 'Thank you for registerimg. Please click the link to verify your registration:';
                 $message .= "\r\n";
-                $message .= "<a href='http://localhost:8080/projects_github/github_camagru/includes/login.php?user=$username&salt=$salt'>Register Account</a>";
+                $message .= "<a href='http://localhost:8080/projects_github/github_camagru/includes/login.php?user=$username&salt=$token'>Register Account</a>";
                 $headers = 'From:kingjoe@mailinator.com' . "\r\n";
                 $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-Type:text/html;charset=UTF-8". "\r\n";
@@ -127,11 +128,11 @@ if (Input::exists())
             </div>
             <div class="field">
                 <label for="user_email">Email</label>
-                <input type="email" name="user_email" id="user_email" value="<?php echo Input::get('user_email'); ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                <input type="email" name="user_email" id="user_email" value="<?php echo Input::get('user_email'); ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Something like 'user@mail.domain'. Don't worry, you can do it">
             </div>
             <div class="field">
                 <label for="user_name">Username</label>
-                <input type="text" name="user_name" id="user_name" value="<?php echo Input::get('user_name'); ?>" autocomplete="off" required>
+                <input type="text" name="user_name" id="user_name" value="<?php echo Input::get('user_name'); ?>" autocomplete="off" required pattern="(?=.*[a-zA-Z]).{2,}" title="min 2 chars and alphabets are a must">
             </div>
             <div class="field">
                 <label for="password">Create a Password</label>
