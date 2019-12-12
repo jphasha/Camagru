@@ -101,7 +101,9 @@ class User
             if ($user)
             {
                 // if ($this->data()->user_pass === Hash::make($password, $this->data()->salt))
-                if (password_verify($password, $this->data()->user_pass))
+                $verified = $this->_data->confirmed;
+
+                if (password_verify($password, $this->data()->user_pass) && $verified)
                 {
                     Session::put($this->_sessionName, $this->data()->user_id);
 

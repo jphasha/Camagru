@@ -64,6 +64,13 @@ class Validate
                                 $this->addError("{$item} already exist, try a different {$item}");
                             }
                         break;
+
+                        case 'strong_pattern':
+                            if (!preg_match('/([a-z])([A-Z])/', $value))
+                            {
+                                $this->addError("{$item} must have {$rule_value} characters in it");
+                            }
+                        break;
                     }
                 }
             }

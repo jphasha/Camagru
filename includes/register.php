@@ -8,7 +8,6 @@ require_once '../core/initialise.php';
 
 if (Input::exists())
 {
-    echo "<br>well?<br>";
     $salt = Input::get('token');
     if (Token::check($salt))
     {
@@ -39,7 +38,8 @@ if (Input::exists())
             'password' => array(
                 'required' => true,
                 'min' => 8,
-                'max' => 50
+                'max' => 50,
+                'strong_pattern' => 'lower and upper case'
             ),
             'confirm_password' => array(
                 'required' => true,
@@ -97,6 +97,7 @@ if (Input::exists())
         {
             foreach ($validation->errors() as $error)
             {
+                echo '<script>console.log("me");</script>';
                 echo $error . "<br>";
             }
         }
@@ -136,15 +137,18 @@ if (Input::exists())
             </div>
             <div class="field">
                 <label for="password">Create a Password</label>
-                <input type="password" name="password" id="password" required pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" title="8 or more characters with atleast one uppercase and one lower case character">
+                <input type="password" name="password" id="password" required>
             </div>
             <div class="field">
                 <label for="confirm_password">Confirm your Password</label>
-                <input type="password" name="confirm_password" id="confirm_password" required pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" title="must be the same as 'create password'">
+                <input type="password" name="confirm_password" id="confirm_password" required>
             </div>
             <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"> <!-- this is the salt above -->
             <!-- no token generated. nevermind, i was directing the $_SESSION[config] to sessions wrong.--> 
             <input type="submit" value="Register">
+            <div>
+                <p err1 hidden> wrong password</p>
+            </div>
         </form>
     </div>
     <footer class="footer">

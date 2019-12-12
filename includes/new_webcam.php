@@ -90,6 +90,7 @@ if (!$user->isLoggedIn())
             var image_saver = document.getElementById('image_saver');
 
             const errorMsgElement = document.getElementById('spanError'); // in case of errors we may encounter when trying to access webcam
+            
             const costraints = {
             video: {
                 width: 500,
