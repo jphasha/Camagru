@@ -10,17 +10,20 @@ if (isset($_POST['reset']))
     $email_exist = $db->emailExists($email);
     if ($email_exist)
     {
+        
         $subject = "Password Reset";
         $message = "You requested a password reset. If this is not you, just ignore this email.";
         $message .= "\r\n";
         $message .= "Otherwise please click on the following link to complete password reset:";
         $message .= "\r\n";
-        $message .= "<a href='http://localhost:8080/projects_github/github_camagru/includes/login.php?&salt=$salt'>Reset Password</a>";
+        $message .= "<a href='http://localhost:8080/projects_github/github_camagru/includes/changepassword.php?salt=$salt'>Reset Password</a>";
         $headers = 'From:noreply@themail.com' . "\r\n";
         $headers .= "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-Type:text/html;charset=UTF-8". "\r\n";
 
-        Redirect::to('../includes/changepassword.php');
+        mail($email, $subject, $message, $headers);
+
+        Redirect::to('../includes/changepassword.php?salt=false');
     }
     else
     {

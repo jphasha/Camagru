@@ -1,5 +1,6 @@
 <?php
-
+// if(isset($_POST['submit']) && $_POST['submit'] == 'change')
+// {
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -10,13 +11,16 @@ $user = new User();
 
 if (!$user->isLoggedIn())
 {
-    if (isset($_GET['salt']));
+    if (isset($_GET['salt']) && $_GET['salt'] !== 'false')
     {
+        echo $_GET['salt'];
         echo Token::check('token');
-        print_r($_GET);
+        // this thing is screwing me over.
         echo "<br>in the statement";
         die("<br><br>already then<br><br>");
+        Session::flash('change password', 'please go to your email and click on the reset password link');
     }
+
     Redirect::to('../index.php');
 }
 
@@ -73,6 +77,7 @@ if (Input::exists())
         }
     }
 }
+//}
 ?>
 
 <!DOCTYPE html>
@@ -111,7 +116,7 @@ if (Input::exists())
                 <input type="password" name="confirm_new_password" id="confirm_new_password">
             </div>
 
-            <input type="submit" value="change">
+            <input type="submit" name="submit" value="change"/>
             <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
         </form>
     </div>
