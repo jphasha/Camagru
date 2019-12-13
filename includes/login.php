@@ -96,7 +96,7 @@ if (Input::exists())
             <label for="username">
                 Username
             </label>
-            <input type="text" name="username" id="username" autocomplete="off" required pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" title="min 8 characters lower and upper case atleast">
+            <input type="text" name="username" id="username" autocomplete="off" required pattern="(?=.*[a-zA-Z]).{2,}" title="min 2 characters and atleast an alphabet">
         </div>
 
         <div class="field">
