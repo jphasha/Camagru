@@ -188,5 +188,7 @@ class DB //a singleton class?
     {
         return $this->_count;
     }
+
+    public function exists()
 }
 ?>
