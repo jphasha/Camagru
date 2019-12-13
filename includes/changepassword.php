@@ -10,6 +10,13 @@ $user = new User();
 
 if (!$user->isLoggedIn())
 {
+    if (isset($_GET['salt']));
+    {
+        echo Token::check('token');
+        print_r($_GET);
+        echo "<br>in the statement";
+        die("<br><br>already then<br><br>");
+    }
     Redirect::to('../index.php');
 }
 

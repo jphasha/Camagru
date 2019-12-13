@@ -189,6 +189,14 @@ class DB //a singleton class?
         return $this->_count;
     }
 
-    public function exists()
+    public function emailExists($the_email)
+    {
+        $data = $this->get('users', ['user_email', '=', $the_email]);
+        if ($data->results())
+        {
+            return true;
+        }
+        return false;
+    }
 }
 ?>

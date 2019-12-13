@@ -78,7 +78,7 @@ if (Input::exists())
                 $message = 'Thank you for registerimg. Please click the link to verify your registration:';
                 $message .= "\r\n";
                 $message .= "<a href='http://localhost:8080/projects_github/github_camagru/includes/login.php?user=$username&salt=$salt'>Register Account</a>";
-                $headers = 'From:kingjoe@mailinator.com' . "\r\n";
+                $headers = 'From:noreply@themail.com' . "\r\n";
                 $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-Type:text/html;charset=UTF-8". "\r\n";
                 mail($email, $subject, $message, $headers);
