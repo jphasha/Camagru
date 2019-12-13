@@ -8,16 +8,40 @@ error_reporting(E_ALL);
 require_once '../core/initialise.php';
 
 $user = new User();
+$db = DB::getInstance();
 
 if (!$user->isLoggedIn())
 {
     if (isset($_GET['salt']) && $_GET['salt'] !== 'false')
     {
-        echo $_GET['salt'];
-        echo Token::check('token');
-        // this thing is screwing me over.
-        echo "<br>in the statement";
-        die("<br><br>already then<br><br>");
+        $salt_check = $db->get('users', ['salt', '=', escape($_GET['salt'])]);
+        if ($salt_check->count())
+        {
+            ?>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>Change Password</title>
+                <link rel="stylesheet" href="style.css">
+            </head>
+            <body>
+                <header class="header">
+
+                    <button><a href="view_gal.php">Gallery</a></button>
+                    <button><a href="logout.php">Log out</a></button>
+                    <button><a href="update.php">Update</a></button>
+                    <button><a href="changepassword.php">change password</a></button>
+                    <button><a href="upload.php">Upload a picture</a></button>
+                    <button><a href="new_webcam.php">take a picture</a></button>
+
+                </header>
+            </body>
+            </html>
+            <?php
+        }
         Session::flash('change password', 'please go to your email and click on the reset password link');
     }
 

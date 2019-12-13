@@ -10,7 +10,11 @@ if (isset($_POST['reset']))
     $email_exist = $db->emailExists($email);
     if ($email_exist)
     {
-        
+        $userId = $db->get('users', ['user_email', '=', $email])->first()->user_id;
+
+        $db->update('users', $userId, ['salt' => $salt]);
+        var_dump($userId);
+        die('<br>people<br>');
         $subject = "Password Reset";
         $message = "You requested a password reset. If this is not you, just ignore this email.";
         $message .= "\r\n";
