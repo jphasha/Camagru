@@ -1,3 +1,7 @@
+<?php
+require_once '../core/initialise.php'
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,10 +23,13 @@
 
     </header>
     <div class="contain">
-        <form action="" method="post">
-            <input type="text" name="email" placeholder="PLEASE ENTER YOUR REGISTERED EMAIL">
+        <form action="../server_side/reset_password.php" method="post">
+        
+            <input type="email" name="email" placeholder="PLEASE ENTER YOUR REGISTERED EMAIL" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Something like 'user@mail.domain'. Don't worry, you can do it">
+            <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
             <br>
-            <input type="submit" value="submit">
+            <input type="submit" value="submit" name="reset">
+            
         </form>
     </div>
     <footer class="footer">
