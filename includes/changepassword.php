@@ -79,8 +79,15 @@ if (Input::exists())
 </head>
 <body>
     <header class="header">
+
+        <button><a href="includes/view_gal.php">Gallery</a></button>
+        <button><a href="includes/logout.php">Log out</a></button>
+        <button><a href="includes/update.php">Update</a></button>
+        <button><a href="includes/changepassword.php">change password</a></button>
+        <button><a href="includes/upload.php">Upload a picture</a></button>
+        <button><a href="includes/new_webcam.php">take a picture</a></button>
+
     </header>
-    <li><a href="logout.php">Log out</a></li>
     <div class="cng_field">
         <form action="" method="post">
             <div class="field">
