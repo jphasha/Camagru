@@ -71,6 +71,13 @@ class Validate
                                 $this->addError("{$item} must have {$rule_value} characters in it");
                             }
                         break;
+
+                        case 'valid_name':
+                            if (!preg_match('/([a-zA-Z])/', $value))
+                            {
+                                $this->addError("{$item} must contain {$rule_value} characters");
+                            }
+                        break;
                     }
                 }
             }

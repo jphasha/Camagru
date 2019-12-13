@@ -32,8 +32,15 @@ if (Input::exists())
         $validate = new Validate();
         $validation = $validate->check(
             array(
-                'username' => array('required' => true),
-                'password' => array('required' => true)
+                'username' => array(
+                    'required' => true,
+                    'valid_name' => 'alphabetic'),
+
+                'password' => array(
+                    'required' => true,
+                    'min' => 8,
+                    'max' => 50,
+                    'strong_pattern' => 'lower and upper case')
             )
         );
 
@@ -58,7 +65,7 @@ if (Input::exists())
             }
             else
             {
-                echo "no can do jack<br>just kidding, your password is wrong chief<br>wanna try again?";
+                echo "no can do jack";
             }
         }
         else
@@ -89,14 +96,14 @@ if (Input::exists())
             <label for="username">
                 Username
             </label>
-            <input type="text" name="username" id="username" autocomplete="off">
+            <input type="text" name="username" id="username" autocomplete="off" required pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" title="min 8 characters lower and upper case atleast">
         </div>
 
         <div class="field">
             <label for="password">
                 Password
             </label>
-            <input type="password" name="password" id="password" autocomplete="off">
+            <input type="password" name="password" id="password" autocomplete="off" required pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" title="min 8 characters lower and upper case atleast">
         </div>
 
         <br>

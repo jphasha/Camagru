@@ -137,11 +137,11 @@ if (Input::exists())
             </div>
             <div class="field">
                 <label for="password">Create a Password</label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password" required pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" title="min 8 characters lower and upper case atleast">
             </div>
             <div class="field">
                 <label for="confirm_password">Confirm your Password</label>
-                <input type="password" name="confirm_password" id="confirm_password" required>
+                <input type="password" name="confirm_password" id="confirm_password" required pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" title="must be the same as the above field">
             </div>
             <input type="hidden" name="token" value="<?php echo Token::generate(); ?>"> <!-- this is the salt above -->
             <!-- no token generated. nevermind, i was directing the $_SESSION[config] to sessions wrong.--> 
