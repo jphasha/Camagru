@@ -92,15 +92,20 @@ class Gallery
 
     public function getUserPics($userId)
     {
-        $imgObj = $this->_db->get('pictures', ['picture_id', '=', $userId]);
+        $imgObj = $this->_db->get('pictures', ['picture_id', '>', 0])->results();
         $itr = 0;
+        $it = 0;
         $pictures = [];
 
-        while ($itr < $imgObj->count())
+        while ($itr < count($imgObj))
         {
-            $pictures = [
-                $itr => $imgObj[$itr]->picture_name
-            ];
+            if ($imgObj[$itr]->user_id === $userId)
+            {
+                $pictures[$it] = [
+                    'full' => $this->path . '/' . $imgObj[$itr]->picture_name
+                ];
+                $it = $it + 1;
+            }
             $itr = $itr + 1;
         }
         if (count($pictures))

@@ -12,10 +12,12 @@ if (!$user->isLoggedIn())
 else
 {
     $gallery = new Gallery();
+    $gallery->setPath('../uploads/');
     $userId = Session::get('user');
     $userImages = $gallery->getUserPics($userId);
-    var_dump($userImages);
-    die('<br><br>well?<br><br>');
+
+    // var_dump($userImages);
+    // die('<br><br>well?<br><br>');
 ?>
 
 <!DOCTYPE html>
@@ -94,6 +96,19 @@ else
         <div class="private_gal">
         </div>
 
+        <div class="gal_con">
+        <?php if($userImages): ?>
+            <div class="gallery cf">
+                <?php foreach($userImages as $image): ?>
+                    <div class="gal_item">
+                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img"></a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            There are no images.
+        <?php   endif;  ?>
+        </div>
 
         <!-- enter javascript. we need it to activate the camera and take pictures -->
         <script>

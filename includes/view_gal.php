@@ -81,7 +81,7 @@ if (!$user->isLoggedIn())
                     echo '<a href="view_gal.php?page=' . $page . '">' . $page . '</a> ';
                 }
         ?>
-    </div>
+        </div>
     <footer class="footer">
     &copy; jphasha 2019
     </footer>
