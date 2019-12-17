@@ -7,6 +7,9 @@ $gallery->setPath('../uploads/');
 
 $images = $gallery->getImages();
 $img_id = $gallery->getImageId();
+$total_images = $gallery->getImageCount();
+$images_per_page = 5;
+$number_of_pages = ceil($total_images/$images_per_page);
 
 if (!$user->isLoggedIn())
 {

@@ -120,5 +120,10 @@ class Gallery
             'picture_name' => $imageName
         ]);
     }
+
+    public function getImageCount()
+    {
+        return $this->_db->get('pictures', ['picture_id', '>', 0])->count();
+    }
 }
 ?>
