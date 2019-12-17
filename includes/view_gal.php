@@ -46,17 +46,41 @@ if (!$user->isLoggedIn())
             <div class="gallery cf">
                 <?php foreach($images as $image): ?>
                     <div class="gal_item">
-                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img" id="<?= $img_id[$id_counter] ?>">
+                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img" id="<?= $img_id[$id_counter] ?>"></a>
                         <?php $id_counter = $id_counter + 1; ?>
-                        <div class="comment_field">
-                            <a href="">Comment</a>
+                        <div class="like_field">
+                            <p><?php echo $gallery->getLikesCount($img_id[$id_counter][$id_counter]) . " likes"; ?></p>
+                        </div>
+                        <div class="comments">
+                            <?php
+                            $comment_cntr = 0;
+                            $comment_count = count($gallery->getComments($img_id[$id_counter][$id_counter]));
+                            try
+                            {
+                                while($comment_count > $comment_cntr)
+                                {
+                                    $comments_objByImg = $gallery->getComments($img_id[$id_counter][$id_counter])[$comment_cntr]->comment;
+                                    echo $comments_objByImg . "<br>";
+                                    $comment_cntr = $comment_cntr + 1;
+                                }
+                            }
+                            catch (Exception $er)
+                            {
+                                echo $er;
+                            }
+                            ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
             </div>
         <?php else: ?>
             There are no images.
-        <?php endif; ?>
+        <?php   endif;
+                for ($page = 1; $page <= $number_of_pages; $page++)
+                {
+                    echo '<a href="view_gal.php?page=' . $page . '">' . $page . '</a> ';
+                }
+        ?>
     </div>
     <footer class="footer">
     &copy; jphasha 2019
