@@ -9,6 +9,13 @@ if (!$user->isLoggedIn())
     Redirect::to('../index.php');
 }
 
+else
+{
+    $gallery = new Gallery();
+    $userId = Session::get('user');
+    $userImages = $gallery->getUserPics($userId);
+    var_dump($userImages);
+    die('<br><br>well?<br><br>');
 ?>
 
 <!DOCTYPE html>
@@ -35,14 +42,26 @@ if (!$user->isLoggedIn())
     <div class="camera_section">
 
         <!-- space where to stream video via webcam -->
-        <div class="video-wrap">
+        <!-- <div class="video-wrap" style="background-color: black; width: 500px"> -->
+        <label>
             <video src="" id="video" playsinline autoplay></video>
-        </div>
+        </label>
+        <!-- </div> -->
+
+        <!-- there is that canvas -->
+        <canvas id="canvas" width="500" height="500"></canvas>
 
         <!-- strike a pose -->
-        <div class="controller">
+        <div class="controller" style="background-color: black; width: 60px">
             <button id="capture" name="capture">Capture</button>
         </div>
+
+        <!-- image saving -->
+        <form action="../classes/Upload.php" method="post">
+            <input type="hidden" id="some_posted" name="some_posted" value="false">
+            <input type="hidden" id="img_enc" name="image_encrypt">
+            <input type="submit" id="image_saver" name="image_saver" value="save image">
+        </form>
 
         <!-- stickers -->
         <p>stickers</p>
@@ -69,15 +88,12 @@ if (!$user->isLoggedIn())
             </button>
         </div>
 
-        <!-- there is that canvas -->
-        <canvas id="canvas" width="500" height="500"></canvas>
+        <!-- user's previous edits -->
+        <p>previous images</p>
 
-        <!-- image saving -->
-        <form action="../classes/Upload.php" method="post">
-            <input type="hidden" id="some_posted" name="some_posted" value="false">
-            <input type="hidden" id="img_enc" name="image_encrypt">
-            <input type="submit" id="image_saver" name="image_saver" value="save image">
-        </form>
+        <div class="private_gal">
+        </div>
+
 
         <!-- enter javascript. we need it to activate the camera and take pictures -->
         <script>
@@ -173,3 +189,6 @@ if (!$user->isLoggedIn())
     </footer>
 </body>
 </html>
+<?php
+}
+?>
