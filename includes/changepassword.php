@@ -12,13 +12,30 @@ $db = DB::getInstance();
 
 if (!$user->isLoggedIn())
 {
-    if (isset($_GET['salt']) && $_GET['salt'] !== 'false')
+    if (Input::exist)
     {
-        $salt_check = $db->get('users', ['salt', '=', escape($_GET['salt'])]);
-        if ($salt_check->count())
+        if (isset($_GET['salt']) && $_GET['salt'] !== 'false')
         {
-            ?>
-            <!DOCTYPE html>
+            $salt_check = $db->get('users', ['salt', '=', escape($_GET['salt'])])->results();
+            if ($salt_check)
+            {
+                $it_id = $salt_check[0]->user_id;
+
+                $db->update('users', $it_id, [
+                    'user_pass' => password_hash(Input::get('new_password2'), PASSWORD_DEFAULT)
+                ]);
+            }
+            
+            Session::flash('change password', 'please go to your email and click on the reset password link');
+        }
+        die('now');
+
+        Redirect::to('../index.php');
+    }
+}
+?>
+
+<!DOCTYPE html>
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
@@ -38,70 +55,79 @@ if (!$user->isLoggedIn())
                     <button><a href="new_webcam.php">take a picture</a></button>
 
                 </header>
+
+                <form action="" method="post">
+                    <div class="field">
+                        <label for="new_password">new password</label>
+                        <input type="password" name="new_password2" id="new_password">
+                    </div>
+
+                    <div class="field">
+                        <label for="confirm_new_password">confirm new password</label>
+                        <input type="password" name="confirm_new_password2" id="confirm_new_password">
+                    </div>
+
+                    <input type="submit" name="submit" value="change"/>
+                </form>
             </body>
             </html>
-            <?php
-        }
-        Session::flash('change password', 'please go to your email and click on the reset password link');
-    }
-
-    Redirect::to('../index.php');
-}
-
-if (Input::exists())
+<?php
+if ($user->isLoggedIn())
 {
-    if (Token::check(Input::get('token')))
+    if (Input::exists())
     {
-        $validate = new Validate();
-        $validation = $validate->check($_POST, array(
-            'current_password' => array(
-                'required' => true,
-                'min' => 8
-            ),
-            'new_password' => array(
-                'required' => true,
-                'min' => 8
-            ),
-            'confirm_new_password' => array(
-                'required' => true,
-                'min' => 8,
-                'matches' => 'new_password'
-            )
-            )
-        );
-
-        if ($validation->passed())
+        if (Token::check(Input::get('token')))
         {
-            // if (Hash::make(Input::get('current_password') . $user->data()->salt) !== $user->data()->user_pass)
-            if (!password_verify(Input::get('current_password'), $user->data()->user_pass))
-            {
-                echo "your current password is wrong.<br>";
-            }
-            else
-            {
-                // $salt = Hash::salt(32);
-                $user->update(array(
-                //     'password' => Hash::make(Input::get('new_password') . $salt),
-                //     'salt' => $salt
-                'user_pass' => password_hash(Input::get('new_password'), PASSWORD_DEFAULT)
+            $validate = new Validate();
+            $validation = $validate->check($_POST, array(
+                'current_password' => array(
+                    'required' => true,
+                    'min' => 8
+                ),
+                'new_password' => array(
+                    'required' => true,
+                    'min' => 8
+                ),
+                'confirm_new_password' => array(
+                    'required' => true,
+                    'min' => 8,
+                    'matches' => 'new_password'
+                )
                 )
             );
 
-            Session::flash('home', 'password changed');
-
-            Redirect::to('../index.php');
-            }
-        }
-        else
-        {
-            foreach($validation->errors() as $error)
+            if ($validation->passed())
             {
-                echo $error . "<br>";
+                // if (Hash::make(Input::get('current_password') . $user->data()->salt) !== $user->data()->user_pass)
+                if (!password_verify(Input::get('current_password'), $user->data()->user_pass))
+                {
+                    echo "your current password is wrong.<br>";
+                }
+                else
+                {
+                    // $salt = Hash::salt(32);
+                    $user->update(array(
+                    //     'password' => Hash::make(Input::get('new_password') . $salt),
+                    //     'salt' => $salt
+                    'user_pass' => password_hash(Input::get('new_password'), PASSWORD_DEFAULT)
+                    )
+                );
+
+                Session::flash('home', 'password changed');
+
+                Redirect::to('../index.php');
+                }
+            }
+            else
+            {
+                foreach($validation->errors() as $error)
+                {
+                    echo $error . "<br>";
+                }
             }
         }
     }
 }
-//}
 ?>
 
 <!DOCTYPE html>

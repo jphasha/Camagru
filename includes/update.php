@@ -32,7 +32,8 @@ if (Input::exists())
             try
             {
                 $user->update(array(
-                    'user_name' => Input::get('user_name')
+                    'user_name' => Input::get('user_name'),
+                    'user_email' => Input::get('user_email')
                 )
             );
 
@@ -82,10 +83,11 @@ if (Input::exists())
                 <label for="user_name">User Name</label>
                 <input type="text" name="user_name" value="<?php echo escape($user->data()->user_name); ?>">
 
-                <label for="user_pass">Password</label>
-                <input type="text" name="user_pass" value="<?php echo escape($user->data()->user_pass); ?>">
+                <!-- <label for="user_pass">Password</label> -->
+                <!-- <input type="text" name="user_pass" value="?php echo escape($user->data()->user_pass); ?>"> -->
 
-                <label for="email">Email</label>
+                <label for="user_email">email</label>
+                <input type="text" name="user_email" value="<?php echo escape($user->data()->user_email); ?>">
 
                 <input type="submit" value="Update">
                 <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">

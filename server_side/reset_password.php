@@ -13,8 +13,6 @@ if (isset($_POST['reset']))
         $userId = $db->get('users', ['user_email', '=', $email])->first()->user_id;
 
         $db->update('users', $userId, ['salt' => $salt]);
-        var_dump($userId);
-        die('<br>people<br>');
         $subject = "Password Reset";
         $message = "You requested a password reset. If this is not you, just ignore this email.";
         $message .= "\r\n";
@@ -27,7 +25,8 @@ if (isset($_POST['reset']))
 
         mail($email, $subject, $message, $headers);
 
-        Redirect::to('../includes/changepassword.php?salt=false');
+        Redirect::to('../includes/forgot_passwrd.php?salt=false');
+        echo "Check email";
     }
     else
     {
