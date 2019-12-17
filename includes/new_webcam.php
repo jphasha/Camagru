@@ -31,6 +31,7 @@ if (!$user->isLoggedIn())
         <button><a href="new_webcam.php">take a picture</a></button>
 
     </header>
+
     <div class="camera_section">
 
         <!-- space where to stream video via webcam -->
@@ -73,13 +74,14 @@ if (!$user->isLoggedIn())
 
         <!-- image saving -->
         <form action="../classes/Upload.php" method="post">
+            <input type="hidden" id="some_posted" name="some_posted" value="false">
             <input type="hidden" id="img_enc" name="image_encrypt">
             <input type="submit" id="image_saver" name="image_saver" value="save image">
         </form>
 
         <!-- enter javascript. we need it to activate the camera and take pictures -->
         <script>
-            const video = document.getElementById('video'); // to ac cess and manipulate the video streaming space.
+            const video = document.getElementById('video'); // to access and manipulate the video streaming space.
 
             const sticker1 = document.getElementById('sticker_1');
             const sticker2 = document.getElementById('sticker_2');
@@ -140,6 +142,7 @@ if (!$user->isLoggedIn())
 
             capture.addEventListener("click", function() {
                 context.drawImage(video, 0, 0, 500, 500);
+                document.getElementById("some_posted").value = "true";
             });
 
             sticker1.addEventListener("click", function() {
