@@ -5,11 +5,21 @@ $gallery = new Gallery();
 $user = new User();
 $gallery->setPath('../uploads/');
 
-$images = $gallery->getImages();
+            if (!isset($_GET['page']))
+            {
+                $page = 1;
+            }
+
+            else
+            {
+                $page = $_GET['page'];
+            }
 $img_id = $gallery->getImageId();
 $total_images = $gallery->getImageCount();
 $images_per_page = 5;
 $number_of_pages = ceil($total_images/$images_per_page);
+$starting_point = ($page - 1) * $images_per_page;
+$images = $gallery->getPaginatedImages($starting_point, $images_per_page);
 
 if (!$user->isLoggedIn())
 {
@@ -83,7 +93,7 @@ else if ($user->isLoggedIn())
     <div class="gal_con">
         <?php if($images): ?>
             <div class="gallery cf">
-            
+
                 <?php foreach($images as $image): ?>
                     <div class="gal_item">
                         <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img" id=""></a>
@@ -136,7 +146,12 @@ else if ($user->isLoggedIn())
             </div>
         <?php else: ?>
             There are no images.
-        <?php endif; ?>
+        <?php   endif;
+                for ($page = 1; $page <= $number_of_pages; $page++)
+                {
+                    echo '<a href="view_gal.php?page=' . $page . '">' . $page . '</a> ';
+                }
+        ?>
     </div>
     <footer class="footer">
     &copy; jphasha 2019

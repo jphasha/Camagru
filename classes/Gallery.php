@@ -125,5 +125,26 @@ class Gallery
     {
         return $this->_db->get('pictures', ['picture_id', '>', 0])->count();
     }
+
+    public function getPaginatedImages($starting_point, $images_per_page)
+    {
+        $imgObj = $this->_db->query('SELECT * FROM pictures LIMIT ' . $starting_point . ',' . $images_per_page);
+        $i = 0;
+        $img_array = [];
+
+        while ($i < $imgObj->count())
+        {
+            $img_array[$i] =
+            [
+                'full' => $this->path . '/' . $imgObj->results()[$i]->picture_name
+            ];
+            $i = $i + 1;
+        }
+        if (count($img_array))
+        {
+            return $img_array;
+        }
+        return false;
+    }
 }
 ?>
