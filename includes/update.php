@@ -87,10 +87,10 @@ if (Input::exists())
                 <!-- <input type="text" name="user_pass" value="?php echo escape($user->data()->user_pass); ?>"> -->
 
                 <label for="user_email">email</label>
-                <input type="text" name="user_email" value="<?php echo escape($user->data()->user_email); ?>">
+                <input type="text" name="user_email" value="<?php echo escape($user->data()->user_email); ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Something like 'user@mail.domain'. Don't worry, you can do it">
 
                 <input type="submit" value="Update">
-                <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
+                <input type="hidden" name="token" value="<?php echo Token::generate(); ?>" required pattern="(?=.*[a-zA-Z]).{2,}" title="min 2 chars and alphabets are a must">
             </div>
         </form>
     </div>

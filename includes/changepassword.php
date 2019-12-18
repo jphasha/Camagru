@@ -12,7 +12,50 @@ $db = DB::getInstance();
 
 if (!$user->isLoggedIn())
 {
-    if (Input::exist)
+?>
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
+            <title>Change Password</title>
+            <link rel="stylesheet" href="style.css">
+        </head>
+        <body>
+            <header class="header">
+
+                <button><a href="view_gal.php">Gallery</a></button>
+                <button><a href="logout.php">Log out</a></button>
+                <button><a href="update.php">Update</a></button>
+                <button><a href="changepassword.php">change password</a></button>
+                <button><a href="upload.php">Upload a picture</a></button>
+                <button><a href="new_webcam.php">take a picture</a></button>
+
+            </header>
+
+            <form action="" method="post">
+                <div class="field">
+                    <label for="new_password">new password</label>
+                    <input type="password" name="new_password2" id="new_password">
+                </div>
+
+                <div class="field">
+                    <label for="confirm_new_password">confirm new password</label>
+                    <input type="password" name="confirm_new_password2" id="confirm_new_password">
+                </div>
+
+                <input type="submit" name="submit" value="change"/>
+            </form>
+        </body>
+        <footer class="footer">
+            &copy; jphasha 2019
+        </footer>
+    </html>
+
+<?php
+
+    if (Input::exists())
     {
         if (isset($_GET['salt']) && $_GET['salt'] !== 'false')
         {
@@ -28,106 +71,16 @@ if (!$user->isLoggedIn())
             
             Session::flash('change password', 'please go to your email and click on the reset password link');
         }
-        die('now');
 
         Redirect::to('../index.php');
     }
 }
 ?>
 
-<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <meta http-equiv="X-UA-Compatible" content="ie=edge">
-                <title>Change Password</title>
-                <link rel="stylesheet" href="style.css">
-            </head>
-            <body>
-                <header class="header">
-
-                    <button><a href="view_gal.php">Gallery</a></button>
-                    <button><a href="logout.php">Log out</a></button>
-                    <button><a href="update.php">Update</a></button>
-                    <button><a href="changepassword.php">change password</a></button>
-                    <button><a href="upload.php">Upload a picture</a></button>
-                    <button><a href="new_webcam.php">take a picture</a></button>
-
-                </header>
-
-                <form action="" method="post">
-                    <div class="field">
-                        <label for="new_password">new password</label>
-                        <input type="password" name="new_password2" id="new_password">
-                    </div>
-
-                    <div class="field">
-                        <label for="confirm_new_password">confirm new password</label>
-                        <input type="password" name="confirm_new_password2" id="confirm_new_password">
-                    </div>
-
-                    <input type="submit" name="submit" value="change"/>
-                </form>
-            </body>
-            </html>
+            
 <?php
 if ($user->isLoggedIn())
 {
-    if (Input::exists())
-    {
-        if (Token::check(Input::get('token')))
-        {
-            $validate = new Validate();
-            $validation = $validate->check($_POST, array(
-                'current_password' => array(
-                    'required' => true,
-                    'min' => 8
-                ),
-                'new_password' => array(
-                    'required' => true,
-                    'min' => 8
-                ),
-                'confirm_new_password' => array(
-                    'required' => true,
-                    'min' => 8,
-                    'matches' => 'new_password'
-                )
-                )
-            );
-
-            if ($validation->passed())
-            {
-                // if (Hash::make(Input::get('current_password') . $user->data()->salt) !== $user->data()->user_pass)
-                if (!password_verify(Input::get('current_password'), $user->data()->user_pass))
-                {
-                    echo "your current password is wrong.<br>";
-                }
-                else
-                {
-                    // $salt = Hash::salt(32);
-                    $user->update(array(
-                    //     'password' => Hash::make(Input::get('new_password') . $salt),
-                    //     'salt' => $salt
-                    'user_pass' => password_hash(Input::get('new_password'), PASSWORD_DEFAULT)
-                    )
-                );
-
-                Session::flash('home', 'password changed');
-
-                Redirect::to('../index.php');
-                }
-            }
-            else
-            {
-                foreach($validation->errors() as $error)
-                {
-                    echo $error . "<br>";
-                }
-            }
-        }
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -175,3 +128,59 @@ if ($user->isLoggedIn())
     </footer>
 </body>
 </html>
+
+<?php
+    if (Input::exists())
+    {
+        if (Token::check(Input::get('token')))
+        {
+            $validate = new Validate();
+            $validation = $validate->check($_POST, array(
+                'current_password' => array(
+                    'required' => true,
+                    'min' => 8,
+                    'strong_pattern' => 'lower and upper case'
+                ),
+                'new_password' => array(
+                    'required' => true,
+                    'min' => 8,
+                    'strong_pattern' => 'lower and upper case'
+                ),
+                'confirm_new_password' => array(
+                    'required' => true,
+                    'min' => 8,
+                    'strong_pattern' => 'lower and upper case',
+                    'matches' => 'new_password'
+                )
+                )
+            );
+
+            if ($validation->passed())
+            {
+                if (!password_verify(Input::get('current_password'), $user->data()->user_pass))
+                {
+                    echo "your current password is wrong.<br>";
+                }
+                else
+                {
+                    $user->update(array(
+                    'user_pass' => password_hash(Input::get('new_password'), PASSWORD_DEFAULT)
+                    )
+                );
+
+                Session::flash('home', 'password changed');
+
+                Redirect::to('../index.php');
+                }
+            }
+            else
+            {
+                foreach($validation->errors() as $error)
+                {
+                    echo $error . "<br>";
+                }
+            }
+        }
+    }
+}
+?>
