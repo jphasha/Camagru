@@ -36,15 +36,28 @@ if (Input::exists())
                     'user_email' => Input::get('user_email')
                 )
             );
+            if (isset($_POST['notify']))
+            {
+                $user->update([
+                    'notify' => 1
+                ]);
+            }
+            else if (!isset($_POST['notify']))
+            {
+                $user->update([
+                    'notify' => 0
+                ]);
+            }
 
-            Session::flash('home', 'updated');
-
-            Redirect::to('../index.php');
             }
             catch(Exception $someException)
             {
                 die($someException->getMessage());
             }
+
+            Session::flash('home', 'updated');
+
+            Redirect::to('../index.php');
         }
         else
         {
@@ -81,17 +94,27 @@ if (Input::exists())
     <div class="upd_field">
         <form action="" method="post">
             <div class="field">
-                <label for="user_name">User Name</label>
-                <input type="text" name="user_name" value="<?php echo escape($user->data()->user_name); ?>">
 
+                <div>
+                    <label for="user_name">User Name</label>
+                    <input type="text" name="user_name" value="<?php echo escape($user->data()->user_name); ?>" required pattern="(?=.*[a-zA-Z]).{2,}" title="min 2 chars and alphabets are a must">
+                </div>
+                
                 <!-- <label for="user_pass">Password</label> -->
                 <!-- <input type="text" name="user_pass" value="?php echo escape($user->data()->user_pass); ?>"> -->
 
-                <label for="user_email">email</label>
-                <input type="text" name="user_email" value="<?php echo escape($user->data()->user_email); ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Something like 'user@mail.domain'. Don't worry, you can do it">
+                <div>
+                    <label for="user_email">email</label>
+                    <input type="text" name="user_email" value="<?php echo escape($user->data()->user_email); ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Something like 'user@mail.domain'. Don't worry, you can do it">
+                </div>
+                
+                <div>
+                    <label for="notifications">Email notifications</label>
+                    <input type="radio" name="notify">
+                </div>
 
                 <input type="submit" value="Update">
-                <input type="hidden" name="token" value="<?php echo Token::generate(); ?>" required pattern="(?=.*[a-zA-Z]).{2,}" title="min 2 chars and alphabets are a must">
+                <input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
             </div>
         </form>
     </div>

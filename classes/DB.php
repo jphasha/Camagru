@@ -198,5 +198,17 @@ class DB //a singleton class?
         }
         return false;
     }
+
+    public function notificationStatus($imageId)
+    {
+        $imageOwner = $this->get('pictures', ['picture_id', '=', $imageId])->first()->user_id;
+        return $notifyStatus = $this->get('users', ['user_id', '=', $imageOwner])->first()->notify;
+    }
+
+    public function ownerEmail($imageId)
+    {
+        $imageOwner = $this->get('pictures', ['picture_id', '=', $imageId])->first()->user_id;
+        return $ownerEmail = $this->get('users', ['user_id', '=', $imageOwner])->first()->user_email;
+    }
 }
 ?>
