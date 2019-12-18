@@ -30,6 +30,7 @@ if ($user->isLoggedIn())
 <body>
     <header class="header">
 
+        <button><a href="index.php">Home</a></button>
         <button><a href="includes/view_gal.php">Gallery</a></button>
         <button><a href="includes/logout.php">Log out</a></button>
         <button><a href="includes/update.php">Update</a></button>
@@ -40,15 +41,6 @@ if ($user->isLoggedIn())
     </header>
 
     <p>Hello <a href="includes/profile.php?user=<?php echo escape($user->data()->user_name); ?>"><?php echo escape($user->data()->user_name); ?></a>!</p>
-
-    <ul>
-        <li><a href="includes/view_gal.php">Gallery</a></li>
-        <li><a href="includes/logout.php">Log out</a></li>
-        <li><a href="includes/update.php">Update</a></li>
-        <li><a href="includes/changepassword.php">change password</a></li>
-        <li><a href="includes/upload.php">Upload a picture</a></li>
-        <li><a href="includes/new_webcam.php">take a picture</a></li>
-    </ul>
     
     <footer class="footer">
     &copy; jphasha 2019

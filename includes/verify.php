@@ -17,6 +17,15 @@ error_reporting(E_ALL);
 </head>
 <body>
     <header class="header">
+
+        <button><a href="../index.php">Home</a></button>
+        <button><a href="view_gal.php">Gallery</a></button>
+        <button><a href="logout.php">Log out</a></button>
+        <button><a href="update.php">Update</a></button>
+        <button><a href="changepassword.php">change password</a></button>
+        <button><a href="upload.php">Upload a picture</a></button>
+        <button><a href="new_webcam.php">take a picture</a></button>
+
     </header>
     <?php
     echo "please verify your account registration in your provided email<br>";

@@ -24,6 +24,7 @@ if ($user->isLoggedIn())
 <body>
     <header class="header">
 
+        <button><a href="../index.php">Home</a></button>
         <button><a href="view_gal.php">Gallery</a></button>
         <button><a href="logout.php">Log out</a></button>
         <button><a href="update.php">Update</a></button>

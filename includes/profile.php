@@ -35,6 +35,7 @@ else
     <body>
         <header class="header">
 
+            <button><a href="../index.php">Home</a></button>
             <button><a href="includes/view_gal.php">Gallery</a></button>
             <button><a href="includes/logout.php">Log out</a></button>
             <button><a href="includes/update.php">Update</a></button>

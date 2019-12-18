@@ -116,6 +116,8 @@ if (Input::exists())
 </head>
 <body>
     <header class="header">
+        <button><a href="../index.php">Home</a></button>
+        <button><a href="view_gal.php"></a></button>
     </header>
     <div class="reg_field">
         <form action="" method="post">
