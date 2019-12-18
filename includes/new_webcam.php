@@ -9,7 +9,7 @@ if (!$user->isLoggedIn())
     Redirect::to('../index.php');
 }
 
-else
+else if ($user->isLoggedIn())
 {
     $gallery = new Gallery();
     $gallery->setPath('../uploads/');
@@ -102,7 +102,11 @@ else
             <div class="gallery cf">
                 <?php foreach($userImages as $image): ?>
                     <div class="gal_item">
+                    <?php var_dump($image); die('polku'); ?>
                         <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img"></a>
+                        <form action="../server_side/delete.php" method="post">
+                            <button name="del_but" id="del_butt">delete</button>
+                        </form>
                     </div>
                 <?php endforeach; ?>
             </div>

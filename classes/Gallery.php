@@ -151,5 +151,8 @@ class Gallery
         }
         return false;
     }
+
+    public function delPic()
+    {}
 }
 ?>
