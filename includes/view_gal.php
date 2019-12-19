@@ -46,20 +46,19 @@ if (!$user->isLoggedIn())
             <div class="gallery cf">
                 <?php foreach($images as $image): ?>
                     <div class="gal_item">
-                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img" id="<?= $img_id[$id_counter] ?>"></a>
-                        <?php $id_counter = $id_counter + 1; ?>
+                        <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img" id="<?= $gallery->paginatedPicId($image); ?>"></a>
                         <div class="like_field">
-                            <p><?php echo $gallery->getLikesCount($img_id[$id_counter][$id_counter]) . " likes"; ?></p>
+                            <p><?php echo $gallery->getLikesCount($gallery->paginatedPicId($image)) . " likes"; ?></p>
                         </div>
                         <div class="comments">
                             <?php
                             $comment_cntr = 0;
-                            $comment_count = count($gallery->getComments($img_id[$id_counter][$id_counter]));
+                            $comment_count = count($gallery->getComments($gallery->paginatedPicId($image)));
                             try
                             {
                                 while($comment_count > $comment_cntr)
                                 {
-                                    $comments_objByImg = $gallery->getComments($img_id[$id_counter][$id_counter])[$comment_cntr]->comment;
+                                    $comments_objByImg = $gallery->getComments($gallery->paginatedPicId($image))[$comment_cntr]->comment;
                                     echo $comments_objByImg . "<br>";
                                     $comment_cntr = $comment_cntr + 1;
                                 }
@@ -118,19 +117,18 @@ else if ($user->isLoggedIn())
     <div class="gal_con">
         <?php if($images): ?>
             <div class="gallery cf">
-
                 <?php foreach($images as $image): ?>
                     <div class="gal_item">
                         <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img" id=""></a>
                         <div class="comments">
                             <?php
                             $comment_cntr = 0;
-                            $comment_count = count($gallery->getComments($img_id[$id_counter][$id_counter]));
+                            $comment_count = count($gallery->getComments($gallery->paginatedPicId($image)));
                             try
                             {
                                 while($comment_count > $comment_cntr)
                                 {
-                                    $comments_objByImg = $gallery->getComments($img_id[$id_counter][$id_counter])[$comment_cntr]->comment;
+                                    $comments_objByImg = $gallery->getComments($gallery->paginatedPicId($image))[$comment_cntr]->comment;
                                     echo $comments_objByImg . "<br>";
                                     $comment_cntr = $comment_cntr + 1;
                                 }
@@ -143,15 +141,15 @@ else if ($user->isLoggedIn())
                         </div>
                         <div class="like_field">
                             <form action="like.php" method="post" name="like">
-                                <input type="hidden" name="img_id" value="<?php echo $img_id[$id_counter][$id_counter]; ?>">
+                                <input type="hidden" name="img_id" value="<?php echo $gallery->paginatedPicId($image); ?>">
                                 <input type="submit"
-                                        value="<?php if ($gallery->getLikes(Session::get('user'), $img_id[$id_counter][$id_counter]) === 0 )
+                                        value="<?php if ($gallery->getLikes(Session::get('user'), $gallery->paginatedPicId($image)) === 0 )
                                                         echo 'like';
                                                     else
                                                         echo 'unlike';?>"
                                         name="like"/>
                             </form>
-                            <p><?php echo $gallery->getLikesCount($img_id[$id_counter][$id_counter]) . " likes"; ?></p>
+                            <p><?php echo $gallery->getLikesCount($gallery->paginatedPicId($image)) . " likes"; ?></p>
                         </div>
                         
                         <div class="comment_field">
@@ -160,12 +158,11 @@ else if ($user->isLoggedIn())
                                     <textarea name="right" id="" cols="30" rows="10"></textarea>
                                 </div>
                                 <div>
-                                    <input type="hidden" name="img_id" value="<?php echo $img_id[$id_counter][$id_counter]; ?>">
+                                    <input type="hidden" name="img_id" value="<?php echo $gallery->paginatedPicId($image); ?>">
                                     <input type="submit" value="comment" name="comment_btn" id="comment">
                                 </div>
                             </form>
                         </div>
-                        <?php $id_counter = $id_counter + 1; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
