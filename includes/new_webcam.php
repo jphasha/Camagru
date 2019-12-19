@@ -102,10 +102,10 @@ else if ($user->isLoggedIn())
             <div class="gallery cf">
                 <?php foreach($userImages as $image): ?>
                     <div class="gal_item">
-                    <?php var_dump($gallery->paginatedPicId($image)); die('polku'); ?>
                         <a href="<?php echo $image['full'] ?>"><img src="<?php echo $image['full']; ?>" class="pre_img"></a>
                         <form action="../server_side/delete.php" method="post">
                             <button name="del_but" id="del_butt">delete</button>
+                            <input type="hidden" name="picture_id" value="<?php echo $gallery->paginatedPicId($image); ?>">
                         </form>
                     </div>
                 <?php endforeach; ?>

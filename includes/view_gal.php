@@ -14,7 +14,7 @@ $gallery->setPath('../uploads/');
             {
                 $page = $_GET['page'];
             }
-$img_id = $gallery->getImageId();
+// $img_id = $gallery->getImageId();
 $total_images = $gallery->getImageCount();
 $images_per_page = 5;
 $number_of_pages = ceil($total_images/$images_per_page);

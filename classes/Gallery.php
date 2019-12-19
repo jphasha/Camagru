@@ -157,5 +157,10 @@ class Gallery
         $picName = substr(implode("", $picNamePath), 11);
         return $this->_db->get('pictures', ['picture_name', '=', $picName])->first()->picture_id;
     }
+
+    public function deletePicture($imageId)
+    {
+        return $this->_db->delete('pictures', ['picture_id', '=', $imageId]);
+    }
 }
 ?>

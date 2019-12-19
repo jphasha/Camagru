@@ -191,7 +191,6 @@ if ($user->isLoggedIn())
 
                 Session::flash('home', 'password changed');
 
-                Redirect::to('../index.php');
                 }
             }
             else
@@ -202,6 +201,7 @@ if ($user->isLoggedIn())
                 }
             }
         }
+        Redirect::to('../index.php');
     }
 }
 ?>
