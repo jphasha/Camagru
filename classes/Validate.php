@@ -66,7 +66,7 @@ class Validate
                         break;
 
                         case 'strong_pattern':
-                            if (!preg_match('/([a-z])([A-Z])/', $value))
+                            if (!preg_match('@[A-Z]@', $value) || !preg_match('@[A-Z]@', $value))
                             {
                                 $this->addError("{$item} must have {$rule_value} characters in it");
                             }
