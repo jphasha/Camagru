@@ -152,7 +152,10 @@ class Gallery
         return false;
     }
 
-    public function delPic()
-    {}
+    public function paginatedPicId($picNamePath)
+    {
+        $picName = substr(implode("", $picNamePath), 11);
+        return $this->_db->get('pictures', ['picture_name', '=', $picName])->first()->picture_id;
+    }
 }
 ?>

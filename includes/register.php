@@ -77,7 +77,7 @@ if (Input::exists())
                 $subject = 'Registration Verification';
                 $message = 'Thank you for registerimg. Please click the link to verify your registration:';
                 $message .= "\r\n";
-                $message .= "<a href='http://localhost:8080/projects_github/github_camagru/includes/login.php?user=$username&salt=$salt'>Register Account</a>";
+                $message .= "<a href='http://localhost:8080/camagru/includes/login.php?user=$username&salt=$salt'>Register Account</a>";
                 $headers = 'From:noreply@themail.com' . "\r\n";
                 $headers .= "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-Type:text/html;charset=UTF-8". "\r\n";
@@ -117,7 +117,7 @@ if (Input::exists())
 <body>
     <header class="header">
         <button><a href="../index.php">Home</a></button>
-        <button><a href="view_gal.php"></a></button>
+        <button><a href="view_gal.php">Gallery</a></button>
     </header>
     <div class="reg_field">
         <form action="" method="post">
