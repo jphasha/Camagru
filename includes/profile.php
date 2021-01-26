@@ -10,6 +10,7 @@ if (!$username = Input::get('user'))
 {
     Redirect::to('../index.php');
 }
+
 else
 {
     $user = new User($username);

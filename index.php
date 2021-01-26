@@ -4,10 +4,10 @@ require_once 'config/setup.php';
 
 require_once 'core/initialise.php';
 
-if (Session::exists('home'))
-{
-    echo '<p>' . Session::flash('home') . '</p>';
-}
+// if (Session::exists('home'))
+// {
+//     echo '<p>' . Session::flash('home') . '</p>';
+// }
 
 $user = new User();
 
@@ -45,6 +45,7 @@ if ($user->isLoggedIn())
 </html>
 <?php
 }
+
 else
 {
 ?>

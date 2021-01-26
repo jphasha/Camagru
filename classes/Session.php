@@ -20,6 +20,7 @@ class Session
     {
         return $_SESSION[$name];
     }
+    
     public static function delete($name)
     {
         if (self::exists($name))
